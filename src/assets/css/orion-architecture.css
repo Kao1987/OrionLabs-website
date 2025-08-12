@@ -1,0 +1,127 @@
+/* === OrionLabs CSS 架構層級系統 === */
+/* 遵循 D-style 規範：@layer 管理層級，降低 !important 使用 */
+/* 遵循 C-refactor 規範：契約中心、最小變更、可回滾 */
+
+/* === CSS Cascade Layers === */
+@layer reset, base, theme, layout, components, utilities, overrides;
+
+/* === 重置層 === */
+@layer reset {
+  /* 統一 box-sizing */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  /* 移除預設邊距 */
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+  }
+}
+
+/* === 基礎層：字體與基本設定 === */
+@layer base {
+  body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+/* === 主題層：從 orion-unified-theme.css 匯入 === */
+@layer theme {
+  @import url('./orion-unified-theme.css');
+}
+
+/* === 佈局層：基本佈局元件 === */
+@layer layout {
+  .container-fluid {
+    width: 100%;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+
+  .section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .section-sm {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .section-lg {
+    padding: calc(var(--spacing-3xl) * 1.5) 0;
+  }
+}
+
+/* === 元件層：BEM-Lite 組件 === */
+@layer components {
+  @import url('./orion-bem-system.css');
+  @import url('./bem-components.css');
+}
+
+/* === 工具層：Utility classes === */
+@layer utilities {
+  /* 文字工具類 */
+  .text_primary { color: var(--color-text-primary); }
+  .text_secondary { color: var(--color-text-secondary); }
+  .text_muted { color: var(--color-text-muted); }
+  .text_light { color: var(--color-text-light); }
+  .text_inverse { color: var(--color-text-inverse); }
+
+  /* 背景工具類 */
+  .bg_primary { background-color: var(--color-bg-primary); }
+  .bg_secondary { background-color: var(--color-bg-secondary); }
+  .bg_tertiary { background-color: var(--color-bg-tertiary); }
+  .bg_card { background-color: var(--color-bg-card); }
+
+  /* 間距工具類（降低 !important 使用） */
+  .u-mb-0 { margin-bottom: 0; }
+  .u-mb-xs { margin-bottom: var(--spacing-xs); }
+  .u-mb-sm { margin-bottom: var(--spacing-sm); }
+  .u-mb-md { margin-bottom: var(--spacing-md); }
+  .u-mb-lg { margin-bottom: var(--spacing-lg); }
+  .u-mb-xl { margin-bottom: var(--spacing-xl); }
+  .u-mb-2xl { margin-bottom: var(--spacing-2xl); }
+
+  .u-mt-0 { margin-top: 0; }
+  .u-mt-xs { margin-top: var(--spacing-xs); }
+  .u-mt-sm { margin-top: var(--spacing-sm); }
+  .u-mt-md { margin-top: var(--spacing-md); }
+  .u-mt-lg { margin-top: var(--spacing-lg); }
+  .u-mt-xl { margin-top: var(--spacing-xl); }
+  .u-mt-2xl { margin-top: var(--spacing-2xl); }
+
+  .u-p-0 { padding: 0; }
+  .u-p-xs { padding: var(--spacing-xs); }
+  .u-p-sm { padding: var(--spacing-sm); }
+  .u-p-md { padding: var(--spacing-md); }
+  .u-p-lg { padding: var(--spacing-lg); }
+  .u-p-xl { padding: var(--spacing-xl); }
+  .u-p-2xl { padding: var(--spacing-2xl); }
+}
+
+/* === 覆蓋層：必要時使用 !important === */
+@layer overrides {
+  /* 僅在必要時使用，用於覆蓋第三方樣式 */
+  .force-text-primary {
+    color: var(--color-text-primary) !important;
+  }
+
+  .force-bg-primary {
+    background-color: var(--color-bg-primary) !important;
+  }
+}

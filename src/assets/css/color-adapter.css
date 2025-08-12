@@ -1,0 +1,113 @@
+/* === Orion 色彩系統適配器 === */
+/* 遵循 C-refactor 規範：鍵名更動先建立 Adapter，三版過渡 */
+/* 目的：統一 Vue 預設色彩與 Orion 主題，消除衝突 */
+
+:root {
+  /* === 適配 Vue 預設色彩到 Orion 系統 === */
+
+  /* Vue 預設變數適配（@deprecated - 將在 v3.0.0 移除） */
+  --vt-c-white: var(--orion-silver-50);
+  --vt-c-white-soft: var(--orion-silver-100);
+  --vt-c-white-mute: var(--orion-silver-200);
+
+  --vt-c-black: var(--orion-silver-950);
+  --vt-c-black-soft: var(--orion-silver-900);
+  --vt-c-black-mute: var(--orion-silver-800);
+
+  --vt-c-indigo: var(--orion-blue-900);
+
+  --vt-c-divider-light-1: var(--orion-silver-300);
+  --vt-c-divider-light-2: var(--orion-silver-200);
+  --vt-c-divider-dark-1: var(--orion-silver-600);
+  --vt-c-divider-dark-2: var(--orion-silver-500);
+
+  --vt-c-text-light-1: var(--orion-silver-900);
+  --vt-c-text-light-2: var(--orion-silver-700);
+  --vt-c-text-dark-1: var(--orion-silver-50);
+  --vt-c-text-dark-2: var(--orion-silver-300);
+
+  /* 舊 global.css 變數適配（@deprecated - 將在 v3.0.0 移除） */
+  --orion-primary: var(--color-primary);
+  --orion-primary-50: var(--orion-blue-50);
+  --orion-primary-100: var(--orion-blue-100);
+  --orion-primary-200: var(--orion-blue-200);
+  --orion-primary-300: var(--orion-blue-300);
+  --orion-primary-400: var(--orion-blue-400);
+  --orion-primary-500: var(--orion-blue-500);
+  --orion-primary-600: var(--orion-blue-600);
+  --orion-primary-700: var(--orion-blue-700);
+  --orion-primary-800: var(--orion-blue-800);
+  --orion-primary-900: var(--orion-blue-900);
+
+  --orion-neutral: var(--orion-silver-400);
+  --orion-neutral-50: var(--orion-silver-50);
+  --orion-neutral-100: var(--orion-silver-100);
+  --orion-neutral-200: var(--orion-silver-200);
+  --orion-neutral-300: var(--orion-silver-300);
+  --orion-neutral-400: var(--orion-silver-400);
+  --orion-neutral-500: var(--orion-silver-500);
+  --orion-neutral-600: var(--orion-silver-600);
+  --orion-neutral-700: var(--orion-silver-700);
+  --orion-neutral-800: var(--orion-silver-800);
+  --orion-neutral-900: var(--orion-silver-900);
+
+  /* Bootstrap 變數適配 */
+  --bs-primary: var(--color-primary);
+  --bs-secondary: var(--color-secondary);
+  --bs-success: var(--color-success);
+  --bs-info: var(--color-info);
+  --bs-warning: var(--color-warning);
+  --bs-danger: var(--color-danger);
+  --bs-light: var(--orion-silver-100);
+  --bs-dark: var(--orion-silver-900);
+
+  /* 品牌色彩適配（@deprecated - 使用 --color-primary 替代） */
+  --brand-primary: var(--color-primary);
+  --brand-secondary: var(--color-primary-dark);
+  --brand-accent: var(--color-accent);
+  --brand-neutral: var(--color-secondary);
+
+  /* 語意色彩適配（@deprecated - 使用標準命名） */
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-muted);
+  --text-inverse: var(--color-text-inverse);
+
+  --bg-primary: var(--color-bg-primary);
+  --bg-secondary: var(--color-bg-secondary);
+  --bg-tertiary: var(--color-bg-tertiary);
+  --bg-accent: var(--color-primary-light);
+
+  --border-color: var(--color-border-primary);
+  --border-color-strong: var(--color-border-secondary);
+
+  /* 導航相關適配 */
+  --nav-brand-color: var(--color-primary);
+  --nav-brand-hover: var(--color-primary-hover);
+  --nav-link-color: var(--color-text-secondary);
+  --nav-link-hover: var(--color-primary);
+  --nav-link-hover-bg: var(--color-primary-light);
+  --nav-link-active: var(--color-primary);
+  --nav-link-active-bg: var(--color-primary-light);
+}
+
+/* === 深色模式適配 === */
+[data-theme="dark"] {
+  /* 深色模式下的變數覆蓋 */
+  --vt-c-white: var(--orion-silver-950);
+  --vt-c-white-soft: var(--orion-silver-900);
+  --vt-c-white-mute: var(--orion-silver-800);
+
+  --vt-c-black: var(--orion-silver-50);
+  --vt-c-black-soft: var(--orion-silver-100);
+  --vt-c-black-mute: var(--orion-silver-200);
+
+  /* 導航在深色模式下的適配 */
+  --nav-brand-color: var(--orion-blue-400);
+  --nav-brand-hover: var(--orion-blue-300);
+  --nav-link-color: var(--orion-silver-300);
+  --nav-link-hover: var(--orion-blue-400);
+  --nav-link-hover-bg: rgba(79, 111, 255, 0.1);
+  --nav-link-active: var(--orion-blue-400);
+  --nav-link-active-bg: rgba(79, 111, 255, 0.15);
+}
