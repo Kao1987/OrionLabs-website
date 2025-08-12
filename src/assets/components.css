@@ -1,0 +1,189 @@
+/* === 組件樣式庫 - Orion-BEM-Lite === */
+/* @deprecated v2.8.2: 組件已遷移至 bem-unified.css 統一管理 */
+/* 將在 v3.0.0 移除，請使用 bem-unified.css 中的統一組件 */
+/* 遷移對照：.blog_* → bem-unified.css, .portfolio_* → bem-unified.css */
+
+/* === Footer 系統 === */
+.footer_container {
+  background: var(--background-surface);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-xl) 0;
+}
+
+.footer_brand-link {
+  color: var(--orion-primary-300) !important; /* 在深色背景上使用更亮的藍色 */
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.footer_brand-link:hover {
+  color: var(--orion-primary-200) !important;
+  transform: translateY(-2px);
+}
+
+.footer_link {
+  color: var(--text-inverse) !important; /* 在深色背景上使用白色文字 */
+  text-decoration: none;
+  transition: var(--transition-base);
+  padding: var(--spacing-xs) 0;
+  display: inline-block;
+  opacity: 0.9;
+}
+
+.footer_link:hover {
+  color: var(--orion-primary-300) !important; /* hover時使用亮藍色 */
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* === Modal 系統 === */
+.modal_backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal_dialog {
+  border-radius: var(--radius-lg);
+  border: none;
+  box-shadow: var(--shadow-xl);
+}
+
+.modal_header {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+}
+
+.modal_body {
+  padding: var(--spacing-lg);
+}
+
+/* === Card 系統已移至 orion-unified-theme.css 統一管理 === */
+/* 避免重複定義，所有卡片樣式請參考 orion-unified-theme.css */
+
+/* === Blog 系統 - Orion-BEM-Lite === */
+.blog_filter-section {
+  background: var(--background-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+}
+
+.blog_search-box {
+  position: relative;
+}
+
+.blog_search-box .input-group {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog_search-box .form-control {
+  border: none;
+  padding: var(--spacing-md);
+}
+
+.blog_search-box .input-group-text {
+  background: var(--brand-primary);
+  border: none;
+  color: var(--text-inverse);
+}
+
+.blog_card {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.blog_card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.blog_card_image {
+  background: linear-gradient(135deg, var(--background-subtle) 0%, var(--neutral-200) 100%);
+  transition: var(--transition-base);
+}
+
+.blog_category-btn {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  transition: var(--transition-base);
+  border: 2px solid var(--border-color);
+  margin: var(--spacing-xs);
+}
+
+.blog_category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.blog_category-btn--active {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-primary-600) 100%);
+  border-color: var(--brand-primary);
+}
+
+/* === Portfolio 系統 - Orion-BEM-Lite === */
+.portfolio_filter-btn {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  transition: var(--transition-base);
+  border: 2px solid var(--border-color);
+  margin: var(--spacing-xs);
+}
+
+.portfolio_filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.portfolio_filter-btn--active {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-primary-600) 100%);
+  border-color: var(--brand-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.portfolio_tech-badge {
+  cursor: pointer;
+  transition: var(--transition-base);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.portfolio_tech-badge:hover {
+  transform: scale(1.05);
+}
+
+.portfolio_tech-badge--active {
+  background: var(--brand-primary) !important;
+  color: var(--text-inverse) !important;
+}
+
+/* === 響應式工具類 === */
+@media (max-width: 576px) {
+  .blog_card-column {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .blog_filter-section {
+    padding: var(--spacing-md);
+  }
+
+  .portfolio_filter-btn,
+  .blog_category-btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+}

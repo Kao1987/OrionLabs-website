@@ -1,161 +1,396 @@
-/* 全域樣式 - 個人品牌網站 */
+/* 全域樣式 - OrionLabs 個人品牌網站 */
+/* @deprecated - 建議遷移至 orion-unified-theme.css + color-adapter.css */
+/* 將在 v3.1.0 移除，目前保留向後相容 */
 
-/* 自訂 Bootstrap 變數覆蓋 */
+/* === 設計系統：色彩變數 === */
 :root {
-  --bs-primary: #2c3e50;
-  --bs-secondary: #34495e;
-  --bs-success: #27ae60;
-  --bs-info: #3498db;
-  --bs-warning: #f39c12;
-  --bs-danger: #e74c3c;
-  --bs-light: #ecf0f1;
-  --bs-dark: #2c3e50;
-  
-  /* 自訂品牌色彩 */
-  --brand-primary: #2c3e50;
-  --brand-secondary: #34495e;
-  --brand-accent: #3498db;
-  --brand-text: #2c3e50;
-  --brand-bg: #ffffff;
-  --brand-light: #f8f9fa;
+  /* 主色調系統 - 藍色調 (#002fa7) */
+  --orion-primary: #002fa7;
+  --orion-primary-50: #e6f0ff;
+  --orion-primary-100: #b3d9ff;
+  --orion-primary-200: #80c2ff;
+  --orion-primary-300: #4dabff;
+  --orion-primary-400: #1a94ff;
+  --orion-primary-500: #002fa7;
+  --orion-primary-600: #002994;
+  --orion-primary-700: #002380;
+  --orion-primary-800: #001d6d;
+  --orion-primary-900: #001754;
+
+  /* 中性色調系統 - 灰色調 (#c8c7c5) */
+  --orion-neutral: #c8c7c5;
+  --orion-neutral-50: #fafafa;
+  --orion-neutral-100: #f5f5f4;
+  --orion-neutral-200: #e7e5e4;
+  --orion-neutral-300: #d6d3d1;
+  --orion-neutral-400: #c8c7c5;
+  --orion-neutral-500: #a8a29e;
+  --orion-neutral-600: #78716c;
+  --orion-neutral-700: #57534e;
+  --orion-neutral-800: #3f3f46;
+  --orion-neutral-900: #1c1917;
+
+  /* 語意色彩 */
+  --orion-success: #10b981;
+  --orion-warning: #f59e0b;
+  --orion-error: #ef4444;
+  --orion-info: #06b6d4;
+
+  /* Bootstrap 變數覆蓋 */
+  --bs-primary: var(--orion-primary);
+  --bs-secondary: var(--orion-neutral-600);
+  --bs-success: var(--orion-success);
+  --bs-info: var(--orion-info);
+  --bs-warning: var(--orion-warning);
+  --bs-danger: var(--orion-error);
+  --bs-light: var(--orion-neutral-100);
+  --bs-dark: var(--orion-neutral-900);
+
+  /* 品牌色彩系統 */
+  --brand-primary: var(--orion-primary);
+  --brand-secondary: var(--orion-primary-700);
+  --brand-accent: var(--orion-info);
+  --brand-neutral: var(--orion-neutral);
+
+  /* 文字色彩 */
+  --text-primary: var(--orion-neutral-900);
+  --text-secondary: var(--orion-neutral-700);
+  --text-muted: var(--orion-neutral-500);
+  --text-inverse: #ffffff;
+
+  /* 背景色彩 */
+  --bg-primary: #ffffff;
+  --bg-secondary: var(--orion-neutral-50);
+  --bg-tertiary: var(--orion-neutral-100);
+  --bg-accent: var(--orion-primary-50);
+
+  /* 邊框與分隔線 */
+  --border-color: var(--orion-neutral-200);
+  --border-color-strong: var(--orion-neutral-300);
+
+  /* 陰影系統 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 47, 167, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 47, 167, 0.1), 0 2px 4px -1px rgba(0, 47, 167, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 47, 167, 0.1), 0 4px 6px -2px rgba(0, 47, 167, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 47, 167, 0.1), 0 10px 10px -5px rgba(0, 47, 167, 0.04);
+
+  /* 間距系統 (基於 8px grid) */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+
+  /* 圓角系統 */
+  --radius-xs: 0.125rem;   /* 2px */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* 轉場與動畫 */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+
+  /* 字體系統 */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
+  --font-family-mono: 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, monospace;
+
+  /* 字體大小 */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
+
+  /* Z-index 層級 */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
 }
 
-/* 通用樣式 */
+/* === 基礎樣式 === */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-family-sans);
+  font-size: var(--text-base);
   line-height: 1.6;
-  color: var(--brand-text);
-  background-color: var(--brand-bg);
+  /* !important 保留：覆蓋 Bootstrap 預設樣式 */
+  color: var(--color-text-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 主要排版元件 */
+/* 文字層次系統 */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+.text-6xl { font-size: var(--text-6xl); }
+
+/* 文字顏色工具類 - @deprecated: 請使用 utilities.css 中的 .u-text-* 類別 */
+/* 將在 v3.0.0 移除，建議遷移至 utilities.css */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-inverse { color: var(--text-inverse); }
+.text-brand { color: var(--brand-primary); }
+
+/* 背景色工具類 - @deprecated: 請使用 utilities.css 中的 .u-bg-* 類別 */
+/* 將在 v3.0.0 移除，建議遷移至 utilities.css */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+.bg-accent { background-color: var(--bg-accent); }
+.bg-brand { background-color: var(--brand-primary); }
+
+/* === 佈局元件 === */
 .main-header {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
-  color: white;
-  padding: 2rem 0;
-}
-
-.section {
-  padding: 4rem 0;
-}
-
-.section-alt {
-  background-color: var(--brand-light);
-}
-
-/* 卡片元件 */
-.card {
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.card-portfolio {
+  /* background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%); */
+  color: var(--text-inverse);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
   overflow: hidden;
 }
 
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.section {
+  padding: var(--spacing-3xl) 0;
+}
+
+.section-sm {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-lg {
+  padding: calc(var(--spacing-3xl) * 1.5) 0;
+}
+
+.section-alt {
+  background-color: var(--bg-secondary);
+}
+
+.section-accent {
+  background-color: var(--bg-accent);
+}
+
+/* === 卡片元件已移至 orion-unified-theme.css 統一管理 === */
+/* 避免重複定義，所有卡片樣式請參考 orion-unified-theme.css */
+
 .card-portfolio img {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-slow);
 }
 
 .card-portfolio:hover img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* 按鈕樣式 */
-.btn-primary {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
+/* === 按鈕系統已移至 orion-unified-theme.css 統一管理 === */
+/* 避免重複定義，所有按鈕樣式請參考 orion-unified-theme.css */
+
+/* === 導航列樣式 === */
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-primary) 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
-}
-
-.btn-outline-primary {
-  color: var(--brand-primary);
-  border-color: var(--brand-primary);
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-outline-primary:hover {
-  background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
-  transform: translateY(-1px);
-}
-
-/* 導航列樣式 */
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: var(--brand-primary);
 }
 
 .navbar-nav .nav-link {
   font-weight: 500;
-  margin: 0 0.5rem;
-  transition: color 0.3s ease;
+  margin: 0 var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+  color: var(--text-secondary);
 }
 
-/* Hero 區塊 */
+.navbar-nav .nav-link:hover {
+  color: var(--brand-primary);
+  background-color: var(--bg-accent);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--brand-primary);
+  background-color: var(--bg-accent);
+}
+
+/* === Hero 區塊 === */
 .hero-section {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
-  color: white;
-  min-height: 60vh;
+  background: linear-gradient(135deg, #002fa7 0%, #001d6d 100%);
+  color: #ffffff;
+  min-height: 70vh;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: var(--text-5xl);
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   opacity: 0.9;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.6;
 }
 
-/* 響應式設計 */
-@media (max-width: 768px) {
+.hero-cta {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+/* === 響應式設計系統 === */
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  :root {
+    --text-xs: 0.6875rem;   /* 11px */
+    --text-sm: 0.8125rem;   /* 13px */
+    --text-base: 0.9375rem; /* 15px */
+    --text-lg: 1.0625rem;   /* 17px */
+    --text-xl: 1.1875rem;   /* 19px */
+    --text-2xl: 1.375rem;   /* 22px */
+    --text-3xl: 1.625rem;   /* 26px */
+    --text-4xl: 1.875rem;   /* 30px */
+    --text-5xl: 2.25rem;    /* 36px */
+    --text-6xl: 2.75rem;    /* 44px */
+  }
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: var(--text-4xl);
   }
-  
+
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
-  
+
   .section {
-    padding: 2rem 0;
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .section-lg {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar-nav .nav-link {
+    margin: var(--spacing-xs) 0;
+    text-align: center;
   }
 }
 
-/* 載入動畫 */
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .hero-title {
+    font-size: var(--text-4xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .hero-title {
+    font-size: var(--text-5xl);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .hero-title {
+    font-size: var(--text-6xl);
+  }
+}
+
+/* === 動畫與轉場系統 === */
+
+/* 淡入動畫 */
 .fade-in {
-  animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -163,34 +398,425 @@ body {
   }
 }
 
-/* 工藝技能圖表樣式 */
+/* 從左滑入 */
+.slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 從右滑入 */
+.slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 放大淡入 */
+.zoom-in {
+  animation: zoomIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 載入動畫 */
+.loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--brand-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 脈衝動畫 */
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* 彈跳動畫 */
+.bounce-in {
+  animation: bounceIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 延遲動畫類 */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* === 表單元件 === */
+.form-control {
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  font-size: var(--text-base);
+  transition: var(--transition-base);
+  background-color: var(--bg-primary);
+}
+
+.form-control:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(0, 47, 167, 0.1);
+  outline: none;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* === 技能進度條 === */
 .skill-bar {
-  height: 0.5rem;
-  background-color: var(--brand-light);
-  border-radius: 0.25rem;
+  height: var(--spacing-sm);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-full);
   overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .skill-progress {
   height: 100%;
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
-  border-radius: 0.25rem;
-  transition: width 0.8s ease;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-info) 100%);
+  border-radius: var(--radius-full);
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-/* Footer 樣式 */
-.main-footer {
-  background-color: var(--brand-primary);
-  color: white;
-  padding: 3rem 0 2rem;
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  animation: shimmer 2s infinite;
 }
 
-.footer-link {
-  color: rgba(255, 255, 255, 0.8);
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* === Badge 系統 === */
+.badge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.badge-primary {
+  background-color: #002fa7;
+  color: #ffffff;
+}
+
+.badge-secondary {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.badge-outline {
+  background-color: transparent;
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+/* === Footer 樣式 === */
+.footer {
+  background: linear-gradient(135deg, var(--orion-neutral-900) 0%, var(--orion-neutral-800) 100%);
+  color: var(--text-inverse);
+  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--brand-primary) 50%, transparent 100%);
+}
+
+.footer_link {
+  color: #d6d3d1;  /* 中性色 300 - 更好的對比度 */
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: var(--transition-base);
+  font-weight: 500;
 }
 
-.footer-link:hover {
-  color: white;
-} 
+.footer_link:hover {
+  color: #ffffff;  /* 純白色 - 最佳對比度 */
+  text-decoration: underline;
+}
+
+.footer_brand-link {
+  color: #80c2ff;  /* 更亮的藍色，提升可見度 */
+  text-decoration: none;
+  transition: var(--transition-base);
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
+.footer_brand-link:hover {
+  color: #b3d9ff;  /* 更亮的懸停效果 */
+  text-decoration: none;
+}
+
+/* === Modal 系統 === */
+.modal_content {
+  border-radius: var(--radius-xl);
+  border: none;
+  box-shadow: var(--shadow-xl);
+}
+
+.modal_header {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  background: var(--bg-secondary);
+}
+
+.modal_body {
+  padding: var(--spacing-xl);
+}
+
+.modal_footer {
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  background: var(--bg-secondary);
+}
+
+/* === Card 系統擴展 === */
+.card_footer {
+  background: transparent;
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+}
+
+.card_img-top {
+  background: var(--bg-tertiary);
+  transition: var(--transition-base);
+}
+
+.card_img-top:hover {
+  background: var(--bg-accent);
+}
+
+/* === Blog 系統 - Orion-BEM-Lite === */
+.blog_card {
+  border: none;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-slow);
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.blog_card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.blog_filter-section {
+  background: var(--bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.blog_search-box .input-group {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog_search-box .form-control {
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.blog_search-box .input-group-text {
+  background: var(--bg-primary);
+  border: none;
+  color: var(--text-muted);
+}
+
+.blog_category-btn {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  transition: var(--transition-base);
+  border: 1px solid var(--border-color);
+}
+
+.blog_category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.blog_category-btn--active {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-primary-600) 100%);
+  border-color: var(--brand-primary);
+}
+
+/* === Portfolio 系統 - Orion-BEM-Lite === */
+.portfolio_filter-btn {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  transition: var(--transition-base);
+  border: 2px solid var(--border-color);
+  margin: var(--spacing-xs);
+}
+
+.portfolio_filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.portfolio_filter-btn--active {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-primary-600) 100%);
+  border-color: var(--brand-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.portfolio_tech-badge {
+  cursor: pointer;
+  transition: var(--transition-base);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.portfolio_tech-badge:hover {
+  transform: scale(1.05);
+}
+
+.portfolio_tech-badge--active {
+  background: var(--brand-primary) !important;
+  color: var(--text-inverse) !important;
+}
+
+/* === 響應式工具類 === */
+@media (max-width: 576px) {
+  .blog_card-column {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* === 工具類 === */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--orion-info) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+.rounded-xs { border-radius: var(--radius-xs); }
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* === 暗色模式支援 - 已整合至 orion-unified-theme.css === */
+/* 避免重複定義，統一使用 orion-unified-theme.css 中的暗色模式配置 */
+
+/* 手動深色模式切換 - 保留必要的覆蓋 */
+[data-theme="dark"] {
+  --bg-accent: var(--orion-primary-800);
+  --text-muted: var(--orion-neutral-400);
+}
+
+/* 手動深色模式切換 - 保留必要的覆蓋 */
+[data-theme="dark"] {
+  --bg-accent: var(--orion-primary-800);
+  --text-muted: var(--orion-neutral-400);
+}

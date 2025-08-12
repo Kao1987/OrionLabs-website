@@ -25,6 +25,7 @@ import './assets/css/orion-unified-theme.css'      // 統一主題系統 (新) -
 // 4. 組件系統（已通過 @layer components 載入）
 import './assets/css/orion-bem-system.css'         // 🎯 BEM-Lite 統一組件系統 - 替代硬編碼
 import './assets/css/bem-components.css'           // 🎯 BEM-Lite 組件庫 - 替代硬編碼顏色
+import './assets/css/bem-unified.css'              // 🎯 BEM-Lite 統一命名規範（P1重構）
 
 // 5. 工具類（已通過 @layer utilities 載入）
 import './assets/utilities.css'                    // 🛠️ 工具類（已移除 !important）
@@ -34,8 +35,7 @@ import './assets/global.css'                       // ⚠️ 向後相容，建�
 import './assets/components.css'                   // ⚠️ 向後相容，建議遷移至 BEM 系統
 
 // 7. 深色模式與對比度增強
-import './assets/css/dark-theme-enhancement.css'   // 🌙 深色模式增強
-import './assets/css/dark-mode-comprehensive-fix.css' // 🌙 深色模式全面修復
+import './assets/css/dark-theme-enhancement.css'   // 🌙 深色模式增強（統一檔案）
 import './assets/css/contrast-enhancements.css'    // 🎯 WCAG 對比度增強
 
 // 8. 頁面特定修復（將逐步移至組件內）
@@ -45,8 +45,6 @@ import './assets/css/page-color-consistency.css'   // 🎨 頁面配色統一（
 
 // 9. Bootstrap 覆蓋層（必要的 !important 使用）
 import './assets/css/bootstrap-overrides.css'      // 🎯 Bootstrap 覆蓋（@layer overrides）
-import './assets/css/page-theme-consistency.css'  // 📄 頁面配色統一修復
-import './assets/css/page-color-consistency.css'  // 🎨 頁面配色統一修復
 
 // === 主題驗證工具 (開發環境) ===
 import { runThemeConsistencyCheck } from './utils/themeValidator'

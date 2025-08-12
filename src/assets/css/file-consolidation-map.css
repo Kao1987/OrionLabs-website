@@ -1,0 +1,43 @@
+/* === OrionLabs P2 檔案整合對照表 === */
+/* 遵循 C-refactor 規範：最小變更、可回滾 */
+/* 遵循 D-style 規範：檔案結構優化、移除重複 */
+
+/* 
+=== 檔案整合策略 ===
+
+1. 重複載入移除：
+   ❌ page-theme-consistency.css (重複載入 2 次)
+   ❌ page-color-consistency.css (重複載入 2 次)
+
+2. 深色模式檔案整合：
+   📁 保留：dark-theme-enhancement.css (主要檔案)
+   ❌ 移除：dark-mode-comprehensive-fix.css (功能重複)
+   ❌ 移除：dark-mode-fixes.css (功能重複)
+   ❌ 移除：dark-mode-enhancements.css (功能重複)
+
+3. 工具類重複定義整合：
+   📁 保留：utilities.css (@layer utilities 管理)
+   ⚠️  處理：global.css 中的工具類重複定義
+
+4. 變數系統整合：
+   📁 保留：orion-unified-theme.css (主要變數檔案)
+   📁 保留：color-adapter.css (相容性適配)
+   ⚠️  處理：global.css 中的變數重複定義
+
+5. BEM 系統整合：
+   📁 保留：bem-unified.css (P1 新創建)
+   📁 保留：orion-bem-system.css (系統級)
+   📁 保留：bem-components.css (組件級)
+   ⚠️  處理：global.css 中的 BEM 重複定義
+
+=== 預期效果 ===
+- 檔案數量減少：46 → 35 個 CSS 檔案
+- 載入時間改善：移除重複載入減少 15% 檔案大小
+- 維護性提升：移除重複定義，統一管理
+- 向後相容：@deprecated 檔案保持 3 版本過渡期
+
+=== 風險評估 ===
+- 🟢 低風險：重複載入移除（無功能影響）
+- 🟡 中風險：深色模式整合（需測試）
+- 🟡 中風險：工具類重複移除（需 fallback）
+*/

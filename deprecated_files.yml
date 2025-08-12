@@ -2,6 +2,25 @@
 # 遵循 A-core §1.5：@deprecated 三版過渡期後移除
 
 deprecated_files:
+  # P2 檔案結構優化（v2.8.2 標記）
+  - path: "src/assets/css/dark-mode-comprehensive-fix.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
+  - path: "src/assets/css/dark-mode-fixes.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
+  - path: "src/assets/css/dark-mode-enhancements.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
   # CSS 架構重構相關（v2.8.1 標記）
   - path: "src/assets/color-optimizations.css"
     reason: "已移至 bootstrap-overrides.css 與 @layer 架構"
