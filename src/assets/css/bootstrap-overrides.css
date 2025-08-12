@@ -1,0 +1,58 @@
+/* === Bootstrap 覆蓋層 - 必要的 !important 使用 === */
+/* 僅在需要覆蓋第三方樣式時使用 !important */
+/* 遵循 D-style 規範：在 @layer overrides 中管理 */
+
+@layer overrides {
+  /* Bootstrap 表單覆蓋 */
+  .form-control:focus {
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 0 0 0.2rem var(--color-shadow-focus) !important;
+  }
+
+  .form-check-input:checked {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  .form-check-input:focus {
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 0 0 0.2rem var(--color-shadow-focus) !important;
+  }
+
+  /* Bootstrap 文字色彩覆蓋 */
+  .text-muted {
+    color: var(--color-text-muted) !important;
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary) !important;
+  }
+
+  /* Bootstrap 狀態色彩覆蓋 */
+  .text-success {
+    color: var(--color-success) !important;
+  }
+
+  .text-warning {
+    color: var(--color-warning) !important;
+  }
+
+  .text-danger {
+    color: var(--color-danger) !important;
+  }
+
+  .text-info {
+    color: var(--color-info) !important;
+  }
+
+  /* Bootstrap 導航覆蓋 */
+  .nav-link.active {
+    color: var(--color-primary) !important;
+  }
+
+  /* 強制主題色彩（用於元件級別覆蓋） */
+  .force-theme-colors {
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-bg-primary) !important;
+  }
+}

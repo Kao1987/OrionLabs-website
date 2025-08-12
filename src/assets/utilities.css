@@ -1,0 +1,132 @@
+/* === 工具類庫 - Orion Design System === */
+/* 遵循 D-style 規範：降低 !important 使用，利用 @layer 管理層級 */
+
+@layer utilities {
+  /* === 間距工具類 === */
+  .u-mb-0 { margin-bottom: 0; }
+  .u-mb-xs { margin-bottom: var(--spacing-xs); }
+  .u-mb-sm { margin-bottom: var(--spacing-sm); }
+  .u-mb-md { margin-bottom: var(--spacing-md); }
+  .u-mb-lg { margin-bottom: var(--spacing-lg); }
+  .u-mb-xl { margin-bottom: var(--spacing-xl); }
+  .u-mb-2xl { margin-bottom: var(--spacing-2xl); }
+
+  .u-mt-0 { margin-top: 0; }
+  .u-mt-xs { margin-top: var(--spacing-xs); }
+  .u-mt-sm { margin-top: var(--spacing-sm); }
+  .u-mt-md { margin-top: var(--spacing-md); }
+  .u-mt-lg { margin-top: var(--spacing-lg); }
+  .u-mt-xl { margin-top: var(--spacing-xl); }
+  .u-mt-2xl { margin-top: var(--spacing-2xl); }
+
+  .u-p-0 { padding: 0; }
+  .u-p-xs { padding: var(--spacing-xs); }
+  .u-p-sm { padding: var(--spacing-sm); }
+  .u-p-md { padding: var(--spacing-md); }
+  .u-p-lg { padding: var(--spacing-lg); }
+  .u-p-xl { padding: var(--spacing-xl); }
+  .u-p-2xl { padding: var(--spacing-2xl); }
+
+  /* === 文字工具類 === */
+  .u-text-center { text-align: center; }
+  .u-text-left { text-align: left; }
+  .u-text-right { text-align: right; }
+
+  .u-text-primary { color: var(--color-text-primary); }
+  .u-text-secondary { color: var(--color-text-secondary); }
+  .u-text-muted { color: var(--color-text-muted); }
+  .u-text-inverse { color: var(--color-text-inverse); }
+
+  .u-fw-light { font-weight: 300; }
+  .u-fw-normal { font-weight: 400; }
+  .u-fw-medium { font-weight: 500; }
+  .u-fw-semibold { font-weight: 600; }
+  .u-fw-bold { font-weight: 700; }
+
+  /* === 背景工具類 === */
+  .u-bg-primary { background-color: var(--color-bg-primary); }
+  .u-bg-secondary { background-color: var(--color-bg-secondary); }
+  .u-bg-tertiary { background-color: var(--color-bg-tertiary); }
+  .u-bg-card { background-color: var(--color-bg-card); }
+
+  /* === 邊框工具類 === */
+  .u-border-0 { border: none; }
+  .u-border-light { border: 1px solid var(--color-border-primary); }
+  .u-border-default { border: 1px solid var(--color-border-secondary); }
+  .u-border-strong { border: 1px solid var(--color-border-focus); }
+
+  .u-rounded-0 { border-radius: 0; }
+  .u-rounded-sm { border-radius: var(--radius-sm); }
+  .u-rounded-md { border-radius: var(--radius-md); }
+  .u-rounded-lg { border-radius: var(--radius-lg); }
+  .u-rounded-xl { border-radius: var(--radius-xl); }
+  .u-rounded-full { border-radius: var(--radius-full); }
+
+  /* === 陰影工具類 === */
+  .u-shadow-none { box-shadow: none; }
+  .u-shadow-sm { box-shadow: var(--shadow-sm); }
+  .u-shadow-md { box-shadow: var(--shadow-md); }
+  .u-shadow-lg { box-shadow: var(--shadow-lg); }
+  .u-shadow-xl { box-shadow: var(--shadow-xl); }
+
+  /* === 佈局工具類 === */
+  .u-d-block { display: block; }
+  .u-d-inline { display: inline; }
+  .u-d-inline-block { display: inline-block; }
+  .u-d-flex { display: flex; }
+  .u-d-inline-flex { display: inline-flex; }
+  .u-d-none { display: none; }
+
+  .u-flex-column { flex-direction: column; }
+  .u-flex-row { flex-direction: row; }
+  .u-justify-start { justify-content: flex-start; }
+  .u-justify-center { justify-content: center; }
+  .u-justify-end { justify-content: flex-end; }
+  .u-justify-between { justify-content: space-between; }
+  .u-justify-around { justify-content: space-around; }
+
+  .u-align-start { align-items: flex-start; }
+  .u-align-center { align-items: center; }
+  .u-align-end { align-items: flex-end; }
+  .u-align-stretch { align-items: stretch; }
+
+  /* === 位置工具類 === */
+  .u-position-relative { position: relative; }
+  .u-position-absolute { position: absolute; }
+  .u-position-fixed { position: fixed; }
+  .u-position-sticky { position: sticky; }
+
+  /* === 變換工具類 === */
+  .u-transform-hover:hover {
+    transform: translateY(-4px);
+    transition: var(--transition-base);
+  }
+
+  .u-scale-hover:hover {
+    transform: scale(1.05);
+    transition: var(--transition-base);
+  }
+
+  .u-transition-fast { transition: var(--transition-fast); }
+  .u-transition-base { transition: var(--transition-base); }
+  .u-transition-smooth { transition: var(--transition-smooth); }
+
+  /* === 響應式工具類 === */
+  @media (max-width: 576px) {
+    .u-mb-xs-responsive { margin-bottom: var(--spacing-xs); }
+    .u-mb-sm-responsive { margin-bottom: var(--spacing-sm); }
+    .u-p-sm-responsive { padding: var(--spacing-sm); }
+    .u-text-center-mobile { text-align: center; }
+  }
+
+  @media (max-width: 768px) {
+    .u-mb-md-responsive { margin-bottom: var(--spacing-md); }
+    .u-p-md-responsive { padding: var(--spacing-md); }
+    .u-flex-column-tablet { flex-direction: column; }
+  }
+
+  @media (max-width: 992px) {
+    .u-mb-lg-responsive { margin-bottom: var(--spacing-lg); }
+    .u-p-lg-responsive { padding: var(--spacing-lg); }
+  }
+}
