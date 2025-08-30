@@ -7,6 +7,12 @@
           <i class="bi bi-shield-lock me-2"></i>
           管理後台
         </span>
+
+        <!-- 用戶狀態組件 -->
+        <div class="mx-auto">
+          <user-status-widget ref="statusWidget" />
+        </div>
+
         <div class="navbar-nav ms-auto">
           <button @click="logout" class="btn btn-outline-light">
             <i class="bi bi-box-arrow-right me-1"></i>
@@ -23,7 +29,7 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a 
+                <a
                   class="nav-link"
                   :class="{ active: activeTab === 'dashboard' }"
                   @click="activeTab = 'dashboard'"
@@ -34,7 +40,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a 
+                <a
                   class="nav-link"
                   :class="{ active: activeTab === 'blog' }"
                   @click="activeTab = 'blog'"
@@ -45,7 +51,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a 
+                <a
                   class="nav-link"
                   :class="{ active: activeTab === 'portfolio' }"
                   @click="activeTab = 'portfolio'"
@@ -63,10 +69,12 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <!-- 儀表板 -->
           <div v-if="activeTab === 'dashboard'" class="dashboard">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
               <h1 class="h2">儀表板</h1>
             </div>
-            
+
             <div class="row">
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -114,17 +122,11 @@
               <div class="col-12">
                 <h3>快速操作</h3>
                 <div class="btn-group" role="group">
-                  <button 
-                    @click="activeTab = 'blog'"
-                    class="btn btn-primary"
-                  >
+                  <button @click="activeTab = 'blog'" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>
                     新增文章
                   </button>
-                  <button 
-                    @click="activeTab = 'portfolio'"
-                    class="btn btn-success"
-                  >
+                  <button @click="activeTab = 'portfolio'" class="btn btn-success">
                     <i class="bi bi-plus-circle me-1"></i>
                     新增作品
                   </button>
@@ -134,10 +136,10 @@
           </div>
 
           <!-- 部落格管理 -->
-          <BlogManagement v-if="activeTab === 'blog'" />
+          <blog-management v-if="activeTab === 'blog'" />
 
           <!-- 作品集管理 -->
-          <PortfolioManagement v-if="activeTab === 'portfolio'" />
+          <portfolio-management v-if="activeTab === 'portfolio'" />
         </main>
       </div>
     </div>
@@ -145,46 +147,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import BlogManagement from '@/components/admin/BlogManagement.vue'
-import PortfolioManagement from '@/components/admin/PortfolioManagement.vue'
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { authAPI } from "@/services/api";
+import BlogManagement from "@/components/admin/BlogManagement.vue";
+import PortfolioManagement from "@/components/admin/PortfolioManagement.vue";
+import UserStatusWidget from "@/components/UserStatusWidget.vue";
 
-const router = useRouter()
-const activeTab = ref('dashboard')
+const router = useRouter();
+const activeTab = ref("dashboard");
+const statusWidget = ref();
 
 // 統計數據
 const stats = ref({
   blogPosts: 0,
-  portfolioItems: 0
-})
+  portfolioItems: 0,
+});
 
 // 檢查登入狀態
 onMounted(() => {
-  const token = localStorage.getItem('adminToken')
+  const token = localStorage.getItem("adminToken");
   if (!token) {
-    router.push('/')
+    router.push("/");
   }
-  
+
   // 載入統計數據
-  loadStats()
-})
+  loadStats();
+});
 
 // 載入統計數據
 const loadStats = () => {
   // 這裡之後會連接API
   stats.value = {
     blogPosts: 0,
-    portfolioItems: 0
-  }
-}
+    portfolioItems: 0,
+  };
+};
 
 // 登出
-const logout = () => {
-  localStorage.removeItem('adminToken')
-  localStorage.removeItem('tokenType')
-  router.push('/')
-}
+const logout = async () => {
+  try {
+    // 呼叫後端登出API
+    await authAPI.logout();
+  } catch (err) {
+    console.warn("後端登出失敗，但仍清除本地Token:", err);
+  } finally {
+    // 無論如何都清除本地Token
+    authAPI.clearAuth();
+    router.push("/");
+  }
+};
 </script>
 
 <style scoped>
@@ -195,7 +207,7 @@ const logout = () => {
   left: 0;
   z-index: 100;
   padding: 48px 0 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .sidebar .nav-link {
@@ -205,7 +217,7 @@ const logout = () => {
 
 .sidebar .nav-link.active {
   color: #007bff;
-  background-color: rgba(0, 123, 255, .1);
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
 .sidebar .nav-link:hover {
@@ -230,4 +242,4 @@ const logout = () => {
     top: 0;
   }
 }
-</style> 
+</style>

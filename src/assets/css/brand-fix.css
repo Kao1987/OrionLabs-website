@@ -1,0 +1,210 @@
+/*
+ * Orion 品牌色彩標準化修復
+ * 目標：修復 rgb(127,179,255) 等不一致的品牌色彩
+ * 統一使用 Orion 官方色彩系統
+ */
+
+/* === Orion 官方品牌色彩定義 === */
+:root {
+  /* 主品牌色 - Orion Blue */
+  --orion-brand-primary: #002fa7;
+  --orion-brand-primary-hover: #001a64;
+  --orion-brand-primary-light: #3441e3;
+
+  /* 次要品牌色 - Orion Silver */
+  --orion-brand-secondary: #c8c7c5;
+  --orion-brand-secondary-dark: #a8a29e;
+
+  /* 品牌漸變 */
+  --orion-brand-gradient: linear-gradient(135deg, #002fa7 0%, #3441e3 50%, #5570ff 100%);
+
+  /* 禁止使用的顏色 */
+  --deprecated-blue: transparent !important; /* 原 rgb(127,179,255) */
+  --deprecated-light-blue: transparent !important; /* 原 #7fb3ff */
+}
+
+/* === 強制修復錯誤的品牌色使用 === */
+
+/* 修復主要按鈕 */
+.btn-primary,
+.btn_primary,
+.orion-btn-primary {
+  background-color: var(--orion-brand-primary) !important;
+  border-color: var(--orion-brand-primary) !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn_primary:hover,
+.btn_primary:focus,
+.orion-btn-primary:hover,
+.orion-btn-primary:focus {
+  background-color: var(--orion-brand-primary-hover) !important;
+  border-color: var(--orion-brand-primary-hover) !important;
+  color: #ffffff !important;
+}
+
+/* 修復連結顏色 */
+a:not(.btn):not(.nav-link):not(.navbar-brand) {
+  color: var(--orion-brand-primary) !important;
+}
+
+a:not(.btn):not(.nav-link):not(.navbar-brand):hover {
+  color: var(--orion-brand-primary-hover) !important;
+}
+
+/* 修復導航連結 */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--orion-brand-primary) !important;
+}
+
+.navbar-nav .nav-link.active,
+.nav-link.active {
+  color: var(--orion-brand-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* 修復表單焦點 */
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--orion-brand-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25) !important;
+}
+
+/* 修復 Hero 標題 */
+.hero-title,
+.hero_title,
+.hero-section__title,
+h1.display-1,
+h1.display-2 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 修復 Hero 背景 */
+.hero-section,
+.hero_section,
+.main-header {
+  background: var(--orion-brand-gradient) !important;
+}
+
+/* 修復卡片標題 */
+.card-title,
+.card_title {
+  color: var(--orion-brand-primary) !important;
+}
+
+/* 修復圖示顏色 */
+.text-primary i,
+.text_primary i,
+i.text-primary,
+i.text_primary {
+  color: var(--orion-brand-primary) !important;
+}
+
+/* 修復進度條 */
+.progress-bar {
+  background-color: var(--orion-brand-primary) !important;
+}
+
+/* 修復分頁 */
+.page-link {
+  color: var(--orion-brand-primary) !important;
+}
+
+.page-link:hover {
+  color: var(--orion-brand-primary-hover) !important;
+  background-color: rgba(0, 47, 167, 0.1) !important;
+  border-color: var(--orion-brand-primary) !important;
+}
+
+.page-item.active .page-link {
+  background-color: var(--orion-brand-primary) !important;
+  border-color: var(--orion-brand-primary) !important;
+}
+
+/* 修復徽章 */
+.badge-primary,
+.badge_primary {
+  background-color: var(--orion-brand-primary) !important;
+  color: #ffffff !important;
+}
+
+/* 修復警告框 */
+.alert-primary {
+  color: var(--orion-brand-primary-hover) !important;
+  background-color: rgba(0, 47, 167, 0.1) !important;
+  border-color: rgba(0, 47, 167, 0.2) !important;
+}
+
+/* 修復下拉選單 */
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: rgba(0, 47, 167, 0.1) !important;
+  color: var(--orion-brand-primary) !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--orion-brand-primary) !important;
+  color: #ffffff !important;
+}
+
+/* === 深色模式品牌色修復 === */
+[data-theme="dark"] a:not(.btn):not(.nav-link):not(.navbar-brand) {
+  color: #7cc7ff !important;
+}
+
+[data-theme="dark"] a:not(.btn):not(.nav-link):not(.navbar-brand):hover {
+  color: #a3d9ff !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover,
+[data-theme="dark"] .navbar-nav .nav-link:focus {
+  color: #7cc7ff !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link.active {
+  color: #7cc7ff !important;
+}
+
+/* === 禁止使用已棄用的顏色 === */
+*[style*="rgb(127,179,255)"],
+*[style*="rgb(127, 179, 255)"],
+*[style*="#7fb3ff"],
+*[style*="#7FB3FF"] {
+  color: var(--orion-brand-primary) !important;
+  background-color: transparent !important;
+}
+
+/* === 調試輔助 === */
+@media (max-width: 1px) {
+  /* 隱藏的調試標記 - 確認品牌色修復已載入 */
+  body::before {
+    content: "BRAND-COLOR-FIX-LOADED";
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+  }
+}
+
+/* === CSS 變數強制覆蓋 === */
+* {
+  /* 確保所有元素使用正確的品牌色 */
+  --bs-primary: var(--orion-brand-primary) !important;
+  --color-primary: var(--orion-brand-primary) !important;
+  --primary-color: var(--orion-brand-primary) !important;
+  --brand-primary: var(--orion-brand-primary) !important;
+
+  /* 禁用錯誤顏色 */
+  --wrong-blue: transparent !important;
+  --light-blue: transparent !important;
+}

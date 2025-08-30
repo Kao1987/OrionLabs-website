@@ -1,0 +1,317 @@
+/* === OrionLabs 深色模式增強修復 === */
+/* 遵循 A-core 和 D-style 規範 */
+
+/* === 主要標題區塊統一樣式 === */
+[data-theme="dark"] .main-header {
+  background: linear-gradient(135deg, rgb(0, 47, 167) 0%, rgb(0, 35, 125) 100%);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .main-header h1,
+[data-theme="dark"] .main-header .lead {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 600 !important;
+}
+
+/* === Hero 區塊深色模式增強 === */
+[data-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, rgb(0, 47, 167) 0%, rgb(0, 35, 125) 100%);
+}
+
+[data-theme="dark"] .hero-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  font-weight: 700 !important;
+  font-size: 2.5rem !important;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: #ffffff !important;
+  opacity: 0.95 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+  font-weight: 400 !important;
+}
+
+/* === 關於我頁面特殊修復 === */
+[data-theme="dark"] .about-page .hero-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+  font-weight: 700 !important;
+  font-size: 3rem !important;
+}
+
+[data-theme="dark"] .about-page .hero-subtitle {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6) !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="dark"] .about-page .text-white {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .about-page .text-white-50 {
+  color: #ffffff !important;
+  opacity: 0.9 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* === 技能區塊深色模式 === */
+[data-theme="dark"] .skills-section,
+[data-theme="dark"] .section-alt,
+[data-theme="dark"] .timeline-section,
+[data-theme="dark"] .hobbies-section {
+  background: var(--color-bg-secondary) !important;
+}
+
+[data-theme="dark"] .skill-item,
+[data-theme="dark"] .skill-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .skill-bar {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .skills-pie-chart,
+[data-theme="dark"] .skills-radar-chart {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+}
+
+/* === 時間線區塊深色模式 === */
+[data-theme="dark"] .timeline-item {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .timeline-marker {
+  background: var(--color-primary);
+  border: 3px solid var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .timeline-content {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .timeline-title {
+  color: var(--color-text-primary);
+}
+
+/* === 興趣愛好區塊深色模式 === */
+[data-theme="dark"] .hobby-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+/* === 作品集深色模式 === */
+[data-theme="dark"] .portfolio-page {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .card-portfolio {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .project-image {
+  background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+}
+
+[data-theme="dark"] .project-icon {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .card-portfolio:hover .project-icon {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .portfolio-overlay {
+  background: linear-gradient(135deg, var(--color-bg-overlay), var(--color-primary-dark));
+}
+
+/* === 部落格深色模式 === */
+[data-theme="dark"] .blog-page {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .blog-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .blog-image {
+  background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+}
+
+[data-theme="dark"] .blog_filter-section {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+}
+
+/* === 表單元素深色模式 === */
+[data-theme="dark"] .form-control {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .form-control:focus {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-focus);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .input-group-text {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+/* === 按鈕深色模式增強 === */
+[data-theme="dark"] .btn-outline-secondary {
+  border-color: var(--color-border-primary);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+/* === 導航列深色模式增強 === */
+[data-theme="dark"] .navbar {
+  background-color: rgba(28, 25, 23, 0.95) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .navbar-brand {
+  color: var(--nav-brand-color) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link {
+  color: var(--nav-link-color) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover {
+  color: var(--nav-link-hover) !important;
+  background-color: var(--nav-link-hover-bg);
+}
+
+[data-theme="dark"] .navbar-nav .nav-link.active {
+  color: var(--nav-link-active) !important;
+  background-color: var(--nav-link-active-bg);
+}
+
+/* === 頁籤深色模式 === */
+[data-theme="dark"] .nav-pills .nav-link {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+}
+
+[data-theme="dark"] .nav-pills .nav-link:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .nav-pills .nav-link.active {
+  background-color: var(--orion-blue-400);
+  color: var(--orion-silver-50);
+}
+
+/* === Modal 深色模式 === */
+[data-theme="dark"] .modal-content {
+  background-color: var(--orion-silver-900);
+  border: 1px solid var(--orion-silver-800);
+}
+
+[data-theme="dark"] .modal-header {
+  background-color: var(--orion-silver-800);
+  border-bottom: 1px solid var(--orion-silver-700);
+}
+
+[data-theme="dark"] .modal-title {
+  color: var(--orion-silver-50);
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1);
+}
+
+/* === Badge 深色模式 === */
+[data-theme="dark"] .badge-secondary {
+  background-color: var(--orion-silver-700);
+  color: var(--orion-silver-50);
+}
+
+[data-theme="dark"] .badge-outline {
+  border-color: var(--orion-silver-600);
+  color: var(--orion-silver-200);
+}
+
+/* === 分頁深色模式 === */
+[data-theme="dark"] .page-link {
+  background-color: var(--orion-silver-800);
+  border-color: var(--orion-silver-700);
+  color: var(--orion-silver-200);
+}
+
+[data-theme="dark"] .page-link:hover {
+  background-color: var(--orion-blue-400);
+  border-color: var(--orion-blue-400);
+  color: var(--orion-silver-50);
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+  background-color: var(--orion-blue-400);
+  border-color: var(--orion-blue-400);
+  color: var(--orion-silver-50);
+}
+
+/* === 響應式深色模式 === */
+@media (max-width: 768px) {
+  [data-theme="dark"] .hero-section {
+    background: var(--orion-blue-900);
+  }
+
+  [data-theme="dark"] .skills-section {
+    padding: 3rem 0;
+  }
+}
+
+/* === 無障礙增強 === */
+[data-theme="dark"] :focus-visible {
+  outline: 2px solid var(--orion-blue-400);
+  outline-offset: 2px;
+}
+
+/* === 滾動條深色模式 === */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  background: var(--orion-silver-900);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--orion-silver-700);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--orion-blue-400);
+}

@@ -1,0 +1,497 @@
+/* === OrionLabs 頁面配色統一修復 === */
+/* 確保 Blog、Portfolio 和其他頁面配色完全一致 */
+
+/* ===== 全域統一色彩覆蓋 ===== */
+
+/* 文字色彩統一 */
+.text-primary {
+  color: #002fa7 !important; /* 統一主色調 */
+}
+
+.text-secondary {
+  color: #78716c !important; /* 統一次要文字色 */
+}
+
+.text-muted {
+  color: #a8a29e !important; /* 統一暗文字色 */
+}
+
+.text-dark {
+  color: #1c1917 !important; /* 統一深色文字 */
+}
+
+/* 背景色彩統一 */
+.bg-primary {
+  background-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.bg-secondary {
+  background-color: #78716c !important;
+  color: #ffffff !important;
+}
+
+.bg-light {
+  background-color: #f5f5f4 !important;
+  color: #1c1917 !important;
+}
+
+.bg-white {
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+}
+
+/* 徽章統一配色 */
+.badge {
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.badge.bg-primary {
+  background-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.badge.bg-secondary {
+  background-color: #78716c !important;
+  color: #ffffff !important;
+}
+
+.badge.bg-light {
+  background-color: #e7e5e4 !important;
+  color: #1c1917 !important;
+  border: 1px solid #d6d3d1;
+}
+
+.badge.text-dark {
+  color: #1c1917 !important;
+}
+
+.badge.text-muted {
+  color: #78716c !important;
+}
+
+/* === Blog 頁面專用修復 === */
+.blog-view .card {
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  color: #1c1917;
+}
+
+.blog-view .card-title {
+  color: #1c1917 !important;
+}
+
+.blog-view .card-text {
+  color: #57534e !important;
+}
+
+.blog-view .text-decoration-none {
+  color: #1c1917 !important;
+}
+
+.blog-view .text-decoration-none:hover {
+  color: #002fa7 !important;
+}
+
+/* Blog 標籤配色 */
+.blog-view .tag-badge {
+  background-color: #f5f5f4 !important;
+  color: #57534e !important;
+  border: 1px solid #d6d3d1;
+}
+
+.blog-view .tag-badge:hover {
+  background-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+/* === Portfolio 頁面專用修復 === */
+.portfolio-view .card {
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  color: #1c1917;
+}
+
+.portfolio-view .card-title {
+  color: #1c1917 !important;
+}
+
+.portfolio-view .card-text {
+  color: #57534e !important;
+}
+
+/* Portfolio 技術標籤 */
+.portfolio_tech-badge {
+  background-color: #f5f5f4 !important;
+  color: #57534e !important;
+  border: 1px solid #d6d3d1;
+}
+
+.portfolio_tech-badge--active {
+  background-color: #002fa7 !important;
+  color: #ffffff !important;
+  border-color: #002fa7 !important;
+}
+
+.portfolio_tech-badge:hover {
+  background-color: #e7e5e4 !important;
+  color: #1c1917 !important;
+}
+
+/* === 按鈕統一配色 === */
+.btn-primary {
+  background-color: #002fa7 !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #001d6d !important;
+  border-color: #001d6d !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-primary {
+  border-color: #002fa7 !important;
+  color: #002fa7 !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: #002fa7 !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.btn-secondary {
+  background-color: #78716c !important;
+  border-color: #78716c !important;
+  color: #ffffff !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: #57534e !important;
+  border-color: #57534e !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-secondary {
+  border-color: #78716c !important;
+  color: #78716c !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:active {
+  background-color: #78716c !important;
+  border-color: #78716c !important;
+  color: #ffffff !important;
+}
+
+/* === 篩選按鈕統一樣式 === */
+.filter-btn,
+.blog_category-btn,
+.portfolio_filter-btn {
+  background-color: #f5f5f4 !important;
+  border: 2px solid #d6d3d1 !important;
+  color: #57534e !important;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.blog_category-btn:hover,
+.portfolio_filter-btn:hover {
+  background-color: #e7e5e4 !important;
+  border-color: #002fa7 !important;
+  color: #002fa7 !important;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active,
+.blog_category-btn--active,
+.portfolio_filter-btn--active {
+  background: linear-gradient(135deg, #002fa7 0%, #001d6d 100%) !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 47, 167, 0.3);
+}
+
+/* === 卡片統一樣式 === */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 12px;
+  color: #1c1917;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #d6d3d1;
+  box-shadow: 0 8px 25px rgba(0, 47, 167, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-body {
+  color: inherit;
+}
+
+.card-title {
+  color: #1c1917 !important;
+  font-weight: 600;
+}
+
+.card-text {
+  color: #57534e !important;
+}
+
+/* === Modal 統一樣式 === */
+.modal-content {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  color: #1c1917;
+}
+
+.modal-header {
+  border-bottom: 1px solid #e7e5e4;
+  background-color: #ffffff;
+}
+
+.modal-title {
+  color: #1c1917 !important;
+}
+
+.modal-body {
+  background-color: #ffffff;
+  color: #1c1917;
+}
+
+.modal-footer {
+  border-top: 1px solid #e7e5e4;
+  background-color: #ffffff;
+}
+
+/* === 暗色模式統一配色 === */
+[data-theme="dark"] .text-primary {
+  color: #4dabff !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: #d6d3d1 !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: #a8a29e !important;
+}
+
+[data-theme="dark"] .text-dark {
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: #292524 !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #1c1917 !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .card {
+  background-color: #292524 !important;
+  border-color: #44403c !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .card-title {
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .card-text {
+  color: #d6d3d1 !important;
+}
+
+[data-theme="dark"] .badge.bg-light {
+  background-color: #44403c !important;
+  color: #fafafa !important;
+  border-color: #57534e;
+}
+
+[data-theme="dark"] .filter-btn,
+[data-theme="dark"] .blog_category-btn,
+[data-theme="dark"] .portfolio_filter-btn {
+  background-color: #44403c !important;
+  border-color: #57534e !important;
+  color: #d6d3d1 !important;
+}
+
+[data-theme="dark"] .filter-btn:hover,
+[data-theme="dark"] .blog_category-btn:hover,
+[data-theme="dark"] .portfolio_filter-btn:hover {
+  background-color: #57534e !important;
+  border-color: #4dabff !important;
+  color: #4dabff !important;
+}
+
+[data-theme="dark"] .filter-btn.active,
+[data-theme="dark"] .blog_category-btn--active,
+[data-theme="dark"] .portfolio_filter-btn--active {
+  background: linear-gradient(135deg, #4dabff 0%, #1a94ff 100%) !important;
+  border-color: #4dabff !important;
+  color: #1c1917 !important;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: #292524 !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom-color: #44403c !important;
+  background-color: #292524 !important;
+}
+
+[data-theme="dark"] .modal-body {
+  background-color: #292524 !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .modal-footer {
+  border-top-color: #44403c !important;
+  background-color: #292524 !important;
+}
+
+[data-theme="dark"] .modal-title {
+  color: #fafafa !important;
+}
+
+/* === 空狀態圖示統一 === */
+.empty-state i.display-1 {
+  color: #002fa7 !important;
+}
+
+[data-theme="dark"] .empty-state i.display-1 {
+  color: #4dabff !important;
+}
+
+/* === 分頁器統一樣式 === */
+.pagination .page-link {
+  color: #002fa7 !important;
+  border-color: #d6d3d1 !important;
+  background-color: #ffffff !important;
+}
+
+.pagination .page-link:hover {
+  color: #001d6d !important;
+  background-color: #f5f5f4 !important;
+  border-color: #002fa7 !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #002fa7 !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .pagination .page-link {
+  color: #4dabff !important;
+  border-color: #57534e !important;
+  background-color: #292524 !important;
+}
+
+[data-theme="dark"] .pagination .page-link:hover {
+  color: #80c2ff !important;
+  background-color: #44403c !important;
+  border-color: #4dabff !important;
+}
+
+[data-theme="dark"] .pagination .page-item.active .page-link {
+  background-color: #4dabff !important;
+  border-color: #4dabff !important;
+  color: #1c1917 !important;
+}
+
+/* === 輸入框統一樣式 === */
+.form-control {
+  border-color: #d6d3d1 !important;
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+}
+
+.form-control:focus {
+  border-color: #002fa7 !important;
+  box-shadow: 0 0 0 0.25rem rgba(0, 47, 167, 0.25) !important;
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+}
+
+[data-theme="dark"] .form-control {
+  border-color: #57534e !important;
+  background-color: #292524 !important;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+  border-color: #4dabff !important;
+  box-shadow: 0 0 0 0.25rem rgba(77, 171, 255, 0.25) !important;
+  background-color: #292524 !important;
+  color: #fafafa !important;
+}
+
+/* === 確保圖示顏色統一 === */
+.bi.text-primary {
+  color: #002fa7 !important;
+}
+
+[data-theme="dark"] .bi.text-primary {
+  color: #4dabff !important;
+}
+
+/* === 連結顏色統一 === */
+a {
+  color: #002fa7 !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: #001d6d !important;
+  text-decoration: underline;
+}
+
+[data-theme="dark"] a {
+  color: #4dabff !important;
+}
+
+[data-theme="dark"] a:hover,
+[data-theme="dark"] a:focus {
+  color: #80c2ff !important;
+}
+
+/* === 確保文字對比度 === */
+.lead {
+  color: #57534e !important;
+}
+
+[data-theme="dark"] .lead {
+  color: #d6d3d1 !important;
+}
+
+small {
+  color: #78716c !important;
+}
+
+[data-theme="dark"] small {
+  color: #a8a29e !important;
+}

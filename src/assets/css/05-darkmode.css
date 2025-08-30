@@ -1,0 +1,37 @@
+[data-theme="dark"] .main-header{background:linear-gradient(135deg,rgb(0,47,167) 0%,rgb(0,35,125) 100%);color:#fff}
+[data-theme="dark"] .main-header h1,[data-theme="dark"] .main-header .lead{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.5);font-weight:60 }
+[data-theme="dark"] .hero-section{background:linear-gradient(135deg,rgb(0,47,167) 0%,rgb(0,35,125) 100%)}
+[data-theme="dark"] .about-page .hero-title{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.7);font-weight:70;font-size:3rem }
+[data-theme="dark"] .about-page .hero-subtitle{color:#fff;opacity:1;text-shadow:0 2px 3px rgba(0,0,0,.6);font-weight:50 }
+[data-theme="dark"] .about-page .text-white{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+[data-theme="dark"] .about-page .text-white-50{color:#fff text-
+[data-theme="dark"] .skills-section,[data-theme="dark"] .section-alt,[data-theme="dark"] .timeline-section,[data-theme="dark"] .hobbies-section{background:var(--color-bg-secondary)}
+[data-theme="dark"] .skill-item,[data-theme="dark"] .skill-card{background:var(--color-bg-card);border:1px solid var(--color-border-primary);color:var(--color-text-primary)}
+[data-theme="dark"] .skill-bar{background-color:var(--color-bg-tertiary)}
+[data-theme="dark"] .skills-pie-chart,[data-theme="dark"] .skills-radar-chart{background:var(--color-bg-card);border:1px solid var(--color-border-primary)}
+[data-theme="dark"] .hobby-card{background:var(--color-bg-card);border:1px solid var(--color-border-primary);border-radius:var(--radius-lg);padding:var(--spacing-lg);color:var(--color-text-primary)}
+[data-theme="dark"] .portfolio-page{background:var(--color-bg-primary)}
+[data-theme="dark"] .blog-page{background:var(--color-bg-primary)}
+[data-theme="dark"] .blog-card{background:var(--color-bg-card);border:1px solid var(--color-border-primary)}
+[data-theme="dark"] .form-control{background-color:var(--color-bg-tertiary);border-color:var(--color-border-primary);color:var(--color-text-primary)}
+[data-theme="dark"] .form-control:focus{background-color:var(--color-bg-tertiary);border-color:var(--color-border-focus);color:var(--color-text-primary)}
+[data-theme="dark"] .form-control::placeholder{color:var(--color-text-muted)}
+[data-theme="dark"] .input-group-text{background-color:var(--color-primary);border-color:var(--color-primary);color:var(--color-text-light)}
+[data-theme="dark"] .btn-outline-secondary{border-color:var(--color-border-primary);color:var(--color-text-secondary)}
+[data-theme="dark"] .btn-outline-secondary:hover{background-color:var(--color-bg-tertiary);border-color:var(--color-border-primary);color:var(--color-text-primary)}
+[data-theme="dark"] .navbar{background-color:rgba(28,25,23,.95);backdrop-filter:blur(10px)}
+[data-theme="dark"] .navbar-brand{color:var(--nav-brand-color)}
+[data-theme="dark"] .navbar-nav .nav-link{color:var(--nav-link-color)}
+[data-theme="dark"] .navbar-nav .nav-link:hover{color:var(--nav-link-hover);background-color:var(--nav-link-hover-bg)}
+[data-theme="dark"] .navbar-nav .nav-link.active{color:var(--nav-link-active);background-color:var(--nav-link-active-bg)}
+[data-theme="dark"] .nav-pills .nav-link{color:var(--color-text-secondary);background-color:transparent}
+[data-theme="dark"] .nav-pills .nav-link:hover{background-color:var(--color-bg-tertiary);color:var(--color-text-primary)}
+[data-theme="dark"] .nav-pills .nav-link.active{background-color:var(--orion-blue-400);color:var(--orion-silver-50)}
+[data-theme="dark"] .modal-content{background-color:var(--orion-silver-900);border:1px solid var(--orion-silver-800)}
+[data-theme="dark"] .modal-header{background-color:var(--orion-silver-800);border-bottom:1px solid var(--orion-silver-700)}
+[data-theme="dark"] .modal-title{color:var(--orion-silver-50)}
+[data-theme="dark"] .btn-close{filter:invert(1)}
+[data-theme="dark"] .page-link{background-color:var(--orion-silver-800);border-color:var(--orion-silver-700);color:var(--orion-silver-200)}
+[data-theme="dark"] .page-link:hover{background-color:var(--orion-blue-400);border-color:var(--orion-blue-400);color:var(--orion-silver-50)}
+[data-theme="dark"] .page-item.active .page-link{background-color:var(--orion-blue-400);border-color:var(--orion-blue-400);color:var(--orion-silver-50)}
+[data-theme="dark"] .skills-section{padding:3rem 0}

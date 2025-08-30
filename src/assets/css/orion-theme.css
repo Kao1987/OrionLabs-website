@@ -1,0 +1,398 @@
+/* Orion Brand Colors & Design System */
+:root {
+  /* Primary Brand Colors - from readme.md specification */
+  --orion-primary: #2c3e50;
+  --orion-secondary: #34495e;
+  --orion-accent: #3498db;
+  --orion-light-bg: #f8f9fa;
+
+  /* Extended Color Palette */
+  --orion-primary-light: #3d566e;
+  --orion-primary-dark: #1a252f;
+  --orion-secondary-light: #425a72;
+  --orion-secondary-dark: #23313d;
+  --orion-accent-light: #52a9e8;
+  --orion-accent-dark: #2980b9;
+
+  /* Functional Colors */
+  --orion-success: #27ae60;
+  --orion-warning: #f39c12;
+  --orion-danger: #e74c3c;
+  --orion-info: var(--orion-accent);
+
+  /* Neutral Colors */
+  --orion-white: #ffffff;
+  --orion-light: #ecf0f1;
+  --orion-muted: #95a5a6;
+  --orion-dark: #2c3e50;
+  --orion-black: #1a1a1a;
+
+  /* Background Colors */
+  --orion-bg-primary: var(--orion-white);
+  --orion-bg-secondary: var(--orion-light-bg);
+  --orion-bg-dark: var(--orion-primary);
+  --orion-bg-overlay: rgba(44, 62, 80, 0.9);
+
+  /* Text Colors */
+  --orion-text-primary: var(--orion-primary);
+  --orion-text-secondary: var(--orion-secondary);
+  --orion-text-muted: var(--orion-muted);
+  --orion-text-light: var(--orion-white);
+
+  /* Shadow Colors */
+  --orion-shadow-light: rgba(0, 0, 0, 0.05);
+  --orion-shadow-medium: rgba(0, 0, 0, 0.1);
+  --orion-shadow-dark: rgba(0, 0, 0, 0.15);
+}
+
+/* Typography System - from readme.md specification */
+:root {
+  /* Font Family */
+  --orion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Font Weights */
+  --orion-font-weight-light: 300;
+  --orion-font-weight-normal: 400;
+  --orion-font-weight-medium: 500;
+  --orion-font-weight-semibold: 600;
+  --orion-font-weight-bold: 700;
+
+  /* Line Heights */
+  --orion-line-height-tight: 1.2;
+  --orion-line-height-normal: 1.6;
+  --orion-line-height-loose: 1.8;
+
+  /* Font Sizes */
+  --orion-font-size-xs: 0.75rem;
+  --orion-font-size-sm: 0.875rem;
+  --orion-font-size-base: 1rem;
+  --orion-font-size-lg: 1.125rem;
+  --orion-font-size-xl: 1.25rem;
+  --orion-font-size-2xl: 1.5rem;
+  --orion-font-size-3xl: 1.875rem;
+  --orion-font-size-4xl: 2.25rem;
+  --orion-font-size-5xl: 3rem;
+}
+
+/* Spacing System */
+:root {
+  --orion-spacing-xs: 0.25rem;
+  --orion-spacing-sm: 0.5rem;
+  --orion-spacing-md: 1rem;
+  --orion-spacing-lg: 1.5rem;
+  --orion-spacing-xl: 3rem;
+  --orion-spacing-2xl: 4rem;
+  --orion-spacing-3xl: 6rem;
+}
+
+/* Border Radius - from readme.md specification */
+:root {
+  --orion-border-radius-sm: 4px;
+  --orion-border-radius: 8px;
+  --orion-border-radius-lg: 12px;
+  --orion-border-radius-xl: 16px;
+  --orion-border-radius-full: 50%;
+}
+
+/* Transitions */
+:root {
+  --orion-transition-fast: 0.15s ease-in-out;
+  --orion-transition-normal: 0.3s ease-in-out;
+  --orion-transition-slow: 0.5s ease-in-out;
+}
+
+/* Global Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--orion-font-family);
+  font-weight: var(--orion-font-weight-normal);
+  line-height: var(--orion-line-height-normal);
+  color: var(--orion-text-primary);
+  background-color: var(--orion-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--orion-font-weight-bold);
+  line-height: var(--orion-line-height-tight);
+  color: var(--orion-text-primary);
+  margin-bottom: var(--orion-spacing-md);
+}
+
+h1 { font-size: var(--orion-font-size-5xl); }
+h2 { font-size: var(--orion-font-size-4xl); }
+h3 { font-size: var(--orion-font-size-3xl); }
+h4 { font-size: var(--orion-font-size-2xl); }
+h5 { font-size: var(--orion-font-size-xl); }
+h6 { font-size: var(--orion-font-size-lg); }
+
+/* Link Styles */
+a {
+  color: var(--orion-accent);
+  text-decoration: none;
+  transition: color var(--orion-transition-fast);
+}
+
+a:hover {
+  color: var(--orion-accent-dark);
+  text-decoration: underline;
+}
+
+/* Card Component - from readme.md specification */
+.orion-card {
+  background: var(--orion-white);
+  border-radius: var(--orion-border-radius);
+  box-shadow: 0 2px 4px var(--orion-shadow-light);
+  padding: var(--orion-spacing-lg);
+  transition: box-shadow var(--orion-transition-normal);
+}
+
+.orion-card:hover {
+  box-shadow: 0 4px 8px var(--orion-shadow-medium);
+}
+
+/* Button System - from readme.md specification */
+.orion-btn {
+  font-family: var(--orion-font-family);
+  font-weight: var(--orion-font-weight-medium);
+  font-size: var(--orion-font-size-base);
+  line-height: 1.5;
+  padding: 0.5rem 1rem;
+  border-radius: var(--orion-border-radius);
+  border: none;
+  cursor: pointer;
+  transition: all var(--orion-transition-fast);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.orion-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.orion-btn-primary {
+  background: linear-gradient(135deg, var(--orion-primary), var(--orion-secondary));
+  color: var(--orion-white);
+  box-shadow: 0 2px 4px var(--orion-shadow-light);
+}
+
+.orion-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--orion-primary-light), var(--orion-secondary-light));
+  box-shadow: 0 4px 8px var(--orion-shadow-medium);
+  transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.orion-btn-secondary {
+  background: var(--orion-light);
+  color: var(--orion-text-primary);
+  border: 1px solid var(--orion-muted);
+}
+
+.orion-btn-secondary:hover:not(:disabled) {
+  background: var(--orion-white);
+  border-color: var(--orion-primary);
+  color: var(--orion-primary);
+}
+
+/* Accent Button */
+.orion-btn-accent {
+  background: linear-gradient(135deg, var(--orion-accent), var(--orion-accent-dark));
+  color: var(--orion-white);
+}
+
+.orion-btn-accent:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--orion-accent-light), var(--orion-accent));
+  transform: translateY(-1px);
+}
+
+/* Form Styles */
+.orion-form-control {
+  font-family: var(--orion-font-family);
+  font-size: var(--orion-font-size-base);
+  padding: 0.75rem;
+  border: 1px solid var(--orion-muted);
+  border-radius: var(--orion-border-radius);
+  background: var(--orion-white);
+  transition: border-color var(--orion-transition-fast), box-shadow var(--orion-transition-fast);
+}
+
+.orion-form-control:focus {
+  outline: none;
+  border-color: var(--orion-accent);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Badge/Tag Styles */
+.orion-badge {
+  font-size: var(--orion-font-size-xs);
+  font-weight: var(--orion-font-weight-medium);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--orion-border-radius-sm);
+  background: var(--orion-light);
+  color: var(--orion-text-primary);
+}
+
+.orion-badge-primary {
+  background: var(--orion-primary);
+  color: var(--orion-white);
+}
+
+.orion-badge-accent {
+  background: var(--orion-accent);
+  color: var(--orion-white);
+}
+
+/* Responsive Breakpoints - from readme.md specification */
+/* xs: 0 */
+/* sm: 480px */
+/* md: 768px */
+/* lg: 992px */
+/* xl: 1280px */
+
+@media (min-width: 480px) {
+  .orion-card {
+    padding: var(--orion-spacing-xl);
+  }
+}
+
+@media (min-width: 768px) {
+  h1 { font-size: var(--orion-font-size-5xl); }
+  h2 { font-size: var(--orion-font-size-4xl); }
+  h3 { font-size: var(--orion-font-size-3xl); }
+}
+
+@media (min-width: 992px) {
+  .orion-btn {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Animation Classes */
+.orion-fade-in {
+  animation: orionFadeIn 0.5s ease-in-out;
+}
+
+@keyframes orionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.orion-slide-up {
+  animation: orionSlideUp 0.5s ease-out;
+}
+
+@keyframes orionSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility Classes */
+.orion-text-primary { color: var(--orion-text-primary); }
+.orion-text-secondary { color: var(--orion-text-secondary); }
+.orion-text-muted { color: var(--orion-text-muted); }
+.orion-text-light { color: var(--orion-text-light); }
+
+.orion-bg-primary { background-color: var(--orion-bg-primary); }
+.orion-bg-secondary { background-color: var(--orion-bg-secondary); }
+.orion-bg-dark { background-color: var(--orion-bg-dark); }
+
+.orion-shadow-sm { box-shadow: 0 1px 2px var(--orion-shadow-light); }
+.orion-shadow { box-shadow: 0 2px 4px var(--orion-shadow-light); }
+.orion-shadow-md { box-shadow: 0 4px 8px var(--orion-shadow-medium); }
+.orion-shadow-lg { box-shadow: 0 8px 16px var(--orion-shadow-dark); }
+
+/* Bootstrap Overrides to match Orion Brand */
+.btn-primary {
+  --bs-btn-bg: var(--orion-primary);
+  --bs-btn-border-color: var(--orion-primary);
+  --bs-btn-hover-bg: var(--orion-primary-light);
+  --bs-btn-hover-border-color: var(--orion-primary-light);
+  --bs-btn-active-bg: var(--orion-primary-dark);
+  --bs-btn-active-border-color: var(--orion-primary-dark);
+}
+
+.btn-success {
+  --bs-btn-bg: var(--orion-success);
+  --bs-btn-border-color: var(--orion-success);
+}
+
+.btn-info {
+  --bs-btn-bg: var(--orion-accent);
+  --bs-btn-border-color: var(--orion-accent);
+}
+
+.text-primary {
+  --bs-text-opacity: 1;
+  color: var(--orion-primary) !important;
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: var(--orion-primary) !important;
+}
+
+.border-primary {
+  --bs-border-opacity: 1;
+  border-color: var(--orion-primary) !important;
+}
+
+/* Focus States */
+.form-control:focus {
+  border-color: var(--orion-accent);
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+.form-select:focus {
+  border-color: var(--orion-accent);
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+/* Loading States */
+.orion-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.orion-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}

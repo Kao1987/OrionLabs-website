@@ -1,0 +1,468 @@
+/* === OrionLabs BEM-Lite 組件庫 === */
+/* 遵循 A-core 規範：block_element-modifier */
+/* 替代所有硬編碼顏色，支援日夜模式 */
+
+/* === 1. Hero 區塊元件 === */
+.hero_section {
+  background: linear-gradient(135deg, var(--orion-primary-900) 0%, var(--orion-primary-800) 100%);
+  color: var(--orion-neutral-50);
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0;
+}
+
+.hero_section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+}
+
+.hero_title {
+  color: var(--orion-neutral-50);
+  font-weight: 700;
+  text-shadow: 0 2px 4px var(--black-alpha-30);
+}
+
+.hero_subtitle {
+  color: var(--orion-neutral-100);
+  text-shadow: 0 1px 2px var(--black-alpha-30);
+}
+
+/* === 2. 區塊背景元件 === */
+.section-alt {
+  background-color: var(--orion-neutral-50);
+}
+
+[data-theme="dark"] .section-alt {
+  background-color: var(--orion-neutral-900);
+}
+
+.section_title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--orion-neutral-800);
+}
+
+[data-theme="dark"] .section_title {
+  color: var(--orion-neutral-50);
+}
+
+.section_subtitle {
+  font-size: 1.125rem;
+  margin-bottom: 0;
+  line-height: 1.6;
+  color: var(--orion-neutral-700);
+}
+
+[data-theme="dark"] .section_subtitle {
+  color: var(--orion-neutral-200);
+}
+
+/* === 3. 關於圖示容器元件 === */
+.about-icon_container {
+  background: var(--white-alpha-10);
+  border: 2px solid var(--white-alpha-20);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  transition: all 0.3s ease;
+}
+
+.about-icon_container:hover {
+  background: var(--white-alpha-15);
+  transform: scale(1.05);
+}
+
+/* === 4. 技能進度條元件 === */
+.skill_progress-bar {
+  background: var(--orion-primary-900);
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+.skill_progress-container {
+  background: var(--orion-neutral-200);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .skill_progress-container {
+  background: var(--orion-neutral-700);
+}
+
+/* === 5. 時間線元件 === */
+.timeline_marker {
+  background: var(--orion-primary-900);
+  border: 3px solid var(--orion-neutral-50);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.timeline_marker-hover {
+  background: var(--orion-primary-700);
+  box-shadow: 0 0 0 3px var(--orion-primary-300);
+}
+
+.timeline_content {
+  background: var(--orion-neutral-50);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px var(--black-alpha-08);
+}
+
+[data-theme="dark"] .timeline_content {
+  background: var(--orion-neutral-800);
+  color: var(--orion-neutral-100);
+}
+
+.timeline_title {
+  color: var(--orion-neutral-800);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .timeline_title {
+  color: var(--orion-neutral-100);
+}
+
+.timeline_company {
+  color: var(--orion-primary-900);
+  font-weight: 500;
+}
+
+[data-theme="dark"] .timeline_company {
+  color: var(--orion-primary-300);
+}
+
+.timeline_description {
+  color: var(--orion-neutral-600);
+  margin: 0;
+}
+
+[data-theme="dark"] .timeline_description {
+  color: var(--orion-neutral-300);
+}
+
+/* === 6. 卡片元件 === */
+.card_default {
+  background: var(--orion-neutral-50);
+  border-radius: 8px;
+  box-shadow: 0 3px 15px var(--black-alpha-05);
+  transition: all 0.3s ease;
+}
+
+.card_default:hover {
+  box-shadow: 0 8px 25px var(--black-alpha-10);
+  transform: translateY(-4px);
+}
+
+[data-theme="dark"] .card_default {
+  background: var(--orion-neutral-800);
+  color: var(--orion-neutral-100);
+}
+
+.card_portfolio {
+  transition: all 0.4s ease;
+  background: var(--orion-neutral-50);
+  position: relative;
+}
+
+.card_portfolio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orion-primary-900), var(--orion-primary-700));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card_portfolio:hover::before {
+  transform: scaleX(1);
+}
+
+[data-theme="dark"] .card_portfolio {
+  background: var(--orion-neutral-800);
+}
+
+/* === 7. 興趣愛好卡片元件 === */
+.hobby_card {
+  background: var(--orion-neutral-50);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 15px var(--black-alpha-05);
+}
+
+.hobby_card:hover {
+  box-shadow: 0 10px 30px var(--black-alpha-15);
+  transform: translateY(-8px);
+}
+
+[data-theme="dark"] .hobby_card {
+  background: var(--orion-neutral-800);
+}
+
+.hobby_card h5 {
+  color: var(--orion-neutral-800);
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .hobby_card h5 {
+  color: var(--orion-neutral-100);
+}
+
+.hobby_card p {
+  color: var(--orion-neutral-600);
+  margin: 0;
+}
+
+[data-theme="dark"] .hobby_card p {
+  color: var(--orion-neutral-300);
+}
+
+.hobby_icon {
+  color: var(--orion-primary-900);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.hobby_card:hover .hobby_icon {
+  color: var(--orion-primary-700);
+}
+
+[data-theme="dark"] .hobby_icon {
+  color: var(--orion-primary-300);
+}
+
+[data-theme="dark"] .hobby_card:hover .hobby_icon {
+  color: var(--orion-primary-200);
+}
+
+/* === 8. 項目圖片元件 === */
+.project_image {
+  background: linear-gradient(135deg, var(--orion-neutral-100) 0%, var(--orion-neutral-200) 100%);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project_image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, var(--white-alpha-10) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.card_portfolio:hover .project_image::before {
+  transform: translateX(100%);
+}
+
+[data-theme="dark"] .project_image {
+  background: linear-gradient(135deg, var(--orion-neutral-700) 0%, var(--orion-neutral-600) 100%);
+}
+
+.project_icon {
+  color: var(--orion-neutral-500);
+  transition: all 0.3s ease;
+}
+
+.card_portfolio:hover .project_icon {
+  color: var(--orion-primary-900);
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .project_icon {
+  color: var(--orion-neutral-400);
+}
+
+[data-theme="dark"] .card_portfolio:hover .project_icon {
+  color: var(--orion-primary-300);
+}
+
+/* === 9. 覆蓋層元件 === */
+.portfolio_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--orion-primary-900);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.card_portfolio:hover .portfolio_overlay {
+  opacity: 0.95;
+}
+
+.overlay_content {
+  color: var(--orion-neutral-50);
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform 0.3s ease 0.1s;
+}
+
+.card_portfolio:hover .overlay_content {
+  transform: translateY(0);
+}
+
+.overlay_content .btn {
+  border-color: var(--orion-neutral-50);
+  color: var(--orion-neutral-50);
+  margin: 0.25rem;
+}
+
+.overlay_content .btn:hover {
+  background-color: var(--orion-neutral-50);
+  color: var(--orion-primary-900);
+}
+
+/* === 10. 文字顏色變體 === */
+.text_primary {
+  color: var(--orion-primary-900);
+}
+
+[data-theme="dark"] .text_primary {
+  color: var(--orion-primary-300);
+}
+
+.text_secondary {
+  color: var(--orion-neutral-600);
+}
+
+[data-theme="dark"] .text_secondary {
+  color: var(--orion-neutral-400);
+}
+
+.text_muted {
+  color: var(--orion-neutral-500);
+}
+
+[data-theme="dark"] .text_muted {
+  color: var(--orion-neutral-400);
+}
+
+.text_light {
+  color: var(--orion-neutral-300);
+}
+
+[data-theme="dark"] .text_light {
+  color: var(--orion-neutral-200);
+}
+
+/* === 11. 陰影變體 === */
+.shadow_light {
+  box-shadow: 0 3px 15px var(--black-alpha-05);
+}
+
+.shadow_medium {
+  box-shadow: 0 5px 15px var(--black-alpha-08);
+}
+
+.shadow_heavy {
+  box-shadow: 0 15px 35px var(--black-alpha-15);
+}
+
+.shadow_focus {
+  box-shadow: 0 0 0 3px var(--orion-primary-300);
+}
+
+/* === 12. 漸變效果元件 === */
+.gradient_brand {
+  background: linear-gradient(135deg, var(--orion-primary-900), var(--orion-primary-700));
+}
+
+.gradient_skill {
+  background: linear-gradient(90deg, var(--orion-primary-900), var(--orion-primary-700));
+}
+
+.gradient_timeline {
+  background: linear-gradient(to bottom, var(--orion-primary-900), var(--orion-primary-700));
+}
+
+.gradient_shimmer {
+  background: linear-gradient(90deg, transparent, var(--white-alpha-30), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* === 13. 特殊文字效果 === */
+.text_glow {
+  text-shadow: 0 0 10px var(--orion-primary-300);
+}
+
+.text_shadow-light {
+  text-shadow: 0 2px 4px var(--black-alpha-30);
+}
+
+.text_shadow-medium {
+  text-shadow: 0 3px 6px var(--black-alpha-40);
+}
+
+.text_stroke {
+  -webkit-text-stroke: 0.5px var(--white-alpha-10);
+}
+
+/* === 14. 狀態顏色 === */
+.state_success {
+  color: var(--orion-success-600);
+}
+
+[data-theme="dark"] .state_success {
+  color: var(--orion-success-400);
+}
+
+.state_warning {
+  color: var(--orion-warning-600);
+}
+
+[data-theme="dark"] .state_warning {
+  color: var(--orion-warning-400);
+}
+
+.state_error {
+  color: var(--orion-error-600);
+}
+
+[data-theme="dark"] .state_error {
+  color: var(--orion-error-400);
+}
+
+/* === 15. 表單聚焦效果 === */
+.form_control-focus {
+  border-color: var(--orion-primary-900);
+  box-shadow: 0 0 0 0.25rem var(--orion-primary-300);
+}
+
+[data-theme="dark"] .form_control-focus {
+  border-color: var(--orion-primary-300);
+  box-shadow: 0 0 0 0.25rem var(--orion-primary-500);
+}

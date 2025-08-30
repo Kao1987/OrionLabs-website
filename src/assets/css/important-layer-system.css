@@ -1,0 +1,194 @@
+/* === Orion !important 優化層級系統 === */
+/* 生成時間: 2025-08-25T23:20:43.564Z */
+/* 目標: 減少 !important 使用率至 < 10% */
+
+@layer reset, base, theme, layout, components, utilities, overrides;
+
+/* 使用說明:
+1. 將此檔案載入到其他 CSS 之前
+2. 現有的 !important 規則將被 Layer 系統自動覆蓋
+3. 特異性通過 Layer 順序管理，無需 !important
+*/
+
+@layer utilities {
+  /* 22 個優化規則 */
+  /* utility-specificity: /* === 藍色標題文字增強 === */
+  h6.mb-1 */
+    .orion-utils/* === 藍色標題文字增強 === */
+  h6.mb-1 { color: #7fb3ff; }
+  /* utility-specificity: .text-primary */
+    .orion-utils.text-primary { color: #7fb3ff; }
+  /* utility-specificity: /* === 確保所有文字對比度 === */
+[data-theme="dark"] .text-dark */
+    .orion-utils/* === 確保所有文字對比度 === */
+[data-theme="dark"] .text-dark { color: var(--color-text-primary); }
+  /* utility-specificity: [data-theme="dark"] .text-muted */
+    .orion-utils[data-theme="dark"] .text-muted { color: var(--color-text-secondary); }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white */
+    .orion-utils[data-theme="dark"] .about-page .text-white { color: #ffffff; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white */
+    .orion-utils[data-theme="dark"] .about-page .text-white { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { color: #ffffff; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { opacity: 0.9; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+  /* utility-specificity: .text-muted */
+    .orion-utils.text-muted { color: var(--text-muted-color, #666666); }
+  /* utility-specificity: .text-secondary */
+    .orion-utils.text-secondary { color: var(--text-secondary-color, #6c757d); }
+  /* utility-specificity: .text-success */
+    .orion-utils.text-success { color: var(--success-color, #198754); }
+  /* utility-specificity: .text-warning */
+    .orion-utils.text-warning { color: var(--warning-color, #ffc107); }
+  /* utility-specificity: .text-danger */
+    .orion-utils.text-danger { color: var(--danger-color, #dc3545); }
+  /* utility-specificity: .text-info */
+    .orion-utils.text-info { color: var(--info-color, #0dcaf0); }
+  /* utility-specificity: .text-primary */
+    .orion-utils.text-primary { color: var(--orion-primary); }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white */
+    .orion-utils[data-theme="dark"] .about-page .text-white { color: #ffffff; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white */
+    .orion-utils[data-theme="dark"] .about-page .text-white { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { color: #ffffff; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { opacity: 0.9; }
+  /* utility-specificity: [data-theme="dark"] .about-page .text-white-50 */
+    .orion-utils[data-theme="dark"] .about-page .text-white-50 { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+  /* utility-specificity: .text-primary */
+    .orion-utils.text-primary { color: var(--orion-primary); }
+}
+
+@layer overrides {
+  /* 53 個優化規則 */
+  /* layer-override: .navbar-nav .nav-link:hover */
+    .navbar-nav .nav-link:hover { color: var(--bs-navbar-hover-color); }
+  /* layer-override: .navbar-nav .nav-link.active */
+    .navbar-nav .nav-link.active { color: var(--bs-navbar-active-color); }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { background-color: #5a7fff; }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { border-color: #5a7fff; }
+  /* layer-override: .btn-outline-primary */
+    .btn-outline-primary { color: #7fb3ff; }
+  /* layer-override: .btn-outline-primary */
+    .btn-outline-primary { border-color: #7fb3ff; }
+  /* layer-override: .btn-outline-primary:hover */
+    .btn-outline-primary:hover { background-color: #5a7fff; }
+  /* layer-override: .btn-outline-primary:hover */
+    .btn-outline-primary:hover { border-color: #5a7fff; }
+  /* layer-override: .btn-outline-primary:hover */
+    .btn-outline-primary:hover { color: #ffffff; }
+  /* bootstrap-specificity: /* === 導航活躍狀態增強 === */
+  .nav-link.active */
+    .orion-app /* === 導航活躍狀態增強 === */
+  .nav-link.active { color: #ffffff; }
+  /* bootstrap-specificity: /* === 導航活躍狀態增強 === */
+  .nav-link.active */
+    .orion-app /* === 導航活躍狀態增強 === */
+  .nav-link.active { background-color: rgba(90, 127, 255, 0.3); }
+  /* layer-override: /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary */
+    /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary { color: var(--color-text-secondary); }
+  /* layer-override: /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary */
+    /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary { border-color: var(--color-border-primary); }
+  /* layer-override: .btn-outline-secondary:hover */
+    .btn-outline-secondary:hover { background-color: var(--color-bg-secondary); }
+  /* layer-override: .btn-outline-secondary:hover */
+    .btn-outline-secondary:hover { border-color: var(--color-border-primary); }
+  /* layer-override: .btn-outline-secondary:hover */
+    .btn-outline-secondary:hover { color: var(--color-text-primary); }
+  /* layer-override: .btn-outline-secondary.active */
+    .btn-outline-secondary.active { background-color: var(--color-bg-secondary); }
+  /* layer-override: .btn-outline-secondary.active */
+    .btn-outline-secondary.active { border-color: var(--color-border-primary); }
+  /* layer-override: .btn-outline-secondary.active */
+    .btn-outline-secondary.active { color: var(--color-text-primary); }
+  /* bootstrap-specificity: /* === 表單控制項增強 === */
+  .form-control */
+    .orion-app /* === 表單控制項增強 === */
+  .form-control { background-color: var(--color-bg-secondary); }
+  /* bootstrap-specificity: /* === 表單控制項增強 === */
+  .form-control */
+    .orion-app /* === 表單控制項增強 === */
+  .form-control { border-color: var(--color-border-primary); }
+  /* bootstrap-specificity: /* === 表單控制項增強 === */
+  .form-control */
+    .orion-app /* === 表單控制項增強 === */
+  .form-control { color: var(--color-text-primary); }
+  /* bootstrap-specificity: .form-control:focus */
+    .orion-app .form-control:focus { background-color: var(--color-bg-secondary); }
+  /* bootstrap-specificity: .form-control:focus */
+    .orion-app .form-control:focus { border-color: var(--color-primary); }
+  /* bootstrap-specificity: .form-control:focus */
+    .orion-app .form-control:focus { color: var(--color-text-primary); }
+  /* bootstrap-specificity: .form-control:focus */
+    .orion-app .form-control:focus { box-shadow: 0 0 0 0.2rem rgba(90, 127, 255, 0.25); }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { background-color: #002890; }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { border-color: #002890; }
+  /* bootstrap-specificity: .nav-link.active */
+    .orion-app .nav-link.active { color: #002fa7; }
+  /* bootstrap-specificity: .nav-link.active */
+    .orion-app .nav-link.active { background-color: rgba(0, 47, 167, 0.15); }
+  /* layer-override: .btn:focus-visible */
+    .btn:focus-visible { outline: 2px solid var(--color-primary); }
+  /* layer-override: .btn:focus-visible */
+    .btn:focus-visible { outline-offset: 2px; }
+  /* bootstrap-specificity: .nav-link:focus-visible */
+    .orion-app .nav-link:focus-visible { outline: 2px solid var(--color-primary); }
+  /* bootstrap-specificity: .nav-link:focus-visible */
+    .orion-app .nav-link:focus-visible { outline-offset: 2px; }
+  /* layer-override: /* === 導航列深色模式增強 === */
+[data-theme="dark"] .navbar */
+    /* === 導航列深色模式增強 === */
+[data-theme="dark"] .navbar { background-color: rgba(28, 25, 23, 0.95); }
+  /* layer-override: [data-theme="dark"] .navbar-brand */
+    [data-theme="dark"] .navbar-brand { color: var(--nav-brand-color); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link */
+    [data-theme="dark"] .navbar-nav .nav-link { color: var(--nav-link-color); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link:hover */
+    [data-theme="dark"] .navbar-nav .nav-link:hover { color: var(--nav-link-hover); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link.active */
+    [data-theme="dark"] .navbar-nav .nav-link.active { color: var(--nav-link-active); }
+  /* bootstrap-specificity: /* From src/assets/color-optimizations.css */
+.form-control:focus */
+    .orion-app /* From src/assets/color-optimizations.css */
+.form-control:focus { border-color: var(--form-focus-border); }
+  /* bootstrap-specificity: /* From src/assets/color-optimizations.css */
+.form-control:focus */
+    .orion-app /* From src/assets/color-optimizations.css */
+.form-control:focus { box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25); }
+  /* bootstrap-specificity: .form-check-input:checked */
+    .orion-app .form-check-input:checked { background-color: var(--form-check-checked-bg); }
+  /* bootstrap-specificity: .form-check-input:checked */
+    .orion-app .form-check-input:checked { border-color: var(--form-check-checked-border); }
+  /* bootstrap-specificity: .form-check-input:focus */
+    .orion-app .form-check-input:focus { border-color: var(--form-check-focus-border); }
+  /* bootstrap-specificity: .form-check-input:focus */
+    .orion-app .form-check-input:focus { box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25); }
+  /* layer-override: .navbar-nav .nav-link.active */
+    .navbar-nav .nav-link.active { color: var(--nav-link-active-color, #002fa7); }
+  /* layer-override: [data-theme="dark"] .navbar */
+    [data-theme="dark"] .navbar { background-color: rgba(28, 25, 23, 0.95); }
+  /* layer-override: [data-theme="dark"] .navbar-brand */
+    [data-theme="dark"] .navbar-brand { color: var(--nav-brand-color); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link */
+    [data-theme="dark"] .navbar-nav .nav-link { color: var(--nav-link-color); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link:hover */
+    [data-theme="dark"] .navbar-nav .nav-link:hover { color: var(--nav-link-hover); }
+  /* layer-override: [data-theme="dark"] .navbar-nav .nav-link.active */
+    [data-theme="dark"] .navbar-nav .nav-link.active { color: var(--nav-link-active); }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { background-color: var(--color-primary-hover); }
+  /* layer-override: .btn-primary:hover */
+    .btn-primary:hover { border-color: var(--color-primary-hover); }
+}
+

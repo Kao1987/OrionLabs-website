@@ -1,0 +1,451 @@
+/* === OrionLabs 頁面配色統一修復 === */
+/* 確保作品集和部落格頁面與其他頁面配色一致 */
+
+/* === 共用元素基礎配色 === */
+/* 確保所有頁面的基礎元素都使用一致的配色 */
+
+/* 統一卡片配色 */
+.card {
+  background-color: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.card-title {
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
+}
+
+.card-text {
+  color: var(--color-text-secondary) !important;
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%) !important;
+  border-bottom: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* 統一按鈕配色 */
+.btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
+  color: var(--color-text-light) !important;
+}
+
+.btn-outline-primary {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+/* 統一連結配色 */
+a {
+  color: var(--color-primary) !important;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-primary-hover) !important;
+}
+
+/* === 分頁系統統一配色 === */
+.pagination .page-link {
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+}
+
+.pagination .page-link:hover {
+  color: var(--color-text-light) !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.pagination .page-item.active .page-link {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--color-text-muted) !important;
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+/* === Blog 頁面特定配色修復 === */
+.blog-view .card,
+.blog-page .card {
+  background-color: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.blog-view .card-title,
+.blog-page .card-title {
+  color: var(--color-text-primary) !important;
+}
+
+.blog-view .card-text,
+.blog-page .card-text {
+  color: var(--color-text-secondary) !important;
+}
+
+.blog-view .text-decoration-none {
+  color: var(--color-text-primary) !important;
+}
+
+.blog-view .text-decoration-none:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Blog 分類和標籤按鈕 */
+.blog_category-btn,
+.blog_filter-btn {
+  background-color: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.blog_category-btn:hover,
+.blog_filter-btn:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background-color: var(--color-bg-tertiary) !important;
+}
+
+.blog_category-btn--active,
+.blog_filter-btn--active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+/* Blog 標籤徽章 */
+.blog-view .tag-badge,
+.blog-page .badge {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--color-border-primary);
+}
+
+.blog-view .tag-badge:hover,
+.blog-page .badge:hover {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* === Portfolio 頁面特定配色修復 === */
+.portfolio-view .card,
+.portfolio-page .card {
+  background-color: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.portfolio-view .card-title,
+.portfolio-page .card-title {
+  color: var(--color-text-primary) !important;
+}
+
+.portfolio-view .card-text,
+.portfolio-page .card-text {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Portfolio 篩選按鈕 */
+.portfolio_filter-btn {
+  background-color: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.portfolio_filter-btn:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background-color: var(--color-bg-tertiary) !important;
+}
+
+.portfolio_filter-btn--active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+/* Portfolio 技術標籤 */
+.portfolio_tech-badge,
+.tech-badge {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--color-border-primary);
+}
+
+.portfolio_tech-badge:hover,
+.tech-badge:hover {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.portfolio_tech-badge--active,
+.tech-badge--active {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* Portfolio 專案卡片覆蓋層 */
+.card-portfolio .image-overlay {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--color-primary) 80%, transparent),
+    color-mix(in srgb, var(--color-primary-hover) 80%, transparent)
+  ) !important;
+}
+
+/* === Modal 統一配色 === */
+.modal-content {
+  background-color: var(--color-bg-card) !important;
+  border: none !important;
+  color: var(--color-text-primary) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--color-border-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.modal-title {
+  color: var(--color-text-primary) !important;
+}
+
+.modal-body {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--color-border-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
+}
+
+/* === 搜尋區域統一配色 === */
+.search-filter-section {
+  background-color: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.form-control {
+  background-color: var(--color-bg-primary) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--color-primary) 25%, transparent) !important;
+}
+
+.input-group-text {
+  background-color: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* === 暗色模式統一配色 === */
+[data-theme="dark"] .card {
+  background-color: var(--color-bg-card) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .card-text {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
+}
+
+[data-theme="dark"] .blog_category-btn,
+[data-theme="dark"] .blog_filter-btn,
+[data-theme="dark"] .portfolio_filter-btn {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .blog_category-btn:hover,
+[data-theme="dark"] .blog_filter-btn:hover,
+[data-theme="dark"] .portfolio_filter-btn:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background-color: var(--color-bg-tertiary) !important;
+}
+
+[data-theme="dark"] .blog_category-btn--active,
+[data-theme="dark"] .blog_filter-btn--active,
+[data-theme="dark"] .portfolio_filter-btn--active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+}
+
+[data-theme="dark"] .tech-badge,
+[data-theme="dark"] .portfolio_tech-badge,
+[data-theme="dark"] .tag-badge {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .tech-badge:hover,
+[data-theme="dark"] .portfolio_tech-badge:hover,
+[data-theme="dark"] .tag-badge:hover {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom-color: var(--color-border-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
+}
+
+[data-theme="dark"] .modal-body {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .modal-footer {
+  border-top-color: var(--color-border-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
+}
+
+[data-theme="dark"] .modal-title {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .form-control {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--color-primary) 25%, transparent) !important;
+}
+
+[data-theme="dark"] .input-group-text {
+  background-color: var(--color-bg-tertiary) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* === 文字顏色統一 === */
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme="dark"] .text-primary {
+  color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+/* === 空狀態圖示統一 === */
+.empty-state i.display-1 {
+  color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .empty-state i.display-1 {
+  color: var(--color-primary) !important;
+}
+
+/* === 確保覆蓋原有硬編碼顏色 === */
+/* 覆蓋 BlogView 中的硬編碼顏色 */
+.blog-view .page-link,
+.blog-page .page-link {
+  color: var(--color-primary) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+.blog-view .page-link:hover,
+.blog-page .page-link:hover {
+  color: var(--color-text-light) !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.blog-view .page-item.active .page-link,
+.blog-page .page-item.active .page-link {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* 覆蓋 PortfolioView 中的硬編碼顏色 */
+.portfolio-view .bg-primary,
+.portfolio-page .bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.portfolio-view .bg-success,
+.portfolio-page .bg-success {
+  background-color: var(--color-success) !important;
+}
+
+.portfolio-view .bg-warning,
+.portfolio-page .bg-warning {
+  background-color: var(--color-warning) !important;
+}
+
+.portfolio-view .bg-info,
+.portfolio-page .bg-info {
+  background-color: var(--color-info) !important;
+}

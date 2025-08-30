@@ -26,6 +26,14 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+# Environment files
+*.env
+!.env.example
+
+# Temporary docs to ignore
+/docs/temp/
+/docs/drafts/
+/docs/
 
 *.tsbuildinfo
 

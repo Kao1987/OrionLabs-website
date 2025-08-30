@@ -1,0 +1,46 @@
+/* CSS 檔案載入順序 - Google Level 3 優化 */
+
+/*
+=== ORION CSS 架構 - 8 檔案系統 ===
+
+載入優先級 (依序載入):
+P1: src/assets/css/01-critical.css - 首屏關鍵 CSS
+P2: src/assets/css/02-layout.css - 核心佈局和工具類
+P3: src/assets/css/03-theme.css - 主題系統和 CSS 變數
+P4: src/assets/css/04-components.css - BEM 組件系統
+P5: src/assets/css/05-darkmode.css - 深色模式和主題切換
+P6: src/assets/css/06-enhancements.css - 對比度優化和顏色修正
+P7: src/assets/css/07-bootstrap.css - Bootstrap 自定義覆蓋
+P8: src/assets/css/08-global.css - 全域樣式和雜項
+
+實施方式:
+1. P1 (Critical CSS) - 內聯至 HTML <head>
+2. P2-P3 (Layout & Theme) - 首屏載入
+3. P4-P6 (Components & Enhancements) - 延遲載入
+4. P7-P8 (Bootstrap & Global) - 最後載入
+
+性能目標:
+- 總檔案數: 8 個 (從 38 個減少)
+- Critical CSS: < 14KB
+- 首屏載入: < 50KB
+- 總大小: < 120KB
+*/
+
+/* main.ts 載入範例 */
+/*
+// === Critical CSS (內聯) ===
+// 已在 main-level3.ts 中內聯
+
+// === 首屏關鍵 CSS ===
+import "./assets/css/02-layout.css";    // P2
+import "./assets/css/03-theme.css";     // P3
+
+// === 延遲載入 ===
+setTimeout(() => {
+  import("./assets/css/04-components.css");     // P4
+  import("./assets/css/05-darkmode.css");       // P5
+  import("./assets/css/06-enhancements.css");   // P6
+  import("./assets/css/07-bootstrap.css");      // P7
+  import("./assets/css/08-global.css");         // P8
+}, 100);
+*/

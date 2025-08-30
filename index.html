@@ -1,13 +1,246 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-TW" data-theme="light">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
+    
+    <!-- 基礎 SEO Meta 標籤 -->
+    <title>OrionLabs - 前端開發與 UI/UX 設計</title>
+    <meta name="description" content="歡迎來到 OrionLabs！我是一名專注於前端開發與 UI/UX 設計的工程師，致力於創造優質的數位體驗。探索我的作品集、技術文章，以及與我聯絡合作。">
+    <meta name="keywords" content="前端開發,Vue.js,React,TypeScript,UI/UX設計,網頁開發,個人品牌,OrionLabs">
+    <meta name="author" content="Orion">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 標籤 -->
+    <meta property="og:title" content="OrionLabs - 前端開發與 UI/UX 設計">
+    <meta property="og:description" content="歡迎來到 OrionLabs！我是一名專注於前端開發與 UI/UX 設計的工程師，致力於創造優質的數位體驗。探索我的作品集、技術文章，以及與我聯絡合作。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orionlabs.dev">
+    <meta property="og:image" content="https://orionlabs.dev/images/og-default.jpg">
+    <meta property="og:site_name" content="OrionLabs">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card 標籤 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@orionlabs_dev">
+    <meta name="twitter:creator" content="@orion_dev">
+    <meta name="twitter:title" content="OrionLabs - 前端開發與 UI/UX 設計">
+    <meta name="twitter:description" content="歡迎來到 OrionLabs！我是一名專注於前端開發與 UI/UX 設計的工程師，致力於創造優質的數位體驗。探索我的作品集、技術文章，以及與我聯絡合作。">
+    <meta name="twitter:image" content="https://orionlabs.dev/images/og-default.jpg">
+    
+    <!-- 結構化資料 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Orion",
+      "jobTitle": "前端開發工程師 & UI/UX 設計師",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "OrionLabs"
+      },
+      "url": "https://orionlabs.dev",
+      "sameAs": [
+        "https://github.com/orionlabs",
+        "https://linkedin.com/in/orionlabs"
+      ]
+    }
+    </script>
+    
+    <!-- 色彩主題支援 -->
+    <meta name="theme-color" content="#002fa7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#7593ff" media="(prefers-color-scheme: dark)">
+    
+    <!-- 統一設計系統 CSS - 新的藍色+銀灰色主題 -->
+    <link rel="stylesheet" href="./src/assets/css/orion-unified-theme.css">
+    
+    <!-- 主題切換腳本 (內聯以避免閃爍) -->
+    <script>
+      // 避免主題切換閃爍
+      (function() {
+        const savedTheme = localStorage.getItem('orion-theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
   </head>
+  
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <!-- 主要應用容器 -->
+    <div id="app">
+      <!-- Vue.js 應用將在此渲染 -->
+      
+      <!-- Loading 狀態 (在 Vue 載入前顯示) -->
+      <div class="app-loading" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-family: var(--font-family-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      ">
+        <div style="text-align: center;">
+          <!-- Orion Logo -->
+          <div style="
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--color-primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            margin: 0 auto var(--spacing-md);
+            animation: spin 1s linear infinite;
+          "></div>
+          
+          <h1 style="
+            color: var(--color-primary);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin: 0 0 var(--spacing-sm) 0;
+          ">OrionLabs</h1>
+          
+          <p style="
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-base);
+            margin: 0;
+          ">載入中...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主題切換按鈕 -->
+    <button 
+      id="theme-toggle"
+      class="theme-toggle"
+      aria-label="切換深色/淺色主題"
+      title="切換主題"
+      style="
+        position: fixed;
+        top: var(--spacing-lg);
+        right: var(--spacing-lg);
+        z-index: 1000;
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--radius-full);
+        background-color: var(--color-bg-card);
+        color: var(--color-text-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        box-shadow: var(--shadow-md);
+        transition: all var(--transition-base);
+      "
+      onmouseover="this.style.transform = 'scale(1.05)'"
+      onmouseout="this.style.transform = 'scale(1)'"
+    >
+      <span class="theme-icon">🌓</span>
+    </button>
+
+    <!-- 主要 JavaScript -->
+    <script type="module" src="/src/main-phase3-ultimate.ts"></script>
+    
+    <!-- 主題切換功能 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        // 更新圖示
+        function updateThemeIcon() {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          themeIcon.textContent = currentTheme === 'dark' ? '🌞' : '🌙';
+        }
+        
+        // 切換主題
+        function toggleTheme() {
+          const html = document.documentElement;
+          const currentTheme = html.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          
+          html.setAttribute('data-theme', newTheme);
+          localStorage.setItem('orion-theme', newTheme);
+          updateThemeIcon();
+          
+          // 觸發自定義事件，通知 Vue 應用
+          window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: newTheme } 
+          }));
+        }
+        
+        // 綁定事件
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // 初始化圖示
+        updateThemeIcon();
+        
+        // 監聽系統主題變化
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', (e) => {
+          if (!localStorage.getItem('orion-theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            updateThemeIcon();
+          }
+        });
+        
+        // Vue 載入完成後隱藏 loading
+        window.addEventListener('load', function() {
+          const loading = document.querySelector('.app-loading');
+          if (loading) {
+            loading.style.opacity = '0';
+            loading.style.transition = 'opacity 0.3s ease-out';
+            setTimeout(() => loading.remove(), 300);
+          }
+        });
+      });
+    </script>
+    
+    <!-- 載入動畫 CSS -->
+    <style>
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      /* 確保主題切換按鈕在所有狀態下都可見 */
+      .theme-toggle:hover {
+        box-shadow: var(--shadow-lg) !important;
+      }
+      
+      .theme-toggle:focus-visible {
+        outline: 2px solid var(--color-border-focus);
+        outline-offset: 2px;
+      }
+      
+      /* 針對小螢幕調整按鈕位置 */
+      @media (max-width: 479px) {
+        .theme-toggle {
+          top: var(--spacing-md) !important;
+          right: var(--spacing-md) !important;
+          width: 40px !important;
+          height: 40px !important;
+          font-size: 16px !important;
+        }
+      }
+      
+      /* 減少動畫偏好支援 */
+      @media (prefers-reduced-motion: reduce) {
+        .app-loading div {
+          animation: none !important;
+        }
+        
+        .theme-toggle {
+          transition: none !important;
+        }
+      }
+    </style>
   </body>
 </html>

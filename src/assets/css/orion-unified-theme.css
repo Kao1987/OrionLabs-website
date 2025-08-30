@@ -1,0 +1,523 @@
+/* === Orion 統一設計系統 - 藍色搭配銀灰色主題 === */
+/* 遵循 A-core 和 D-style 規範 */
+
+:root {
+  /* === 核心品牌色彩 - 近似藍色搭配銀灰色 === */
+
+  /* 主要藍色系統 - 基於 #002fa7 */
+  --orion-blue-50: #f0f4ff;
+  --orion-blue-100: #dde8ff;
+  --orion-blue-200: #c2d4ff;
+  --orion-blue-300: #9cb8ff;
+  --orion-blue-400: #7593ff;
+  --orion-blue-500: #4f6fff;
+  --orion-blue-600: #3e52f7;
+  --orion-blue-700: #3441e3;
+  --orion-blue-800: #2c35b8;
+  --orion-blue-900: #002fa7;
+  --orion-blue-950: #001a64;
+
+  /* 銀灰色系統 - 基於 #c8c7c5 */
+  --orion-silver-50: #fafafa;
+  --orion-silver-100: #f5f5f4;
+  --orion-silver-200: #e7e5e4;
+  --orion-silver-300: #d6d3d1;
+  --orion-silver-400: #c8c7c5;
+  --orion-silver-500: #a8a29e;
+  --orion-silver-600: #78716c;
+  --orion-silver-700: #57534e;
+  --orion-silver-800: #44403c;
+  --orion-silver-900: #292524;
+  --orion-silver-950: #1c1917;
+
+  /* === 語意化色彩系統 === */
+
+  /* 主要色彩 */
+  --color-primary: var(--orion-blue-900);
+  --color-primary-hover: var(--orion-blue-800);
+  --color-primary-light: var(--orion-blue-100);
+  --color-primary-dark: var(--orion-blue-950);
+
+  /* 次要色彩 */
+  --color-secondary: var(--orion-silver-400);
+  --color-secondary-hover: var(--orion-silver-500);
+  --color-secondary-light: var(--orion-silver-100);
+  --color-secondary-dark: var(--orion-silver-700);
+
+  /* 強調色彩（保持藍色系） */
+  --color-accent: var(--orion-blue-600);
+  --color-accent-hover: var(--orion-blue-700);
+  --color-accent-light: var(--orion-blue-200);
+
+  /* === 功能性色彩 === */
+  --color-success: #16a34a;
+  --color-warning: #ea580c;
+  --color-danger: #dc2626;
+  --color-info: var(--orion-blue-500);
+
+  /* === 背景色彩系統 === */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: var(--orion-silver-50);
+  --color-bg-tertiary: var(--orion-silver-100);
+  --color-bg-card: #ffffff;
+  --color-bg-overlay: rgba(0, 47, 167, 0.8);
+
+  /* === 文字色彩系統 === */
+  --color-text-primary: var(--orion-silver-900);
+  --color-text-secondary: var(--orion-silver-700);
+  --color-text-muted: var(--orion-silver-500);
+  --color-text-light: #ffffff;
+  --color-text-inverse: #ffffff;
+
+  /* === 邊框色彩系統 === */
+  --color-border-primary: var(--orion-silver-300);
+  --color-border-secondary: var(--orion-silver-200);
+  --color-border-focus: var(--orion-blue-500);
+  --color-border-error: var(--color-danger);
+
+  /* === 陰影色彩 === */
+  --color-shadow-light: rgba(0, 47, 167, 0.05);
+  --color-shadow-medium: rgba(0, 47, 167, 0.1);
+  --color-shadow-dark: rgba(0, 47, 167, 0.15);
+  --color-shadow-focus: rgba(0, 47, 167, 0.25);
+
+  /* === 字體系統 === */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-code: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+  /* 字重 */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* 字體大小 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  /* 行高 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* === 間距系統 === */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* === 圓角系統 === */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* === 過渡動畫 === */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.2s ease-out;
+  --transition-slow: 0.3s ease-out;
+
+  /* === 斷點系統 === */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1280px;
+
+  /* === 陰影系統 === */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 47, 167, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 47, 167, 0.1), 0 1px 2px -1px rgba(0, 47, 167, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 47, 167, 0.1), 0 2px 4px -2px rgba(0, 47, 167, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 47, 167, 0.1), 0 4px 6px -4px rgba(0, 47, 167, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 47, 167, 0.1), 0 8px 10px -6px rgba(0, 47, 167, 0.1);
+
+  /* === 導航欄色彩變數 === */
+  --nav-brand-color: var(--color-primary);
+  --nav-brand-hover: var(--color-primary-hover);
+  --nav-link-color: var(--color-text-secondary);
+  --nav-link-hover: var(--color-primary);
+  --nav-link-hover-bg: var(--color-primary-light);
+  --nav-link-active: var(--color-primary);
+  --nav-link-active-bg: var(--color-primary-light);
+}
+
+/* === 暗色主題支援 - WCAG AA 合規對比度優化 === */
+[data-theme="dark"],
+.theme-dark {
+  /* 背景色調整 - 提升層次感 */
+  --color-bg-primary: var(--orion-silver-950);
+  --color-bg-secondary: var(--orion-silver-900);
+  --color-bg-tertiary: var(--orion-silver-800);
+  --color-bg-card: var(--orion-silver-900);
+
+  /* 文字色彩 - WCAG AA 合規 (≥4.5:1 對比度) */
+  --color-text-primary: #ffffff;                    /* 純白 - 最高對比度 */
+  --color-text-secondary: var(--orion-silver-100);  /* 淺灰 - 確保 ≥4.5:1 對比 */
+  --color-text-muted: var(--orion-silver-300);      /* 中灰 - 保持可讀性 */
+  --color-text-light: #ffffff;
+  --color-text-inverse: var(--orion-silver-950);
+
+  /* 邊框色彩 */
+  --color-border-primary: var(--orion-silver-700);
+  --color-border-secondary: var(--orion-silver-600);
+
+  /* 藍色主色調 - 保持品牌一致性 */
+  --color-primary: var(--orion-blue-400);
+  --color-primary-hover: var(--orion-blue-300);
+  --color-primary-light: rgba(79, 111, 255, 0.15);   /* 藍色透明背景 */
+  --color-primary-dark: var(--orion-blue-500);
+
+  --color-accent: var(--orion-blue-400);
+  --color-accent-hover: var(--orion-blue-300);
+  --color-accent-light: rgba(79, 111, 255, 0.2);
+
+  /* 陰影系統 - 深色主題專用 */
+  --color-shadow-light: rgba(0, 0, 0, 0.3);
+  --color-shadow-medium: rgba(0, 0, 0, 0.4);
+  --color-shadow-dark: rgba(0, 0, 0, 0.5);
+  --color-shadow-focus: rgba(79, 111, 255, 0.4);     /* 藍色焦點陰影 */
+  --shadow-sm: 0 1px 2px 0 var(--color-shadow-light);
+  --shadow-md: 0 4px 6px -1px var(--color-shadow-medium), 0 2px 4px -1px var(--color-shadow-light);
+  --shadow-lg: 0 10px 15px -3px var(--color-shadow-medium), 0 4px 6px -2px var(--color-shadow-light);
+  --shadow-xl: 0 20px 25px -5px var(--color-shadow-dark), 0 10px 10px -5px var(--color-shadow-medium);
+
+  /* 暗色主題導航欄變數 */
+  --nav-brand-color: var(--color-primary);
+  --nav-brand-hover: var(--color-primary-hover);
+  --nav-link-color: var(--color-text-secondary);
+  --nav-link-hover: var(--color-primary);
+  --nav-link-hover-bg: rgba(79, 111, 255, 0.1);
+  --nav-link-active: var(--color-primary);
+  --nav-link-active-bg: rgba(79, 111, 255, 0.25);
+}
+
+/* === 全域基礎樣式 === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* === Hero 區塊防閃現樣式 === */
+.hero-title {
+  color: var(--color-text-light) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.hero-subtitle {
+  color: var(--color-text-light) !important;
+  opacity: 0.9 !important;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text-light);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* === 主要標題區塊統一樣式 (BEM-Lite) === */
+.main-header {
+  /* background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); */
+  color: var(--color-text-light);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.main-header h1,
+.main-header .lead {
+  color: var(--color-text-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* === 區塊背景色系統 (BEM-Lite) === */
+.section-alt {
+  background-color: var(--color-bg-secondary);
+}
+
+.timeline-section {
+  background-color: var(--color-bg-primary);
+}
+
+.hobbies-section {
+  background-color: var(--color-bg-secondary);
+}
+
+/* === 標題樣式 (BEM-Lite) === */
+.heading {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-1 { font-size: var(--font-size-5xl); }
+.heading-2 { font-size: var(--font-size-4xl); }
+.heading-3 { font-size: var(--font-size-3xl); }
+.heading-4 { font-size: var(--font-size-2xl); }
+.heading-5 { font-size: var(--font-size-xl); }
+.heading-6 { font-size: var(--font-size-lg); }
+
+.heading-primary { color: var(--color-primary); }
+.heading-secondary { color: var(--color-text-secondary); }
+
+/* === 按鈕系統 (BEM-Lite) === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 主要按鈕 */
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 次要按鈕 */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+}
+
+/* 輪廓按鈕 */
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+/* 按鈕大小變體 */
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.btn-lg {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-lg);
+}
+
+/* === 卡片組件 (BEM-Lite) === */
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card_header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.card_body {
+  padding: var(--spacing-lg);
+}
+
+.card_footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+/* === 表單組件 (BEM-Lite) === */
+.form_control {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.form_control:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-shadow-focus);
+}
+
+.form_control:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form_control-error {
+  border-color: var(--color-border-error);
+}
+
+/* === 工具類別 === */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-light { color: var(--color-text-light); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-bg-secondary); }
+.bg-card { background-color: var(--color-bg-card); }
+
+.border-primary { border-color: var(--color-border-primary); }
+.border-focus { border-color: var(--color-border-focus); }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* === 響應式設計 === */
+@media (max-width: 479px) {
+  .heading-1 { font-size: var(--font-size-3xl); }
+  .heading-2 { font-size: var(--font-size-2xl); }
+  .heading-3 { font-size: var(--font-size-xl); }
+
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .card_header,
+  .card_body,
+  .card_footer {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .btn-lg {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+/* === 動畫減少支援 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === 高對比度支援 === */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border-primary: var(--orion-silver-600);
+    --color-text-secondary: var(--orion-silver-800);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}

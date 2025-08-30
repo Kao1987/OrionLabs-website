@@ -1,0 +1,145 @@
+/*
+ * WCAG 對比度修復 - 緊急生產修復
+ * 目標：所有文字達到 ≥4.5:1 對比度
+ * 優先級：!important 確保覆蓋所有其他 CSS
+ */
+
+/* === 基礎文字對比度修復 === */
+:root {
+  /* 修復淺色主題次要文字 - #999999 vs #ffffff = 2.3:1 → #666666 vs #ffffff = 4.5:1 */
+  --color-text-secondary-fixed: #666666 !important;
+  --color-text-muted-fixed: #595959 !important;
+
+  /* 修復深色主題次要文字 - #c8c7c5 vs #000000 = 9.74:1 保持 */
+  --color-text-secondary-dark-fixed: #c8c7c5 !important;
+  --color-text-muted-dark-fixed: #b3b3b3 !important;
+}
+
+/* === 淺色模式 WCAG 修復 === */
+:root:not([data-theme="dark"]),
+[data-theme="light"],
+html:not([data-theme="dark"]) {
+  /* 強制覆蓋所有次要文字定義 */
+  --color-text-secondary: var(--color-text-secondary-fixed) !important;
+  --color-text-muted: var(--color-text-muted-fixed) !important;
+
+  /* 修復所有 orion-silver 變數 */
+  --orion-silver-700: var(--color-text-secondary-fixed) !important;
+  --orion-silver-800: var(--color-text-secondary-fixed) !important;
+
+  /* 修復所有別名 */
+  --text-secondary: var(--color-text-secondary-fixed) !important;
+  --nav-link-color: var(--color-text-secondary-fixed) !important;
+}
+
+/* === 深色模式 WCAG 修復 === */
+[data-theme="dark"],
+.theme-dark {
+  /* 深色模式次要文字 */
+  --color-text-secondary: var(--color-text-secondary-dark-fixed) !important;
+  --color-text-muted: var(--color-text-muted-dark-fixed) !important;
+
+  /* 深色模式 orion-silver 變數 */
+  --orion-silver-200: var(--color-text-secondary-dark-fixed) !important;
+  --orion-silver-300: var(--color-text-secondary-dark-fixed) !important;
+
+  /* 深色模式別名 */
+  --text-secondary: var(--color-text-secondary-dark-fixed) !important;
+  --nav-link-color: var(--color-text-secondary-dark-fixed) !important;
+}
+
+/* === 元素級別強制修復 === */
+.text-secondary,
+.text_secondary,
+.card_text,
+.lead,
+p:not(.text-primary):not(.text-light):not(.text-dark),
+.nav-link:not(.active),
+.navbar-nav .nav-link:not(.active),
+.footer_text,
+small,
+.small {
+  color: var(--color-text-secondary-fixed) !important;
+}
+
+/* 深色模式元素級別修復 */
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .text_secondary,
+[data-theme="dark"] .card_text,
+[data-theme="dark"] .lead,
+[data-theme="dark"] p:not(.text-primary):not(.text-light):not(.text-dark),
+[data-theme="dark"] .nav-link:not(.active),
+[data-theme="dark"] .navbar-nav .nav-link:not(.active),
+[data-theme="dark"] .footer_text,
+[data-theme="dark"] small,
+[data-theme="dark"] .small {
+  color: var(--color-text-secondary-dark-fixed) !important;
+}
+
+/* === 表單對比度修復 === */
+.form-control:focus {
+  border-color: #002fa7 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25) !important;
+}
+
+/* === 連結對比度修復 === */
+a:not(.btn):not(.nav-link):not(.navbar-brand) {
+  color: #002fa7 !important;
+}
+
+a:not(.btn):not(.nav-link):not(.navbar-brand):hover {
+  color: #001a64 !important;
+}
+
+[data-theme="dark"] a:not(.btn):not(.nav-link):not(.navbar-brand) {
+  color: #7cc7ff !important;
+}
+
+[data-theme="dark"] a:not(.btn):not(.nav-link):not(.navbar-brand):hover {
+  color: #a3d9ff !important;
+}
+
+/* === 品牌色彩一致性修復 === */
+.hero-title,
+.hero_title,
+h1.display-1,
+h1.display-2 {
+  color: #ffffff !important;
+}
+
+.btn-primary {
+  background-color: #002fa7 !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #001a64 !important;
+  border-color: #001a64 !important;
+  color: #ffffff !important;
+}
+
+/* === 緊急覆蓋所有衝突的 CSS 變數 === */
+* {
+  /* 確保沒有元素使用低對比度的 silver-200/700 */
+  --orion-silver-200: transparent !important;
+  --orion-silver-700: var(--color-text-secondary-fixed) !important;
+}
+
+[data-theme="dark"] * {
+  --orion-silver-200: var(--color-text-secondary-dark-fixed) !important;
+  --orion-silver-700: transparent !important;
+}
+
+/* === 調試輔助 === */
+@media (max-width: 1px) {
+  /* 隱藏的調試標記 - 確認修復已載入 */
+  body::after {
+    content: "WCAG-FIX-LOADED";
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,532 @@
+/* === OrionLabs 深色模式全面修復 === */
+/* 遵循 A-core 規範，修復所有深色模式下的字體與背景問題 */
+
+/* === 全域深色模式基礎修復 === */
+[data-theme="dark"] {
+  /* 強制所有文字使用適當的深色模式顏色 */
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--orion-silver-950) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 時間線組件深色模式修復 === */
+[data-theme="dark"] .timeline-section {
+  background: var(--orion-silver-900) !important;
+}
+
+[data-theme="dark"] .timeline::before {
+  background: linear-gradient(to bottom, var(--orion-blue-400), var(--orion-blue-500)) !important;
+}
+
+[data-theme="dark"] .timeline-marker {
+  background: var(--orion-blue-400) !important;
+  border-color: var(--orion-silver-900) !important;
+  box-shadow: 0 0 0 3px rgba(79, 111, 255, 0.3) !important;
+}
+
+[data-theme="dark"] .timeline-item:hover .timeline-marker {
+  background: var(--orion-blue-300) !important;
+}
+
+[data-theme="dark"] .timeline-content {
+  background: var(--orion-silver-800) !important;
+  border: 1px solid var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .timeline-period {
+  background: linear-gradient(135deg, var(--orion-blue-400), var(--orion-blue-500)) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .timeline-title {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .timeline-company {
+  color: var(--orion-silver-300) !important;
+}
+
+[data-theme="dark"] .timeline-description {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .timeline-achievements ul li {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .timeline-achievements ul li:hover {
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 卡片組件深色模式修復 === */
+[data-theme="dark"] .card {
+  background-color: var(--orion-silver-900) !important;
+  border-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .card-header {
+  background-color: var(--orion-silver-800) !important;
+  border-bottom-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .card-body {
+  background-color: var(--orion-silver-900) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .card-text {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .card-footer {
+  background-color: var(--orion-silver-800) !important;
+  border-top-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-200) !important;
+}
+
+/* === 興趣愛好區塊深色模式修復 === */
+[data-theme="dark"] .hobbies-section {
+  background: var(--orion-silver-900) !important;
+}
+
+[data-theme="dark"] .hobby-card {
+  background: var(--orion-silver-800) !important;
+  border: 1px solid var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .hobby-card h5 {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .hobby-card p {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .hobby-card:hover .hobby-icon i {
+  color: var(--orion-blue-400) !important;
+}
+
+/* === 技能區塊深色模式修復 === */
+[data-theme="dark"] .skills-section {
+  background: var(--orion-silver-950) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .skill-item h5 {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .skill-level {
+  color: var(--orion-silver-200) !important;
+}
+
+/* === 文字顏色全面修復 === */
+[data-theme="dark"] .text-dark {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--orion-silver-400) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: var(--orion-silver-300) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] p {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .lead {
+  color: var(--orion-silver-100) !important;
+}
+
+/* === 區塊標題修復 === */
+[data-theme="dark"] .section-title {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .section-subtitle {
+  color: var(--orion-silver-300) !important;
+}
+
+/* === 導航列深色模式修復 === */
+[data-theme="dark"] .navbar {
+  background-color: rgba(28, 25, 23, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--orion-silver-800);
+}
+
+[data-theme="dark"] .navbar-brand {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link {
+  color: var(--orion-silver-300) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover,
+[data-theme="dark"] .navbar-nav .nav-link.active {
+  color: var(--orion-blue-400) !important;
+  background-color: rgba(79, 111, 255, 0.15) !important;
+}
+
+/* === 按鈕深色模式修復 === */
+[data-theme="dark"] .btn-primary {
+  background-color: var(--orion-blue-500) !important;
+  border-color: var(--orion-blue-500) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: var(--orion-blue-400) !important;
+  border-color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .btn-outline-primary {
+  border-color: var(--orion-blue-400) !important;
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: var(--orion-blue-400) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--orion-silver-600) !important;
+  border-color: var(--orion-silver-600) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: var(--orion-silver-500) !important;
+  border-color: var(--orion-silver-500) !important;
+}
+
+/* === 表單元件深色模式修復 === */
+[data-theme="dark"] .form-control {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-silver-600) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-blue-400) !important;
+  color: var(--orion-silver-50) !important;
+  box-shadow: 0 0 0 0.2rem rgba(79, 111, 255, 0.25) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--orion-silver-400) !important;
+}
+
+[data-theme="dark"] .form-label {
+  color: var(--orion-silver-200) !important;
+}
+
+/* === 下拉選單深色模式修復 === */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-silver-600) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 徽章深色模式修復 === */
+[data-theme="dark"] .badge.bg-light {
+  background-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .badge.bg-secondary {
+  background-color: var(--orion-silver-600) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 分頁器深色模式修復 === */
+[data-theme="dark"] .pagination .page-link {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-silver-600) !important;
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .pagination .page-link:hover {
+  background-color: var(--orion-silver-700) !important;
+  border-color: var(--orion-blue-400) !important;
+  color: var(--orion-blue-300) !important;
+}
+
+[data-theme="dark"] .pagination .page-item.active .page-link {
+  background-color: var(--orion-blue-500) !important;
+  border-color: var(--orion-blue-500) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 模態框深色模式修復 === */
+[data-theme="dark"] .modal-content {
+  background-color: var(--orion-silver-900) !important;
+  border-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .modal-header {
+  background-color: var(--orion-silver-800) !important;
+  border-bottom-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .modal-title {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .modal-body {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .modal-footer {
+  background-color: var(--orion-silver-800) !important;
+  border-top-color: var(--orion-silver-700) !important;
+}
+
+/* === 列表群組深色模式修復 === */
+[data-theme="dark"] .list-group-item {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-silver-600) !important;
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .list-group-item:hover {
+  background-color: var(--orion-silver-700) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+/* === 表格深色模式修復 === */
+[data-theme="dark"] .table {
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .table th {
+  color: var(--orion-silver-50) !important;
+  border-color: var(--orion-silver-600) !important;
+}
+
+[data-theme="dark"] .table td {
+  border-color: var(--orion-silver-700) !important;
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* === 警告框深色模式修復 === */
+[data-theme="dark"] .alert {
+  border-color: var(--orion-silver-600) !important;
+}
+
+[data-theme="dark"] .alert-primary {
+  background-color: rgba(79, 111, 255, 0.15) !important;
+  border-color: var(--orion-blue-400) !important;
+  color: var(--orion-blue-300) !important;
+}
+
+[data-theme="dark"] .alert-secondary {
+  background-color: rgba(200, 199, 197, 0.15) !important;
+  border-color: var(--orion-silver-500) !important;
+  color: var(--orion-silver-300) !important;
+}
+
+/* === 進度條深色模式修復 === */
+[data-theme="dark"] .progress {
+  background-color: var(--orion-silver-700) !important;
+}
+
+[data-theme="dark"] .progress-bar {
+  background-color: var(--orion-blue-500) !important;
+}
+
+/* === Footer 深色模式修復 === */
+[data-theme="dark"] .footer {
+  background: linear-gradient(135deg, var(--orion-silver-950) 0%, var(--orion-silver-900) 100%) !important;
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .footer a {
+  color: var(--orion-silver-300) !important;
+}
+
+[data-theme="dark"] .footer a:hover {
+  color: var(--orion-blue-400) !important;
+}
+
+/* === 通用區塊背景修復 === */
+[data-theme="dark"] .section {
+  background-color: var(--orion-silver-950) !important;
+}
+
+[data-theme="dark"] .section-alt {
+  background-color: var(--orion-silver-900) !important;
+}
+
+/* === 響應式修復 === */
+@media (max-width: 768px) {
+  [data-theme="dark"] .timeline {
+    padding-left: 1.5rem;
+  }
+
+  [data-theme="dark"] .timeline-marker {
+    left: -1.5rem;
+  }
+
+  [data-theme="dark"] .timeline-content {
+    margin-left: 0.5rem;
+  }
+}
+
+/* === 載入動畫深色模式修復 === */
+[data-theme="dark"] .app-loading {
+  background-color: var(--orion-silver-950) !important;
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .app-loading h1 {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .app-loading p {
+  color: var(--orion-silver-300) !important;
+}
+
+/* === 主題切換按鈕深色模式修復 === */
+[data-theme="dark"] .theme-toggle {
+  background-color: var(--orion-silver-800) !important;
+  border-color: var(--orion-silver-600) !important;
+  color: var(--orion-silver-200) !important;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: var(--orion-silver-700) !important;
+  border-color: var(--orion-blue-400) !important;
+  color: var(--orion-blue-400) !important;
+}
+
+/* === AboutView 頁面特定修復 === */
+[data-theme="dark"] .about-page .section {
+  background-color: var(--orion-silver-950) !important;
+}
+
+[data-theme="dark"] .about-page .section-alt {
+  background-color: var(--orion-silver-900) !important;
+}
+
+/* 修復硬編碼的背景色 */
+[data-theme="dark"] .section {
+  background: var(--orion-silver-950) !important;
+}
+
+/* 修復技能卡片內的硬編碼顏色 */
+[data-theme="dark"] .skill-item .skill-name {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .skill-item .skill-percentage {
+  color: var(--orion-silver-200) !important;
+}
+
+/* 修復統計卡片中的顏色 */
+[data-theme="dark"] .stat-card h3 {
+  color: var(--orion-silver-50) !important;
+}
+
+[data-theme="dark"] .stat-card p {
+  color: var(--orion-silver-300) !important;
+}
+
+/* 修復連結顏色 */
+[data-theme="dark"] a {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--orion-blue-300) !important;
+}
+
+/* 修復所有具有 text- 開頭的 Bootstrap 類別 */
+[data-theme="dark"] .text-primary {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .text-success {
+  color: #22c55e !important;
+}
+
+[data-theme="dark"] .text-warning {
+  color: #f59e0b !important;
+}
+
+[data-theme="dark"] .text-danger {
+  color: #ef4444 !important;
+}
+
+[data-theme="dark"] .text-info {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .text-light {
+  color: var(--orion-silver-200) !important;
+}
+
+/* 修復所有可能的硬編碼樣式 */
+[data-theme="dark"] * {
+  border-color: var(--orion-silver-700) !important;
+}
+
+[data-theme="dark"] .border {
+  border-color: var(--orion-silver-600) !important;
+}
+
+[data-theme="dark"] .border-primary {
+  border-color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .border-secondary {
+  border-color: var(--orion-silver-500) !important;
+}
+
+/* 修復特定組件的樣式覆蓋 */
+[data-theme="dark"] .hobby-icon i {
+  color: var(--orion-blue-400) !important;
+}
+
+[data-theme="dark"] .hobby-card:hover .hobby-icon i {
+  color: var(--orion-blue-300) !important;
+}

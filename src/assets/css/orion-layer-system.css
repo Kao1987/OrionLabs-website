@@ -1,0 +1,100 @@
+/* === OrionLabs CSS Layer 系統 === */
+/* 用於管理 CSS 特異性，減少 !important 使用 */
+
+@layer reset, base, theme, components, overrides, utilities;
+
+/* === Reset Layer (最低優先級) === */
+@layer reset {
+  /* CSS Reset 和 Normalize */
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* === Base Layer === */
+@layer base {
+  /* 基礎 HTML 元素樣式 */
+  body {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+  }
+  
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  
+  a:hover, a:focus {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+/* === Theme Layer === */
+@layer theme {
+  /* 主題相關的全域樣式 */
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+  
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+}
+
+/* === Components Layer === */  
+@layer components {
+  /* BEM 組件樣式在這裡 */
+  /* 這些樣式會自動載入更高的特異性 */
+}
+
+/* === Overrides Layer === */
+@layer overrides {
+  /* Bootstrap 和第三方庫的覆蓋 */
+  /* 只在這裡使用 !important */
+  
+  /* Bootstrap 按鈕覆蓋 */
+  .btn-primary {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover) !important;
+    border-color: var(--color-primary-hover) !important;
+  }
+}
+
+/* === Utilities Layer (最高優先級) === */
+@layer utilities {
+  /* 工具類，可以安全使用 !important */
+  .d-none {
+    display: none !important;
+  }
+  
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}

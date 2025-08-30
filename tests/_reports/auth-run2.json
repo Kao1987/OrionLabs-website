@@ -1,0 +1,7 @@
+
+> personal-brand-website@0.0.0 test:tri-run
+> vitest run --reporter=json --outputFile=tests/_reports/run1.json && vitest run --reporter=json --outputFile=tests/_reports/run2.json && vitest run --reporter=json --outputFile=tests/_reports/run3.json tests/unit/stores/auth.spec.ts --reporter=json --silent
+
+JSON report written to /Users/hong-yikao/Documents/Orionlabs/orionlabs-website/tests/_reports/run1.json
+JSON report written to /Users/hong-yikao/Documents/Orionlabs/orionlabs-website/tests/_reports/run2.json
+JSON report written to /Users/hong-yikao/Documents/Orionlabs/orionlabs-website/tests/_reports/run3.json

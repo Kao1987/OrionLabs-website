@@ -1,0 +1,85 @@
+/* Phase 3 Ultimate: <1KB, 0 !important, 單一複雜度選擇器 */
+/* Orion Labs 主題色彩系統 - 僅必要樣式 */
+:root {
+  /* 核心主題色 */
+  --o-primary: #002fa7;
+  --o-silver: #c8c7c5;
+  /* 快速模式切換 */
+  --o-bg: #ffffff;
+  --o-text: #333333;
+  /* 極簡系統 */
+  --o-shadow: 0 2px 4px rgba(0,47,167,0.1);
+  --o-radius: 6px;
+  --o-space: 1rem;
+}
+
+/* 深色模式 - 單一選擇器 */
+[data-theme="dark"] {
+  --o-bg: #1a1a1a;
+  --o-text: #ffffff;
+}
+
+/* 重置與基礎 - 極簡化 */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font:16px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;color:var(--o-text);background:var(--o-bg);transition:all 0.2s ease}
+
+/* 導航 - 單層選擇器 */
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:var(--o-space);background:var(--o-bg);border-bottom:1px solid var(--o-silver)}
+.navbar .nav-brand{color:var(--o-primary);font-weight:600;text-decoration:none}
+.navbar .nav-links{display:flex;gap:var(--o-space);list-style:none}
+.navbar .nav-link{color:var(--o-text);text-decoration:none;transition:opacity 0.2s}
+.navbar .nav-link:hover{opacity:0.7}
+.navbar .theme-toggle{background:var(--o-primary);color:white;border:0;border-radius:var(--o-radius);padding:0.5rem;cursor:pointer;transition:opacity 0.2s}
+.navbar .theme-toggle:hover{opacity:0.8}
+
+/* 容器系統 */
+.container{max-width:1200px;margin:0 auto;padding:0 var(--o-space)}
+.section{padding:calc(var(--o-space) * 2) 0}
+
+/* 按鈕系統 */
+.btn{display:inline-flex;align-items:center;padding:0.75rem 1.5rem;border:0;border-radius:var(--o-radius);font-weight:500;text-decoration:none;cursor:pointer;transition:all 0.2s ease}
+.btn-primary{background:var(--o-primary);color:white}
+.btn-secondary{background:var(--o-silver);color:var(--o-text)}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--o-shadow)}
+
+/* 卡片系統 */
+.card{background:var(--o-bg);border:1px solid var(--o-silver);border-radius:var(--o-radius);padding:var(--o-space);box-shadow:var(--o-shadow)}
+
+/* 響應式網格 */
+.grid{display:grid;gap:var(--o-space)}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+
+/* 文字系統 */
+.text-center{text-align:center}
+.text-primary{color:var(--o-primary)}
+h1,h2,h3{margin-bottom:0.5rem;line-height:1.2}
+h1{font-size:2.5rem}
+h2{font-size:2rem}
+h3{font-size:1.5rem}
+p{margin-bottom:1rem}
+
+/* 響應式斷點 */
+@media (max-width:768px){
+  .navbar{flex-direction:column;gap:var(--o-space)}
+  .navbar .nav-links{flex-wrap:wrap;justify-content:center}
+  h1{font-size:2rem}
+  h2{font-size:1.75rem}
+}
+
+/* 載入動畫 - 最小化 */
+.loading{opacity:0;animation:fadeIn 0.3s ease forwards}
+@keyframes fadeIn{to{opacity:1}}
+
+/* 表單 - 精簡版 */
+.form-group{margin-bottom:var(--o-space)}
+.form-label{display:block;margin-bottom:0.25rem;font-weight:500}
+.form-input{width:100%;padding:0.75rem;border:1px solid var(--o-silver);border-radius:var(--o-radius);font-size:1rem;transition:border-color 0.2s}
+.form-input:focus{outline:0;border-color:var(--o-primary)}
+
+/* 工具類別 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.d-none{display:none}
+.d-block{display:block}
+.w-100{width:100%}
+.text-sm{font-size:0.875rem}

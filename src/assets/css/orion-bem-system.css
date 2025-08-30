@@ -1,0 +1,448 @@
+/* === OrionLabs BEM-Lite 統一組件系統 === */
+/* 遵循 A-core §1 與 D-style 規範 */
+/* 替代所有硬編碼顏色，完全支援日夜模式切換 */
+
+/* === 1. 文字色彩 BEM 類別 === */
+.text_primary {
+  color: var(--color-text-primary);
+}
+
+.text_secondary {
+  color: var(--color-text-secondary);
+}
+
+.text_muted {
+  color: var(--color-text-muted);
+}
+
+.text_light {
+  color: var(--color-text-light);
+}
+
+.text_inverse {
+  color: var(--color-text-inverse);
+}
+
+.text_brand {
+  color: var(--color-primary);
+}
+
+.text_brand-hover:hover {
+  color: var(--color-primary-hover);
+}
+
+/* === 2. 背景色彩 BEM 類別 === */
+.bg_primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg_secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg_tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+
+.bg_card {
+  background-color: var(--color-bg-card);
+}
+
+.bg_brand {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.bg_brand-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* === 3. 導航元件 BEM 系統 === */
+.navbar_brand {
+  color: var(--nav-brand-color);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.navbar_brand:hover,
+.navbar_brand:focus {
+  color: var(--nav-brand-hover);
+  text-decoration: none;
+}
+
+.navbar_link {
+  color: var(--nav-link-color);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.navbar_link:hover,
+.navbar_link:focus {
+  color: var(--nav-link-hover);
+  background-color: var(--nav-link-hover-bg);
+  text-decoration: none;
+}
+
+.navbar_link-active {
+  color: var(--nav-link-active);
+  background-color: var(--nav-link-active-bg);
+}
+
+/* === 4. 按鈕元件 BEM 系統 === */
+.btn_primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.btn_primary:hover,
+.btn_primary:focus {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-text-light);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn_secondary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.btn_secondary:hover,
+.btn_secondary:focus {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+  color: var(--color-text-light);
+  text-decoration: none;
+}
+
+.btn_outline-light {
+  background-color: transparent;
+  border-color: var(--color-text-light);
+  color: var(--color-text-light);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-fast);
+  border: 1px solid;
+}
+
+.btn_outline-light:hover,
+.btn_outline-light:focus {
+  background-color: var(--color-text-light);
+  border-color: var(--color-text-light);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* === 5. Hero 區塊 BEM 系統 === */
+.hero_section {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text-light);
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-3xl) 0;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero_section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg-overlay);
+  opacity: 0.1;
+}
+
+.hero_title {
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-4xl);
+  text-shadow: 0 2px 4px var(--color-shadow-dark);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero_subtitle {
+  color: var(--color-text-light);
+  font-size: var(--font-size-xl);
+  opacity: 0.9;
+  text-shadow: 0 1px 2px var(--color-shadow-medium);
+  margin-bottom: var(--spacing-xl);
+}
+
+.hero_content {
+  position: relative;
+  z-index: 2;
+}
+
+/* === 6. 卡片元件 BEM 系統 === */
+.card_base {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.card_base:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card_title {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.card_text {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+.card_link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+.card_link:hover,
+.card_link:focus {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* === 7. Footer 元件 BEM 系統 === */
+.footer_base {
+  background: linear-gradient(135deg, var(--orion-silver-950) 0%, var(--orion-silver-800) 100%);
+  color: var(--color-text-light);
+  padding: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+  margin-top: auto;
+}
+
+.footer_title {
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer_text {
+  color: var(--orion-silver-200);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer_link {
+  color: var(--orion-silver-300);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer_link:hover,
+.footer_link:focus {
+  color: var(--color-text-light);
+  text-decoration: none;
+}
+
+.footer_brand-link {
+  color: var(--orion-blue-300);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer_brand-link:hover,
+.footer_brand-link:focus {
+  color: var(--orion-blue-200);
+  text-decoration: none;
+}
+
+/* === 8. 表單元件 BEM 系統 === */
+.form_control {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.form_control:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 0.25rem var(--color-shadow-focus);
+}
+
+.form_control-error {
+  border-color: var(--color-border-error);
+}
+
+.form_control-error:focus {
+  border-color: var(--color-border-error);
+  box-shadow: 0 0 0 0.25rem rgba(220, 38, 38, 0.25);
+}
+
+/* === 9. 徽章元件 BEM 系統 === */
+.badge_primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  display: inline-block;
+}
+
+.badge_secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  display: inline-block;
+}
+
+/* === 10. 功能性色彩 BEM 類別 === */
+.text_success {
+  color: var(--color-success);
+}
+
+.text_warning {
+  color: var(--color-warning);
+}
+
+.text_danger {
+  color: var(--color-danger);
+}
+
+.text_info {
+  color: var(--color-info);
+}
+
+.bg_success {
+  background-color: var(--color-success);
+  color: var(--color-text-light);
+}
+
+.bg_warning {
+  background-color: var(--color-warning);
+  color: var(--color-text-light);
+}
+
+.bg_danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-light);
+}
+
+.bg_info {
+  background-color: var(--color-info);
+  color: var(--color-text-light);
+}
+
+/* === 11. 響應式修飾符 === */
+@media (max-width: 768px) {
+  .hero_title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero_subtitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .card_base {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* === 12. 過渡動畫增強 === */
+.transition_fast {
+  transition: all var(--transition-fast);
+}
+
+.transition_base {
+  transition: all var(--transition-base);
+}
+
+.transition_slow {
+  transition: all var(--transition-slow);
+}
+
+/* === 13. 深色模式特定修正 === */
+[data-theme="dark"] .footer_base {
+  background: linear-gradient(135deg, var(--orion-silver-950) 0%, var(--orion-silver-900) 100%);
+}
+
+[data-theme="dark"] .card_base {
+  background-color: var(--orion-silver-900);
+  border-color: var(--orion-silver-700);
+}
+
+[data-theme="dark"] .form_control {
+  background-color: var(--orion-silver-800);
+  border-color: var(--orion-silver-600);
+  color: var(--color-text-primary);
+}
+
+/* === 14. 高對比度輔助功能 === */
+@media (prefers-contrast: high) {
+  .btn_primary {
+    border-width: 2px;
+  }
+
+  .card_base {
+    border-width: 2px;
+  }
+
+  .form_control {
+    border-width: 2px;
+  }
+}
+
+/* === 15. 動作優先（Reduced Motion）支援 === */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero_section::before {
+    animation: none;
+  }
+}

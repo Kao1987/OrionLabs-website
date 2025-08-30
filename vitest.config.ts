@@ -12,14 +12,14 @@ export default defineConfig({
   test: {
     // 測試環境配置
     environment: 'jsdom',
-    
+
     // 全局設定
     globals: true,
-    
+
     // 覆蓋率配置
     coverage: {
       provider: 'v8',
-    reporters: ['text', 'json', 'json-summary', 'html'],
+      reporter: ['text', 'json', 'json-summary', 'html'],
       reportsDirectory: './coverage',
       exclude: [
         'node_modules/',
@@ -41,45 +41,40 @@ export default defineConfig({
         lines: 75
       }
     },
-    
+
     // 測試檔案匹配模式
     include: [
       'tests/unit/**/*.{test,spec}.{js,ts}',
       'tests/components/**/*.{test,spec}.{js,ts}'
     ],
-    
+
     // 排除檔案
     exclude: [
       'node_modules/',
       'tests/e2e/**',
       'tests/_staging/**' // 暫存測試檔案
     ],
-    
+
     // 測試設定
     testTimeout: 5000, // 5秒超時
     hookTimeout: 5000,
-    
+
     // 測試報告
     reporters: ['verbose', 'json'],
     outputFile: {
       json: './tests/_reports/results.json'
     },
-    
+
     // 設置檔案
     setupFiles: ['./tests/setup.ts'],
-    
+
     // 模擬設定
     unstubEnvs: true,
     unstubGlobals: true,
-    
+
     // 隔離設定
-    isolate: true,
-    
-    // 監視模式排除
-    watchExclude: [
-      'node_modules/**',
-      'coverage/**',
-      'tests/_reports/**'
-    ]
+    isolate: true
+
+    // 注意：watchExclude 在新版本 vitest 中已移除，使用 vite.config.ts 中的 server.watch.ignored
   }
 })

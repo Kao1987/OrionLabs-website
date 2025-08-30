@@ -1,0 +1,5 @@
+
+> personal-brand-website@0.0.0 test:run
+> vitest run tests/unit/stores/auth.spec.ts --reporter=json
+
+JSON report written to /Users/hong-yikao/Documents/Orionlabs/orionlabs-website/tests/_reports/results.json

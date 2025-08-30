@@ -1,0 +1,349 @@
+/* === 色彩對比度優化配置 - 基於 #002fa7 和 #c8c7c5 === */
+
+:root {
+  /* === 重新定義核心色彩變數以符合品牌色調 === */
+
+  /* 導航系統色彩優化 */
+  --nav-brand-color: var(--orion-primary-900);          /* 品牌名稱色 */
+  --nav-brand-hover: var(--orion-primary-700);          /* 品牌名稱懸停 */
+  --nav-link-color: var(--orion-primary-900);           /* 導航連結 #002fa7 */
+  --nav-link-hover: var(--orion-primary-700);           /* 懸停效果 */
+  --nav-link-active: var(--orion-primary-800);          /* 當前頁面 */
+  --nav-link-hover-bg: var(--orion-primary-50);         /* 懸停背景 */
+  --nav-link-active-bg: var(--orion-primary-100);       /* 激活背景 */
+
+  /* 按鈕色彩系統優化 */
+  --btn-primary-bg: var(--orion-primary-900);           /* 主要按鈕背景 */
+  --btn-primary-hover: var(--orion-primary-800);        /* 懸停效果 */
+  --btn-primary-active: var(--orion-primary-950);       /* 按下效果 */
+  --btn-primary-text: #ffffff;                          /* 按鈕文字 */
+
+  --btn-secondary-bg: var(--neutral-400);               /* 次要按鈕 #c8c7c5 */
+  --btn-secondary-hover: var(--neutral-500);            /* 懸停 */
+  --btn-secondary-text: var(--neutral-900);             /* 深色文字 */
+
+  --btn-outline-border: var(--orion-primary-900);       /* 邊框按鈕 */
+  --btn-outline-text: var(--orion-primary-900);         /* 邊框按鈕文字 */
+  --btn-outline-hover-bg: var(--orion-primary-900);     /* 邊框按鈕懸停背景 */
+
+  /* 標題與重點文字優化 */
+  --heading-primary: var(--orion-primary-900);          /* 主標題 */
+  --heading-secondary: var(--neutral-800);              /* 副標題 */
+  --text-highlight: var(--orion-primary-700);           /* 重點文字 */
+  --text-accent: var(--orion-primary-600);              /* 強調文字 */
+
+  /* 統計數字與數據展示 */
+  --stats-number: var(--orion-primary-900);             /* 統計數字主色 */
+  --stats-label: var(--neutral-600);                    /* 統計標籤 */
+  --stats-bg: var(--neutral-50);                        /* 統計背景 */
+
+  /* 卡片與區塊優化 */
+  --card-border: var(--neutral-300);                    /* 卡片邊框 */
+  --card-shadow: rgba(0, 47, 167, 0.08);               /* 品牌色陰影 */
+  --card-hover-shadow: rgba(0, 47, 167, 0.15);         /* 懸停陰影 */
+  --card-bg: #ffffff;                                   /* 卡片背景 */
+  --card-bg-alt: var(--neutral-50);                     /* 替代背景 */
+
+  /* 表單元素優化 */
+  --input-border: var(--neutral-300);                   /* 輸入框邊框 */
+  --input-focus-border: var(--orion-primary-900);       /* 聚焦邊框 */
+  --input-focus-shadow: rgba(0, 47, 167, 0.2);         /* 聚焦陰影 */
+  --input-bg: #ffffff;                                  /* 輸入框背景 */
+  --input-placeholder: var(--neutral-500);              /* 佔位符文字 */
+
+  /* 狀態與反饋顏色 */
+  --state-success: #059669;                             /* 成功狀態 */
+  --state-warning: #d97706;                             /* 警告狀態 */
+  --state-error: #dc2626;                               /* 錯誤狀態 */
+  --state-info: var(--orion-primary-600);               /* 資訊狀態 */
+
+  /* 背景漸層優化 */
+  --gradient-primary: linear-gradient(135deg, var(--orion-primary-900) 0%, var(--orion-primary-700) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--neutral-100) 0%, var(--neutral-200) 100%);
+  --gradient-brand: linear-gradient(135deg, #002fa7 0%, #3441e3 50%, #5570ff 100%);
+  --gradient-subtle: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+
+  /* 互動式元素顏色 */
+  --interactive-primary: var(--orion-primary-900);      /* 主要互動色 */
+  --interactive-hover: var(--orion-primary-700);        /* 懸停效果 */
+  --interactive-active: var(--orion-primary-950);       /* 激活狀態 */
+  --interactive-disabled: var(--neutral-400);           /* 禁用狀態 */
+
+  /* 技術標籤與徽章優化 */
+  --badge-primary-bg: var(--orion-primary-900);         /* 主要徽章 */
+  --badge-primary-text: #ffffff;                        /* 主要徽章文字 */
+  --badge-secondary-bg: var(--neutral-200);             /* 次要徽章 */
+  --badge-secondary-text: var(--neutral-800);           /* 次要徽章文字 */
+  --badge-outline-border: var(--orion-primary-900);     /* 邊框徽章 */
+  --badge-outline-text: var(--orion-primary-900);       /* 邊框徽章文字 */
+
+  /* 分隔線與邊框 */
+  --divider-light: var(--neutral-200);                  /* 淺色分隔線 */
+  --divider-medium: var(--neutral-300);                 /* 中等分隔線 */
+  --divider-strong: var(--neutral-400);                 /* 強分隔線 */
+  --divider-brand: var(--orion-primary-200);            /* 品牌色分隔線 */
+
+  /* 覆蓋層與遮罩 */
+  --overlay-light: rgba(255, 255, 255, 0.9);           /* 淺色覆蓋 */
+  --overlay-medium: rgba(0, 47, 167, 0.8);             /* 品牌色覆蓋 */
+  --overlay-dark: rgba(0, 0, 0, 0.6);                  /* 深色覆蓋 */
+  --overlay-glass: rgba(255, 255, 255, 0.1);           /* 毛玻璃效果 */
+}
+
+/* 表單相關顏色優化 */
+.form-control:focus {
+  border-color: var(--form-focus-border) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--form-check-checked-bg) !important;
+  border-color: var(--form-check-checked-border) !important;
+}
+
+.form-check-input:focus {
+  border-color: var(--form-check-focus-border) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25) !important;
+}
+
+/* 連結顏色優化 */
+a {
+  color: var(--link-color, #002fa7);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover-color, #001a64);
+  text-decoration: underline;
+}
+
+/* 無障礙顏色對比增強 */
+.text-muted {
+  color: var(--text-muted-color, #666666) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary-color, #6c757d) !important;
+}
+
+/* 狀態顏色一致性 */
+.text-success {
+  color: var(--success-color, #198754) !important;
+}
+
+.text-warning {
+  color: var(--warning-color, #ffc107) !important;
+}
+
+.text-danger {
+  color: var(--danger-color, #dc3545) !important;
+}
+
+.text-info {
+  color: var(--info-color, #0dcaf0) !important;
+}
+
+/* 頁尾顏色調整 */
+footer {
+  background-color: var(--footer-bg, #f8f9fa);
+  color: var(--footer-text, #495057);
+}
+
+footer a {
+  color: var(--footer-link-color, #002fa7);
+}
+
+footer a:hover {
+  color: var(--footer-link-hover-color, #001a64);
+}
+
+/* 卡片組件顏色已移至 orion-unified-theme.css 統一管理 */
+/* 避免重複定義，所有卡片樣式請參考 orion-unified-theme.css */
+
+/* 導航列活動狀態 */
+.navbar-nav .nav-link.active {
+  color: var(--nav-link-active-color, #002fa7) !important;
+  font-weight: 600;
+}
+
+/* 分隔線顏色 */
+hr {
+  border-color: var(--hr-border-color, #c8c7c5);
+  opacity: 0.8;
+}
+
+/* 表格顏色優化 */
+.table {
+  --bs-table-bg: var(--table-bg, #ffffff);
+  --bs-table-striped-bg: var(--table-striped-bg, #f8f9fa);
+  --bs-table-hover-bg: var(--table-hover-bg, #f5f5f5);
+  --bs-table-border-color: var(--table-border-color, #dee2e6);
+}
+
+/* 輸入框組件 */
+.input-group-text {
+  background-color: var(--input-group-text-bg, #e9ecef);
+  border-color: var(--input-group-text-border, #ced4da);
+  color: var(--input-group-text-color, #495057);
+}
+
+/* 下拉選單顏色 */
+.dropdown-menu {
+  border-color: var(--dropdown-border-color, #dee2e6);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--dropdown-item-hover-bg, #f8f9fa);
+  color: var(--dropdown-item-hover-color, #002fa7);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--dropdown-item-active-bg, #002fa7);
+  color: var(--dropdown-item-active-color, #ffffff);
+}
+
+/* 進度條顏色 */
+.progress {
+  background-color: var(--progress-bg, #e9ecef);
+}
+
+.progress-bar {
+  background-color: var(--progress-bar-bg, #002fa7);
+}
+
+/* 提示框（Tooltip）顏色 */
+.tooltip .tooltip-inner {
+  background-color: var(--tooltip-bg, #000000);
+  color: var(--tooltip-color, #ffffff);
+}
+
+/* 分頁組件顏色 */
+.page-link {
+  color: var(--pagination-link-color, #002fa7);
+  border-color: var(--pagination-link-border, #dee2e6);
+}
+
+.page-link:hover {
+  color: var(--pagination-link-hover-color, #001a64);
+  background-color: var(--pagination-link-hover-bg, #e9ecef);
+  border-color: var(--pagination-link-hover-border, #002fa7);
+}
+
+.page-item.active .page-link {
+  background-color: var(--pagination-active-bg, #002fa7);
+  border-color: var(--pagination-active-border, #002fa7);
+  color: var(--pagination-active-color, #ffffff);
+}
+
+/* 手風琴組件顏色 */
+.accordion-button {
+  color: var(--accordion-button-color, #212529);
+  background-color: var(--accordion-button-bg, #ffffff);
+  border-bottom-color: var(--accordion-border-color, #dee2e6);
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--accordion-button-active-color, #002fa7);
+  background-color: var(--accordion-button-active-bg, #e7f1ff);
+  border-bottom-color: var(--accordion-border-color, #002fa7);
+}
+
+.accordion-button:focus {
+  border-color: var(--accordion-button-focus-border, #002fa7);
+  box-shadow: 0 0 0 0.25rem rgba(0, 47, 167, 0.25);
+}
+
+/* 麵包屑導航顏色 */
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--breadcrumb-divider-color, #6c757d);
+}
+
+.breadcrumb-item.active {
+  color: var(--breadcrumb-active-color, #6c757d);
+}
+
+.breadcrumb-item a {
+  color: var(--breadcrumb-link-color, #002fa7);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--breadcrumb-link-hover-color, #001a64);
+}
+
+/* 列表群組顏色 */
+.list-group-item {
+  border-color: var(--list-group-border-color, #dee2e6);
+}
+
+.list-group-item:hover {
+  background-color: var(--list-group-item-hover-bg, #f8f9fa);
+}
+
+.list-group-item.active {
+  background-color: var(--list-group-item-active-bg, #002fa7);
+  border-color: var(--list-group-item-active-border, #002fa7);
+  color: var(--list-group-item-active-color, #ffffff);
+}
+
+/* 模態框顏色 */
+.modal-header {
+  border-bottom-color: var(--modal-header-border-color, #dee2e6);
+}
+
+.modal-footer {
+  border-top-color: var(--modal-footer-border-color, #dee2e6);
+}
+
+/* 標籤頁（Tabs）顏色 */
+.nav-tabs .nav-link {
+  color: var(--nav-tabs-link-color, #495057);
+  border-color: var(--nav-tabs-border-color, #dee2e6);
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: var(--nav-tabs-link-hover-color, #002fa7);
+  border-color: var(--nav-tabs-link-hover-border, #e9ecef #e9ecef #dee2e6);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--nav-tabs-link-active-color, #495057);
+  background-color: var(--nav-tabs-link-active-bg, #ffffff);
+  border-color: var(--nav-tabs-link-active-border, #dee2e6 #dee2e6 #ffffff);
+}
+
+/* 警告框顏色增強 */
+.alert-primary {
+  --bs-alert-color: var(--alert-primary-color, #084298);
+  --bs-alert-bg: var(--alert-primary-bg, #cfe2ff);
+  --bs-alert-border-color: var(--alert-primary-border, #9ec5fe);
+}
+
+.alert-secondary {
+  --bs-alert-color: var(--alert-secondary-color, #41464b);
+  --bs-alert-bg: var(--alert-secondary-bg, #e2e3e5);
+  --bs-alert-border-color: var(--alert-secondary-border, #c4c8cb);
+}
+
+/* 自定義選擇器 */
+.form-select:focus {
+  border-color: var(--form-select-focus-border, #002fa7);
+  box-shadow: 0 0 0 0.25rem rgba(0, 47, 167, 0.25);
+}
+
+/* 按鈕組合顏色 */
+.btn-group .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-left-color: var(--btn-group-divider, rgba(255, 255, 255, 0.2));
+  border-right-color: var(--btn-group-divider, rgba(255, 255, 255, 0.2));
+}
+
+/* Loading 狀態顏色 */
+.spinner-border {
+  color: var(--spinner-color, #002fa7);
+}
+
+.spinner-grow {
+  color: var(--spinner-color, #002fa7);
+}

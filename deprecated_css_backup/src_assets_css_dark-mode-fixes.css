@@ -1,0 +1,28 @@
+/* 深色模式導航列修復 */
+[data-theme="dark"] .navbar-nav .nav-link {
+  color: var(--orion-neutral-300) !important;
+  background-color: transparent !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover {
+  color: var(--orion-neutral-100) !important;
+  background-color: var(--orion-primary-800) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link.active {
+  color: var(--orion-neutral-100) !important;
+  background-color: var(--orion-primary-800) !important;
+}
+
+/* 修復媒體查詢深色模式 */
+@media (prefers-color-scheme: dark) {
+  .navbar-nav .nav-link {
+    color: var(--orion-neutral-300) !important;
+  }
+
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: var(--orion-neutral-100) !important;
+    background-color: var(--orion-primary-800) !important;
+  }
+}

@@ -45,9 +45,7 @@
                 <i class="bi bi-house display-4 text-primary mb-3"></i>
                 <h5 class="card-title">首頁</h5>
                 <p class="card-text text-muted">了解我的服務與最新作品</p>
-                <router-link to="/" class="btn btn-outline-primary">
-                  前往首頁
-                </router-link>
+                <router-link to="/" class="btn btn-outline-primary"> 前往首頁 </router-link>
               </div>
             </div>
           </div>
@@ -69,9 +67,7 @@
                 <i class="bi bi-person display-4 text-primary mb-3"></i>
                 <h5 class="card-title">關於我</h5>
                 <p class="card-text text-muted">了解我的背景與專業經驗</p>
-                <router-link to="/about" class="btn btn-outline-primary">
-                  認識我
-                </router-link>
+                <router-link to="/about" class="btn btn-outline-primary"> 認識我 </router-link>
               </div>
             </div>
           </div>
@@ -81,9 +77,7 @@
                 <i class="bi bi-envelope display-4 text-primary mb-3"></i>
                 <h5 class="card-title">聯絡我</h5>
                 <p class="card-text text-muted">有任何問題歡迎與我聯繫</p>
-                <router-link to="/contact" class="btn btn-outline-primary">
-                  聯絡我
-                </router-link>
+                <router-link to="/contact" class="btn btn-outline-primary"> 聯絡我 </router-link>
               </div>
             </div>
           </div>
@@ -97,12 +91,12 @@
 // 返回上一頁
 const goBack = () => {
   if (window.history.length > 1) {
-    window.history.back()
+    window.history.back();
   } else {
     // 如果沒有歷史記錄，導向首頁
-    window.location.href = '/'
+    window.location.href = "/";
   }
-}
+};
 </script>
 
 <style scoped>
@@ -141,18 +135,18 @@ const goBack = () => {
   .error-title {
     font-size: 6rem;
   }
-  
+
   .error-subtitle {
     font-size: 1.5rem;
   }
-  
+
   .error-actions .btn {
     width: 100%;
     margin-bottom: 0.5rem;
   }
-  
+
   .error-actions .me-3 {
     margin-right: 0 !important;
   }
 }
-</style> 
+</style>

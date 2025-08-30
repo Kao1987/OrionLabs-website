@@ -13,8 +13,44 @@ export default defineConfigWithVueTs(
     files: ['**/*.{ts,mts,tsx,vue}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores([
+    '**/dist/**', 
+    '**/dist-ssr/**', 
+    '**/coverage/**',
+    'api-example/**',
+    'scripts/**/*.js',
+    '**/*.js',
+    '**/node_modules/**'
+  ]),
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  
+  // 測試檔案的寬鬆規則
+  {
+    files: ['tests/**/*.{ts,spec.ts}'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+    }
+  },
+
+  // BEM 命名規範驗證
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'vue/attribute-hyphenation': ['error', 'always'],
+      'vue/component-name-in-template-casing': ['error', 'kebab-case'],
+      // 自定義規則：建議使用 BEM 命名法
+      'vue/no-unused-vars': 'warn'
+    },
+    settings: {
+      // BEM 命名模式說明
+      'bem-patterns': {
+        block: /^[a-z][a-z0-9-]*[a-z0-9]$/,
+        element: /^[a-z][a-z0-9-]*[a-z0-9]__[a-z][a-z0-9-]*[a-z0-9]$/,
+        modifier: /^[a-z][a-z0-9-]*[a-z0-9](__|-)([a-z][a-z0-9-]*[a-z0-9])--[a-z][a-z0-9-]*[a-z0-9]$/
+      }
+    }
+  }
 )

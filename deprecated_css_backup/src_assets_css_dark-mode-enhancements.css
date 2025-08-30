@@ -1,0 +1,273 @@
+/* === 深色模式增強修復 - 遵循 A-core 和 D-style 規範 === */
+
+/* === 頁面級別深色模式修復 === */
+[data-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, rgb(0, 47, 167) 0%, rgb(0, 35, 125) 100%);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .hero-section * {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .hero-section h1,
+[data-theme="dark"] .hero-section h2,
+[data-theme="dark"] .hero-section h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .section-alt {
+  background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .section-accent {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* === 技能區塊深色模式修復 === */
+[data-theme="dark"] .skills-section {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .skills-section .card {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .nav-pills .nav-link {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .nav-pills .nav-link:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .nav-pills .nav-link.active {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .skill-bar {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .skill-progress {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+}
+
+/* === 作品集深色模式修復 === */
+[data-theme="dark"] .portfolio-page {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .card-portfolio {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .card-portfolio .card-title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-portfolio .card-text {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .project-image {
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+}
+
+[data-theme="dark"] .portfolio-overlay {
+  background: linear-gradient(135deg, rgba(79, 111, 255, 0.9), rgba(62, 82, 247, 0.9));
+}
+
+[data-theme="dark"] .search-filter-section,
+[data-theme="dark"] .technology-filter {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+/* === 部落格深色模式修復 === */
+[data-theme="dark"] .blog-page {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .blog-card {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .blog-card .card-title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .blog-card .card-text {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .blog-image {
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+}
+
+[data-theme="dark"] .blog_filter-section {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+/* === 表單元素深色模式修復 === */
+[data-theme="dark"] .form-control {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .form-control:focus {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+  box-shadow: 0 0 0 0.2rem var(--color-shadow-focus);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .input-group-text {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+/* === 按鈕深色模式修復 === */
+[data-theme="dark"] .btn-outline-secondary {
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+/* === Modal 深色模式修復 === */
+[data-theme="dark"] .modal-content {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .modal-header {
+  background-color: var(--color-bg-secondary);
+  border-bottom-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .modal-footer {
+  background-color: var(--color-bg-secondary);
+  border-top-color: var(--color-border-primary);
+}
+
+/* === Badge 深色模式修復 === */
+[data-theme="dark"] .badge {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .badge-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .badge-secondary {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+}
+
+/* === 分頁深色模式修復 === */
+[data-theme="dark"] .page-link {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .page-link:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .page-item.disabled .page-link {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-muted);
+}
+
+/* === Alert 深色模式修復 === */
+[data-theme="dark"] .alert {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(79, 111, 255, 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* === 文字色彩深度修復 === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .text-primary {
+  color: var(--color-primary) !important;
+}
+
+/* === Footer 深色模式修復 === */
+[data-theme="dark"] .footer {
+  background: linear-gradient(135deg, var(--orion-silver-950) 0%, var(--orion-silver-900) 100%);
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .footer h5,
+[data-theme="dark"] .footer h6 {
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .footer p {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .footer .footer_link {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .footer .footer_link:hover {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .footer .footer_brand-link {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .footer .footer_brand-link:hover {
+  color: var(--color-primary-hover);
+}

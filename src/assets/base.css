@@ -1,52 +1,54 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* === Vue 預設色彩變數（@deprecated - 使用 Orion 統一主題） === */
+/* 由 color-adapter.css 適配至 Orion 色彩系統 */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  /* Vue 預設變數（透過 color-adapter.css 映射） */
+  --vt-c-white: var(--orion-silver-50);
+  --vt-c-white-soft: var(--orion-silver-100);
+  --vt-c-white-mute: var(--orion-silver-200);
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --vt-c-black: var(--orion-silver-950);
+  --vt-c-black-soft: var(--orion-silver-900);
+  --vt-c-black-mute: var(--orion-silver-800);
 
-  --vt-c-indigo: #2c3e50;
+  --vt-c-indigo: var(--orion-blue-900);
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --vt-c-divider-light-1: var(--orion-silver-300);
+  --vt-c-divider-light-2: var(--orion-silver-200);
+  --vt-c-divider-dark-1: var(--orion-silver-600);
+  --vt-c-divider-dark-2: var(--orion-silver-500);
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --vt-c-text-light-1: var(--orion-silver-900);
+  --vt-c-text-light-2: var(--orion-silver-700);
+  --vt-c-text-dark-1: var(--orion-silver-50);
+  --vt-c-text-dark-2: var(--orion-silver-300);
 }
 
-/* semantic color variables for this project */
+/* === 語意化色彩變數（統一至 Orion 系統） === */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-background: var(--color-bg-primary);
+  --color-background-soft: var(--color-bg-secondary);
+  --color-background-mute: var(--color-bg-tertiary);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-border: var(--color-border-secondary);
+  --color-border-hover: var(--color-border-primary);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-heading: var(--color-text-primary);
+  --color-text: var(--color-text-primary);
 
   --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: var(--color-bg-primary);
+    --color-background-soft: var(--color-bg-secondary);
+    --color-background-mute: var(--color-bg-tertiary);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-border: var(--color-border-secondary);
+    --color-border-hover: var(--color-border-primary);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-heading: var(--color-text-primary);
+    --color-text: var(--color-text-primary);
   }
 }
 
@@ -60,8 +62,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--color-text-primary) !important;
+  background: var(--color-bg-primary) !important;
   transition:
     color 0.5s,
     background-color 0.5s;

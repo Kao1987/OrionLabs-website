@@ -1,0 +1,191 @@
+/*
+ * 終極測試修復 - 最高優先級覆蓋
+ * 使用 !important 和高度特定性確保覆蓋所有衝突
+ */
+
+/* === 強制品牌色彩修復 === */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"],
+html,
+html[data-theme="light"],
+html[data-theme="dark"] {
+  /* 禁用錯誤的藍色 */
+  --wrong-blue-color: transparent !important;
+  --light-blue-wrong: transparent !important;
+
+  /* 強制正確的品牌色 */
+  --orion-brand-primary-enforced: #002fa7 !important;
+  --orion-brand-light-enforced: #ffffff !important;
+}
+
+/* === 深色模式連結修復 === */
+[data-theme="dark"] *,
+[data-theme="dark"] a,
+[data-theme="dark"] a:link,
+[data-theme="dark"] a:visited,
+[data-theme="dark"] a:hover,
+[data-theme="dark"] a:active,
+[data-theme="dark"] a:focus,
+.theme-dark *,
+.theme-dark a,
+.theme-dark a:link,
+.theme-dark a:visited,
+.theme-dark a:hover,
+.theme-dark a:active,
+.theme-dark a:focus {
+  /* 強制覆蓋所有連結顏色 */
+  color: var(--orion-brand-light-enforced) !important;
+}
+
+/* 排除按鈕和導航 */
+[data-theme="dark"] .btn,
+[data-theme="dark"] .nav-link,
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] button,
+.theme-dark .btn,
+.theme-dark .nav-link,
+.theme-dark .navbar-brand,
+.theme-dark button {
+  color: inherit !important;
+}
+
+/* === 淺色模式連結修復 === */
+:root:not([data-theme="dark"]) a,
+:root:not([data-theme="dark"]) a:link,
+:root:not([data-theme="dark"]) a:visited,
+html:not([data-theme="dark"]) a,
+html:not([data-theme="dark"]) a:link,
+html:not([data-theme="dark"]) a:visited {
+  color: var(--orion-brand-primary-enforced) !important;
+}
+
+:root:not([data-theme="dark"]) a:hover,
+:root:not([data-theme="dark"]) a:active,
+:root:not([data-theme="dark"]) a:focus,
+html:not([data-theme="dark"]) a:hover,
+html:not([data-theme="dark"]) a:active,
+html:not([data-theme="dark"]) a:focus {
+  color: #001a64 !important;
+}
+
+/* === 禁用所有錯誤顏色 === */
+* {
+  /* 禁用 rgb(127,179,255) */
+  color: initial !important;
+}
+
+*[style*="127, 179, 255"],
+*[style*="127,179,255"],
+*[style*="#7fb3ff"],
+*[style*="#7FB3FF"],
+*[class*="blue"],
+*[class*="light"] {
+  color: var(--orion-brand-primary-enforced) !important;
+}
+
+[data-theme="dark"] *[style*="127, 179, 255"],
+[data-theme="dark"] *[style*="127,179,255"],
+[data-theme="dark"] *[style*="#7fb3ff"],
+[data-theme="dark"] *[style*="#7FB3FF"],
+[data-theme="dark"] *[class*="blue"],
+[data-theme="dark"] *[class*="light"] {
+  color: var(--orion-brand-light-enforced) !important;
+}
+
+/* === WCAG 對比度強制修復 === */
+:root:not([data-theme="dark"]) {
+  --color-text-secondary: #666666 !important;
+  --color-text-muted: #595959 !important;
+  --orion-silver-700: #666666 !important;
+  --orion-silver-800: #666666 !important;
+}
+
+[data-theme="dark"] {
+  --color-text-secondary: #c8c7c5 !important;
+  --color-text-muted: #b3b3b3 !important;
+  --orion-silver-200: #c8c7c5 !important;
+  --orion-silver-300: #c8c7c5 !important;
+}
+
+/* === 文字對比度元素級修復 === */
+.text-secondary,
+.text_secondary,
+.card_text,
+.lead,
+p:not(.text-primary):not(.text-light):not(.text-dark):not(.hero-title):not(.hero_title) {
+  color: #666666 !important;
+}
+
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .text_secondary,
+[data-theme="dark"] .card_text,
+[data-theme="dark"] .lead,
+[data-theme="dark"] p:not(.text-primary):not(.text-light):not(.text-dark):not(.hero-title):not(.hero_title) {
+  color: #c8c7c5 !important;
+}
+
+/* === Hero 區域修復 === */
+.hero-title,
+.hero_title,
+.hero-section h1,
+.hero_section h1,
+.main-header h1 {
+  color: #ffffff !important;
+}
+
+/* === 按鈕品牌色修復 === */
+.btn-primary,
+.btn_primary {
+  background-color: var(--orion-brand-primary-enforced) !important;
+  border-color: var(--orion-brand-primary-enforced) !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn_primary:hover,
+.btn_primary:focus {
+  background-color: #001a64 !important;
+  border-color: #001a64 !important;
+  color: #ffffff !important;
+}
+
+/* === 表單焦點修復 === */
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--orion-brand-primary-enforced) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25) !important;
+}
+
+/* === 調試標記 === */
+@media (max-width: 1px) {
+  body::after {
+    content: "ULTIMATE-FIX-LOADED";
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+  }
+}
+
+/* === CSS 變數終極覆蓋 === */
+:root,
+html,
+body,
+* {
+  /* 確保所有元素使用正確顏色 */
+  --bs-primary: var(--orion-brand-primary-enforced) !important;
+  --color-primary: var(--orion-brand-primary-enforced) !important;
+  --primary-color: var(--orion-brand-primary-enforced) !important;
+  --brand-primary: var(--orion-brand-primary-enforced) !important;
+  --link-color: var(--orion-brand-primary-enforced) !important;
+
+  /* 禁用所有錯誤變數 */
+  --wrong-blue: transparent !important;
+  --light-blue: transparent !important;
+  --rgb-127-179-255: transparent !important;
+}

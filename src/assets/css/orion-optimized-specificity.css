@@ -1,0 +1,700 @@
+/* === 優化後的 CSS === */
+/* 移除了不必要的 !important，使用 CSS Layer 管理特異性 */
+
+/* 優化前: /* === 響應式工具類 === */
+@media (max-width: 576px) */
+.orion-app /* === 響應式工具類 === */
+@media (max-width: 576px) {
+  
+  .blog_card-column {
+    flex: 0 0 100%;
+  
+    max-width: 100%;
+}
+
+/* 優化前: /* === 響應式工具類 === */
+@media (max-width: 576px) */
+.orion-app /* === 響應式工具類 === */
+@media (max-width: 576px) {
+  
+  .blog_card-column {
+    flex: 0 0 100%;
+  
+    max-width: 100%;
+}
+
+/* 優化前: --gallery-columns: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) */
+.orion-app --gallery-columns: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  
+  * {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: /* === 一般段落文字 === */
+  p */
+.orion-app /* === 一般段落文字 === */
+  p {
+  
+    color: var(--color-text-secondary);
+}
+
+/* 優化前: border-width: 2px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) */
+.orion-app border-width: 2px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  
+  * {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: --gallery-columns: 1;
+  }
+}
+
+/* === 13. Accessibility === */
+@media (prefers-reduced-motion: reduce) */
+--gallery-columns: 1;
+  }
+}
+
+/* === 13. Accessibility === */
+@media (prefers-reduced-motion: reduce)undefined {
+  
+  * {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: box-sizing: border-box;
+}
+
+body */
+.orion-app box-sizing: border-box;
+}
+
+body {
+  
+  /*保留：覆蓋 Bootstrap 預設樣式 */
+  color: var(--color-text-primary);
+  
+  background-color: var(--color-bg-primary);
+}
+
+/* 優化前: padding: var(--spacing-2xl); }
+}
+
+
+@layer overrides */
+.orion-app padding: var(--spacing-2xl); }
+}
+
+
+@layer overrides {
+  
+  
+  .force-text-primary {
+    color: var(--color-text-primary);
+}
+
+/* 優化前: border-width: 2px;
+  }
+}
+
+/* === 15. 動作優先（Reduced Motion）支援 === */
+@media (prefers-reduced-motion: reduce) */
+border-width: 2px;
+  }
+}
+
+/* === 15. 動作優先（Reduced Motion）支援 === */
+@media (prefers-reduced-motion: reduce)undefined {
+  
+  * {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: padding: var(--spacing-2xl); }
+}
+
+/* === 覆蓋層：必要時使用 !important === */
+@layer overrides */
+.orion-app padding: var(--spacing-2xl); }
+}
+
+/* === 覆蓋層：必要時使用 !important === */
+@layer overrides {
+  
+  /* 僅在必要時使用，用於覆蓋第三方樣式 */
+  .force-text-primary {
+    color: var(--color-text-primary);
+}
+
+/* 優化前: padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+/* === 動畫減少支援 === */
+@media (prefers-reduced-motion: reduce) */
+.orion-app padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+/* === 動畫減少支援 === */
+@media (prefers-reduced-motion: reduce) {
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) */
+.orion-app padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+  
+    animation-iteration-count: 1;
+  
+    transition-duration: 0.01ms;
+}
+
+/* 優化前: /* === Bootstrap 覆蓋層 - 必要的 !important 使用 === */
+/* 僅在需要覆蓋第三方樣式時使用 !important */
+/* 遵循 D-style 規範：在 @layer overrides 中管理 */
+
+@layer overrides */
+.orion-app /* === Bootstrap 覆蓋層 - 必要的 !important 使用 === */
+/* 僅在需要覆蓋第三方樣式時使用 !important */
+/* 遵循 D-style 規範：在 @layer overrides 中管理 */
+
+@layer overrides {
+  
+  /* Bootstrap 表單覆蓋 */
+  .form-control:focus {
+    border-color: var(--color-border-focus);
+  
+    box-shadow: 0 0 0 0.2rem var(--color-shadow-focus);
+}
+
+/* 優化前: box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body */
+.orion-app box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  
+  color: var(--color-text-primary);
+  
+  background: var(--color-bg-primary);
+}
+
+/* 優化前: .footer_brand-link:hover */
+.footer_brand-link:hover.footer_brand-link {
+  
+  color: var(--orion-primary-200);
+}
+
+/* 優化前: .footer_link */
+.footer_link.footer_link {
+  
+  color: var(--text-inverse);
+}
+
+/* 優化前: .footer_link:hover */
+.footer_link:hover.footer_link {
+  
+  color: var(--orion-primary-300);
+}
+
+/* 優化前: .form-check-input:checked */
+.form-check-input:checked.form-check-input {
+  
+  background-color: var(--form-check-checked-bg);
+  
+  border-color: var(--form-check-checked-border);
+}
+
+/* 優化前: .form-check-input:focus */
+.form-check-input:focus.form-check-input {
+  
+  border-color: var(--form-check-focus-border);
+  
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25);
+}
+
+/* 優化前: .text-secondary */
+.text-secondary.text-secondary {
+  
+  color: var(--text-secondary-color, #6c757d);
+}
+
+/* 優化前: /* 狀態顏色一致性 */
+.text-success */
+/* 狀態顏色一致性 */
+.text-success.text-success {
+  
+  color: var(--success-color, #198754);
+}
+
+/* 優化前: .text-warning */
+.text-warning.text-warning {
+  
+  color: var(--warning-color, #ffc107);
+}
+
+/* 優化前: .text-danger */
+.text-danger.text-danger {
+  
+  color: var(--danger-color, #dc3545);
+}
+
+/* 優化前: .text-info */
+.text-info.text-info {
+  
+  color: var(--info-color, #0dcaf0);
+}
+
+/* 優化前: .hero-subtitle */
+.hero-subtitle.hero-subtitle {
+  
+  color: var(--color-text-light);
+  
+  opacity: 0.9;
+}
+
+/* 優化前: .bg-primary */
+.bg-primary.bg-primary {
+  
+  background-color: var(--orion-primary);
+}
+
+/* 優化前: .border-primary */
+.border-primary.border-primary {
+  
+  border-color: var(--orion-primary);
+}
+
+/* 優化前: .hero-subtitle */
+.hero-subtitle.hero-subtitle {
+  
+  color: var(--color-text-light);
+  
+  opacity: 0.9;
+}
+
+/* 優化前: .form-check-input:checked */
+.form-check-input:checked.form-check-input {
+  
+  background-color: var(--form-check-checked-bg);
+  
+  border-color: var(--form-check-checked-border);
+}
+
+/* 優化前: .form-check-input:focus */
+.form-check-input:focus.form-check-input {
+  
+  border-color: var(--form-check-focus-border);
+  
+  box-shadow: 0 0 0 0.2rem rgba(0, 47, 167, 0.25);
+}
+
+/* 優化前: .text-secondary */
+.text-secondary.text-secondary {
+  
+  color: var(--text-secondary-color, #6c757d);
+}
+
+/* 優化前: .text-success */
+.text-success.text-success {
+  
+  color: var(--success-color, #198754);
+}
+
+/* 優化前: .text-warning */
+.text-warning.text-warning {
+  
+  color: var(--warning-color, #ffc107);
+}
+
+/* 優化前: .text-danger */
+.text-danger.text-danger {
+  
+  color: var(--danger-color, #dc3545);
+}
+
+/* 優化前: .text-info */
+.text-info.text-info {
+  
+  color: var(--info-color, #0dcaf0);
+}
+
+/* 優化前: .bg-primary */
+.bg-primary.bg-primary {
+  
+  background-color: var(--orion-primary);
+}
+
+/* 優化前: .border-primary */
+.border-primary.border-primary {
+  
+  border-color: var(--orion-primary);
+}
+
+/* 優化前: .force-bg-primary */
+.force-bg-primary.force-bg-primary {
+  
+    background-color: var(--color-bg-primary);
+}
+
+/* 優化前: .force-bg-primary */
+.force-bg-primary.force-bg-primary {
+  
+    background-color: var(--color-bg-primary);
+}
+
+/* 優化前: .btn-primary:hover */
+.btn-primary:hover.btn-primary {
+  
+    background-color: #5a7fff;
+  
+    border-color: #5a7fff;
+}
+
+/* 優化前: .btn-outline-primary */
+.btn-outline-primary.btn-outline-primary {
+  
+    color: #7fb3ff;
+  
+    border-color: #7fb3ff;
+}
+
+/* 優化前: .btn-outline-primary:hover */
+.btn-outline-primary:hover.btn-outline-primary {
+  
+    background-color: #5a7fff;
+  
+    border-color: #5a7fff;
+  
+    color: #ffffff;
+}
+
+/* 優化前: /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary */
+/* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary.btn-outline-secondary {
+  
+    color: var(--color-text-secondary);
+  
+    border-color: var(--color-border-primary);
+}
+
+/* 優化前: /* === 表單控制項增強 === */
+  .form-control */
+/* === 表單控制項增強 === */
+  .form-control.form-control {
+  
+    background-color: var(--color-bg-secondary);
+  
+    border-color: var(--color-border-primary);
+  
+    color: var(--color-text-primary);
+}
+
+/* 優化前: .form-control:focus */
+.form-control:focus.form-control {
+  
+    background-color: var(--color-bg-secondary);
+  
+    border-color: var(--color-primary);
+  
+    color: var(--color-text-primary);
+  
+    box-shadow: 0 0 0 0.2rem rgba(90, 127, 255, 0.25);
+}
+
+/* 優化前: }
+
+/* === 淺色模式對比度確認 === */
+[data-theme="light"] */
+}
+
+/* === 淺色模式對比度確認 === */
+[data-theme="light"] {
+  
+  .btn-primary {
+    background-color: #002fa7;
+  
+    border-color: #002fa7;
+  
+    color: #ffffff;
+}
+
+/* 優化前: .btn-primary:hover */
+.btn-primary:hover.btn-primary {
+  
+    background-color: #002890;
+  
+    border-color: #002890;
+}
+
+/* 優化前: }
+
+/* === 通用對比度確保 === */
+.low-contrast-fix */
+}
+
+/* === 通用對比度確保 === */
+.low-contrast-fix.low-contrast-fix {
+  
+  /* 為任何低對比度元素添加此類別 */
+  background-color: var(--color-bg-primary);
+  
+  color: var(--color-text-primary);
+  
+  border: 1px solid var(--color-border-primary);
+}
+
+/* 優化前: .form-check-input:checked */
+.form-check-input:checked.form-check-input {
+  
+    background-color: var(--color-primary);
+  
+    border-color: var(--color-primary);
+}
+
+/* 優化前: .form-check-input:focus */
+.form-check-input:focus.form-check-input {
+  
+    border-color: var(--color-border-focus);
+  
+    box-shadow: 0 0 0 0.2rem var(--color-shadow-focus);
+}
+
+/* 優化前: .text-secondary */
+.text-secondary.text-secondary {
+  
+    color: var(--color-text-secondary);
+}
+
+/* 優化前: .text-warning */
+.text-warning.text-warning {
+  
+    color: var(--color-warning);
+}
+
+/* 優化前: .text-danger */
+.text-danger.text-danger {
+  
+    color: var(--color-danger);
+}
+
+/* 優化前: .text-info */
+.text-info.text-info {
+  
+    color: var(--color-info);
+}
+
+/* 優化前: /* 強制主題色彩（用於元件級別覆蓋） */
+  .force-theme-colors */
+/* 強制主題色彩（用於元件級別覆蓋） */
+  .force-theme-colors.force-theme-colors {
+  
+    color: var(--color-text-primary);
+  
+    background-color: var(--color-bg-primary);
+}
+
+/* 優化前: /* Bootstrap 文字色彩覆蓋 */
+  .text-muted */
+/* Bootstrap 文字色彩覆蓋 */
+  .text-muted.text-muted {
+  
+    color: var(--color-text-muted);
+}
+
+/* 優化前: /* Bootstrap 狀態色彩覆蓋 */
+  .text-success */
+/* Bootstrap 狀態色彩覆蓋 */
+  .text-success.text-success {
+  
+    color: var(--color-success);
+}
+
+/* 優化前: display: flex; }
+}
+
+/* === 無障礙增強 === */
+.sr-only */
+display: flex; }
+}
+
+/* === 無障礙增強 === */
+.sr-only.sr-only {
+  
+  position: absolute;
+  
+  width: 1px;
+  
+  height: 1px;
+  
+  padding: 0;
+  
+  margin: -1px;
+  
+  overflow: hidden;
+  
+  clip: rect(0, 0, 0, 0);
+  
+  white-space: nowrap;
+  
+  border: 0;
+}
+
+/* 優化前: --bs-btn-bg: var(--orion-accent);
+  --bs-btn-border-color: var(--orion-accent);
+}
+
+.text-primary */
+--bs-btn-bg: var(--orion-accent);
+  --bs-btn-border-color: var(--orion-accent);
+}
+
+.text-primary.text-primary {
+  
+  color: var(--orion-primary);
+}
+
+/* 優化前: --bs-btn-bg: var(--orion-accent);
+  --bs-btn-border-color: var(--orion-accent);
+}
+
+.text-primary */
+--bs-btn-bg: var(--orion-accent);
+  --bs-btn-border-color: var(--orion-accent);
+}
+
+.text-primary.text-primary {
+  
+  color: var(--orion-primary);
+}
+
+/* 優化前: background: var(--background-surface);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-xl) 0;
+}
+
+.footer_brand-link */
+background: var(--background-surface);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-xl) 0;
+}
+
+.footer_brand-link.footer_brand-link {
+  
+  color: var(--orion-primary-300);
+}
+
+/* 優化前: background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form__honeypot */
+background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form__honeypot.contact-form__honeypot {
+  
+  position: absolute;
+  
+  left: -9999px;
+  
+  opacity: 0;
+  
+  pointer-events: none;
+}
+
+/* 優化前: background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form__honeypot */
+background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form__honeypot.contact-form__honeypot {
+  
+  position: absolute;
+  
+  left: -9999px;
+  
+  opacity: 0;
+  
+  pointer-events: none;
+}
+

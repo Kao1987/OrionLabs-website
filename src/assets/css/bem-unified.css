@@ -1,0 +1,219 @@
+/* === OrionLabs BEM-Lite 統一命名規範檔案 === */
+/* 遵循 D-style 規範：BEM-Lite 命名 block_element-mod */
+/* 遵循 C-refactor 規範：統一重構，向後相容 */
+
+@layer components {
+  /* === 導航元件統一命名 === */
+  .nav_brand {
+    color: var(--nav-brand-color);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav_brand:hover,
+  .nav_brand:focus {
+    color: var(--nav-brand-hover);
+    text-decoration: none;
+  }
+
+  .nav_link {
+    color: var(--nav-link-color);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .nav_link:hover,
+  .nav_link:focus {
+    color: var(--nav-link-hover);
+    background-color: var(--nav-link-hover-bg);
+    text-decoration: none;
+  }
+
+  .nav_link-active {
+    color: var(--nav-link-active);
+    background-color: var(--nav-link-active-bg);
+  }
+
+  /* === 主題切換按鈕統一命名 === */
+  .theme_toggle {
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+  }
+
+  .theme_toggle:hover {
+    background-color: var(--nav-link-hover-bg);
+    color: var(--nav-link-hover);
+  }
+
+  .theme_toggle_icon {
+    font-size: 1.1rem;
+    transition: transform var(--transition-base);
+  }
+
+  .theme_toggle_text {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .theme_toggle:hover .theme_toggle_icon {
+    transform: scale(1.1);
+  }
+
+  /* === Footer 元件統一命名 === */
+  .footer_brand-link {
+    color: var(--nav-brand-color);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer_brand-link:hover {
+    color: var(--nav-brand-hover);
+    text-decoration: none;
+  }
+
+  .footer_link {
+    color: var(--orion-silver-300);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer_link:hover {
+    color: var(--orion-blue-400);
+    text-decoration: none;
+  }
+
+  /* === 管理介面統一命名 === */
+  .admin_img-placeholder {
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+  }
+
+  .admin_badge {
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .admin_card {
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    background: var(--color-bg-card);
+  }
+
+  .admin_card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-focus);
+  }
+
+  /* === Blog 系統統一命名 === */
+  .blog_card {
+    border: none;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-slow);
+    background: var(--color-bg-card);
+    position: relative;
+  }
+
+  .blog_card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .blog_filter-section {
+    background: var(--color-bg-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .blog_search-box .input-group {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .blog_category-btn {
+    border-radius: var(--radius-full);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-base);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  .blog_category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .blog_category-btn-active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+    border-color: var(--color-primary);
+    color: var(--color-text-light);
+  }
+
+  /* === Portfolio 系統統一命名 === */
+  .portfolio_filter-btn {
+    border-radius: var(--radius-full);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-base);
+    border: 2px solid var(--color-border-primary);
+    margin: var(--spacing-xs);
+  }
+
+  .portfolio_filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .portfolio_filter-btn-active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text-light);
+  }
+
+  .portfolio_tech-badge {
+    cursor: pointer;
+    transition: var(--transition-base);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .portfolio_tech-badge:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    transform: scale(1.05);
+  }
+}

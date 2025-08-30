@@ -20,83 +20,242 @@
           <div class="col-lg-8">
             <div class="card">
               <div class="card-body p-4">
-                <h4 class="card-title mb-4">發送訊息</h4>
-                <form @submit.prevent="submitForm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h4 class="card-title mb-0">發送訊息</h4>
+                  <div v-if="formProgress > 0" class="form-progress">
+                    <small class="text-muted">完成度: {{ formProgress }}%</small>
+                    <div class="progress mt-1" style="height: 4px; width: 100px">
+                      <div
+                        class="progress-bar"
+                        :style="{ width: formProgress + '%' }"
+                        role="progressbar"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 成功訊息 -->
+                <div v-if="submitSuccess" class="alert alert-success mb-4" role="alert">
+                  <i class="bi bi-check-circle me-2"></i>
+                  訊息已成功發送！我會盡快回覆您。
+                </div>
+
+                <!-- 錯誤訊息 -->
+                <div v-if="submitError" class="alert alert-danger mb-4" role="alert">
+                  <i class="bi bi-exclamation-triangle me-2"></i>
+                  {{ submitError.message }}
+                  <button
+                    v-if="submitError.code === 'SUBMIT_ERROR'"
+                    @click="retrySubmit"
+                    class="btn btn-sm btn-outline-danger ms-2"
+                    :disabled="isSubmitting"
+                  >
+                    重試
+                  </button>
+                </div>
+
+                <form @submit.prevent="handleSubmit" novalidate>
+                  <!-- Honeypot field (hidden) -->
+                  <input
+                    v-model="formData.honeypot"
+                    type="text"
+                    name="website"
+                    class="d-none"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+
                   <div class="row g-3">
                     <div class="col-md-6">
-                      <label for="name" class="form-label">姓名 *</label>
+                      <label for="name" class="form-label">
+                        姓名 <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
                         class="form-control"
                         id="name"
                         v-model="formData.name"
-                        :class="{ 'is-invalid': errors.name }"
+                        :class="{
+                          'is-invalid': errors.name,
+                          'is-valid': !errors.name && formData.name.trim().length > 0,
+                        }"
+                        @input="handleFieldInput('name')"
+                        @blur="handleFieldBlur('name')"
+                        @focus="trackInteraction"
                         required
-                      >
+                        autocomplete="name"
+                      />
                       <div v-if="errors.name" class="invalid-feedback">
                         {{ errors.name }}
                       </div>
+                      <div v-else-if="formData.name.trim().length > 0" class="valid-feedback">
+                        <i class="bi bi-check-circle me-1"></i>
+                        格式正確
+                      </div>
                     </div>
+
                     <div class="col-md-6">
-                      <label for="email" class="form-label">電子郵件 *</label>
+                      <label for="email" class="form-label">
+                        電子郵件 <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="email"
                         class="form-control"
                         id="email"
                         v-model="formData.email"
-                        :class="{ 'is-invalid': errors.email }"
+                        :class="{
+                          'is-invalid': errors.email,
+                          'is-valid': !errors.email && formData.email.trim().length > 0,
+                        }"
+                        @input="handleFieldInput('email')"
+                        @blur="handleFieldBlur('email')"
+                        @focus="trackInteraction"
                         required
-                      >
+                        autocomplete="email"
+                      />
                       <div v-if="errors.email" class="invalid-feedback">
                         {{ errors.email }}
                       </div>
+                      <div v-else-if="isValidEmail(formData.email)" class="valid-feedback">
+                        <i class="bi bi-check-circle me-1"></i>
+                        電子郵件格式正確
+                      </div>
                     </div>
+
                     <div class="col-12">
-                      <label for="subject" class="form-label">主旨 *</label>
+                      <label for="subject" class="form-label">
+                        主旨 <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
                         class="form-control"
                         id="subject"
                         v-model="formData.subject"
-                        :class="{ 'is-invalid': errors.subject }"
+                        :class="{
+                          'is-invalid': errors.subject,
+                          'is-valid': !errors.subject && formData.subject.trim().length >= 5,
+                        }"
+                        @input="handleFieldInput('subject')"
+                        @blur="handleFieldBlur('subject')"
+                        @focus="trackInteraction"
                         required
-                      >
+                        placeholder="請簡述您的需求..."
+                      />
                       <div v-if="errors.subject" class="invalid-feedback">
                         {{ errors.subject }}
                       </div>
+                      <div v-else-if="formData.subject.trim().length >= 5" class="valid-feedback">
+                        <i class="bi bi-check-circle me-1"></i>
+                        主旨長度適當
+                      </div>
+                      <div v-else-if="formData.subject.trim().length > 0" class="form-text">
+                        還需要 {{ 5 - formData.subject.trim().length }} 個字元
+                      </div>
                     </div>
+
                     <div class="col-12">
-                      <label for="message" class="form-label">訊息內容 *</label>
+                      <label for="message" class="form-label">
+                        訊息內容 <span class="text-danger">*</span>
+                      </label>
                       <textarea
                         class="form-control"
                         id="message"
                         rows="6"
                         v-model="formData.message"
-                        :class="{ 'is-invalid': errors.message }"
-                        placeholder="請詳細描述您的需求..."
+                        :class="{
+                          'is-invalid': errors.message,
+                          'is-valid': !errors.message && formData.message.trim().length >= 10,
+                        }"
+                        @input="handleFieldInput('message')"
+                        @blur="handleFieldBlur('message')"
+                        @focus="trackInteraction"
+                        placeholder="請詳細描述您的需求、預算範圍、時程要求等..."
                         required
                       ></textarea>
                       <div v-if="errors.message" class="invalid-feedback">
                         {{ errors.message }}
                       </div>
+                      <div v-else-if="formData.message.trim().length >= 10" class="valid-feedback">
+                        <i class="bi bi-check-circle me-1"></i>
+                        內容詳細度良好
+                      </div>
+                      <div v-else class="form-text">
+                        <span class="text-muted">
+                          {{ formData.message.trim().length }}/1000 字元
+                          <span v-if="formData.message.trim().length < 10">
+                            (至少需要 {{ 10 - formData.message.trim().length }} 個字元)
+                          </span>
+                        </span>
+                      </div>
                     </div>
+
+                    <!-- 隱私政策同意 -->
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="privacyConsent"
+                          v-model="privacyConsent"
+                          required
+                        />
+                        <label class="form-check-label" for="privacyConsent">
+                          我已閱讀並同意
+                          <router-link to="/privacy" target="_blank" class="text-decoration-none">
+                            隱私政策
+                          </router-link>
+                          <span class="text-danger">*</span>
+                        </label>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <button
                         type="submit"
-                        class="btn btn-primary btn-lg"
+                        class="btn btn-primary btn-lg me-3"
+                        :disabled="!canSubmit"
+                      >
+                        <span
+                          v-if="isSubmitting"
+                          class="spinner-border spinner-border-sm me-2"
+                        ></span>
+                        <i v-else class="bi bi-send me-2"></i>
+                        {{ isSubmitting ? "發送中..." : "發送訊息" }}
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        @click="handleClearForm"
                         :disabled="isSubmitting"
                       >
-                        <span v-if="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
-                        {{ isSubmitting ? '發送中...' : '發送訊息' }}
+                        <i class="bi bi-arrow-clockwise me-1"></i>
+                        清除表單
                       </button>
                     </div>
                   </div>
                 </form>
 
-                <!-- 成功訊息 -->
-                <div v-if="showSuccess" class="alert alert-success mt-3" role="alert">
-                  <i class="bi bi-check-circle me-2"></i>
-                  訊息已成功發送！我會盡快回覆您。
+                <!-- 表單提示 -->
+                <div class="mt-4 p-3 bg-light rounded">
+                  <h6 class="mb-2">
+                    <i class="bi bi-info-circle me-2"></i>
+                    提交須知
+                  </h6>
+                  <ul class="list-unstyled mb-0 small">
+                    <li class="mb-1">
+                      <i class="bi bi-check text-success me-2"></i>
+                      我會在 24 小時內回覆您的訊息
+                    </li>
+                    <li class="mb-1">
+                      <i class="bi bi-check text-success me-2"></i>
+                      所有資料都會被安全保護，不會被第三方使用
+                    </li>
+                    <li class="mb-1">
+                      <i class="bi bi-check text-success me-2"></i>
+                      緊急事務請直接透過電話聯絡
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -116,8 +275,8 @@
                       </div>
                       <div>
                         <h6 class="mb-1">電子郵件</h6>
-                        <a href="mailto:hong.yikao@example.com" class="text-muted">
-                          hong.yikao@example.com
+                        <a href="mailto:orionkaolabs@gmail.com" class="text-muted">
+                          orionkaolabs@gmail.com
                         </a>
                       </div>
                     </div>
@@ -129,7 +288,7 @@
                       </div>
                       <div>
                         <h6 class="mb-1">電話</h6>
-                        <span class="text-muted">+886-912-345-678</span>
+                        <a href="tel:+886912345678" class="text-muted">+886-912-345-678</a>
                       </div>
                     </div>
                   </div>
@@ -216,11 +375,7 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <div class="accordion" id="faqAccordion">
-              <div
-                v-for="(faq, index) in faqs"
-                :key="faq.id"
-                class="accordion-item"
-              >
+              <div v-for="(faq, index) in faqs" :key="faq.id" class="accordion-item">
                 <h2 class="accordion-header" :id="`heading${faq.id}`">
                   <button
                     class="accordion-button"
@@ -255,134 +410,137 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, computed, onMounted, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useContactStore } from "@/stores/contact";
+import { useUIStore } from "@/stores/ui";
 
-// 表單資料
-const formData = reactive({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
+const contactStore = useContactStore();
+const uiStore = useUIStore();
 
-// 錯誤訊息
-const errors = reactive({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
+// Store getters with storeToRefs
+const { formData, errors, isSubmitting, submitSuccess, submitError, formProgress, isFormValid } =
+  storeToRefs(contactStore);
 
-// 狀態管理
-const isSubmitting = ref(false)
-const showSuccess = ref(false)
+// Local state
+const privacyConsent = ref(false);
+const fieldTouched = ref<Record<string, boolean>>({});
 
-// 社群媒體連結
+// Computed
+const canSubmit = computed(() => {
+  return isFormValid.value && privacyConsent.value && !isSubmitting.value;
+});
+
+// Social media links
 const socialLinks = ref([
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/yourprofile', icon: 'bi bi-linkedin' },
-  { name: 'GitHub', url: 'https://github.com/yourusername', icon: 'bi bi-github' },
-  { name: 'Instagram', url: 'https://instagram.com/yourprofile', icon: 'bi bi-instagram' },
-  { name: 'Twitter', url: 'https://twitter.com/yourprofile', icon: 'bi bi-twitter' }
-])
+  { name: "LinkedIn", url: "https://linkedin.com/in/yourprofile", icon: "bi bi-linkedin" },
+  { name: "GitHub", url: "https://github.com/yourusername", icon: "bi bi-github" },
+  { name: "Instagram", url: "https://instagram.com/in/yourprofile", icon: "bi bi-instagram" },
+  { name: "Twitter", url: "https://twitter.com/yourprofile", icon: "bi bi-twitter" },
+]);
 
-// FAQ 資料
+// FAQ data
 const faqs = ref([
   {
     id: 1,
-    question: '專案開發週期大概需要多久？',
-    answer: '專案開發時間取決於複雜度和需求範圍。一般小型網站約 2-4 週，中型專案約 1-2 個月，大型專案可能需要 2-3 個月。我會在初期評估後提供詳細的時程規劃。'
+    question: "專案開發週期大概需要多久？",
+    answer:
+      "專案開發時間取決於複雜度和需求範圍。一般小型網站約 2-4 週，中型專案約 1-2 個月，大型專案可能需要 2-3 個月。我會在初期評估後提供詳細的時程規劃。",
   },
   {
     id: 2,
-    question: '如何計算專案費用？',
-    answer: '費用會根據專案規模、功能複雜度、設計需求和開發時程來評估。我提供透明的報價，包含設計、開發、測試和基本維護。歡迎聯絡我討論您的需求，我會提供詳細的報價單。'
+    question: "如何計算專案費用？",
+    answer:
+      "費用會根據專案規模、功能複雜度、設計需求和開發時程來評估。我提供透明的報價，包含設計、開發、測試和基本維護。歡迎聯絡我討論您的需求，我會提供詳細的報價單。",
   },
   {
     id: 3,
-    question: '是否提供網站維護服務？',
-    answer: '是的，我提供網站維護服務，包含安全更新、功能調整、內容更新和技術支援。維護方案可以是一次性或月費制，根據您的需求來規劃。'
+    question: "是否提供網站維護服務？",
+    answer:
+      "是的，我提供網站維護服務，包含安全更新、功能調整、內容更新和技術支援。維護方案可以是一次性或月費制，根據您的需求來規劃。",
   },
   {
     id: 4,
-    question: '可以協助現有網站的優化嗎？',
-    answer: '當然可以！我提供網站優化服務，包含效能提升、SEO 優化、使用者體驗改善、響應式設計調整等。會先進行全面評估，然後提出具體的優化建議。'
+    question: "可以協助現有網站的優化嗎？",
+    answer:
+      "當然可以！我提供網站優化服務，包含效能提升、SEO 優化、使用者體驗改善、響應式設計調整等。會先進行全面評估，然後提出具體的優化建議。",
+  },
+]);
+
+// Methods
+const isValidEmail = (email: string): boolean => {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+};
+
+const handleFieldInput = (fieldName: string) => {
+  contactStore.trackInteraction();
+
+  // Real-time validation for immediate feedback
+  if (fieldTouched.value[fieldName]) {
+    contactStore.validateSingleField(fieldName);
   }
-])
+};
 
-// 表單驗證
-const validateForm = () => {
-  let isValid = true
-  
-  // 重置錯誤
-  Object.keys(errors).forEach(key => {
-    errors[key as keyof typeof errors] = ''
-  })
+const handleFieldBlur = (fieldName: string) => {
+  fieldTouched.value[fieldName] = true;
+  contactStore.validateSingleField(fieldName);
+};
 
-  // 驗證姓名
-  if (!formData.name.trim()) {
-    errors.name = '請輸入您的姓名'
-    isValid = false
-  }
+const trackInteraction = () => {
+  contactStore.trackInteraction();
+};
 
-  // 驗證電子郵件
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!formData.email.trim()) {
-    errors.email = '請輸入電子郵件'
-    isValid = false
-  } else if (!emailRegex.test(formData.email)) {
-    errors.email = '請輸入有效的電子郵件格式'
-    isValid = false
-  }
+const handleSubmit = async () => {
+  // Mark all fields as touched
+  Object.keys(formData).forEach((field) => {
+    fieldTouched.value[field] = true;
+  });
 
-  // 驗證主旨
-  if (!formData.subject.trim()) {
-    errors.subject = '請輸入主旨'
-    isValid = false
-  }
-
-  // 驗證訊息
-  if (!formData.message.trim()) {
-    errors.message = '請輸入訊息內容'
-    isValid = false
-  } else if (formData.message.trim().length < 10) {
-    errors.message = '訊息內容至少需要10個字元'
-    isValid = false
+  if (!privacyConsent.value) {
+    uiStore.showError("提交失敗", "請先同意隱私政策");
+    return;
   }
 
-  return isValid
-}
+  const success = await contactStore.submitMessage();
 
-// 提交表單
-const submitForm = async () => {
-  if (!validateForm()) return
-
-  isSubmitting.value = true
-  
-  try {
-    // 模擬發送過程
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // 這裡可以串接實際的 API
-    console.log('Form submitted:', formData)
-    
-    // 重置表單
-    Object.keys(formData).forEach(key => {
-      formData[key as keyof typeof formData] = ''
-    })
-    
-    showSuccess.value = true
-    
-    // 3秒後隱藏成功訊息
-    setTimeout(() => {
-      showSuccess.value = false
-    }, 3000)
-    
-  } catch (error) {
-    console.error('Error submitting form:', error)
-  } finally {
-    isSubmitting.value = false
+  if (success) {
+    // Reset form state
+    privacyConsent.value = false;
+    fieldTouched.value = {};
+    uiStore.showSuccess("發送成功", "您的訊息已成功發送！");
+  } else {
+    uiStore.showError("發送失敗", submitError.value?.message || "請稍後再試");
   }
-}
+};
+
+const handleClearForm = () => {
+  if (confirm("確定要清除所有已輸入的內容嗎？")) {
+    contactStore.clearForm();
+    privacyConsent.value = false;
+    fieldTouched.value = {};
+    uiStore.showInfo("表單已清除", "所有欄位已重置");
+  }
+};
+
+const retrySubmit = async () => {
+  const success = await contactStore.retrySubmit();
+  if (success) {
+    uiStore.showSuccess("發送成功", "您的訊息已成功發送！");
+  }
+};
+
+// Watchers
+watch(submitSuccess, (newValue) => {
+  if (newValue) {
+    // Scroll to top to show success message
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
+
+// Lifecycle
+onMounted(() => {
+  contactStore.initForm();
+});
 </script>
 
 <style scoped>
@@ -412,9 +570,51 @@ const submitForm = async () => {
   box-shadow: 0 0 0 0.25rem rgba(44, 62, 80, 0.25);
 }
 
+.form-progress {
+  text-align: right;
+}
+
+.progress {
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  background-color: var(--brand-primary);
+  transition: width 0.3s ease;
+}
+
+.valid-feedback {
+  display: block;
+}
+
+.form-check-input:checked {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.btn-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
+  .form-progress {
+    text-align: left;
+    margin-top: 1rem;
+  }
+
   .social-links {
     justify-content: center;
   }
 }
-</style> 
+</style>

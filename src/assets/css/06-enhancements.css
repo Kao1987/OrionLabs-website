@@ -1,0 +1,20 @@
+.btn-primary:hover{background-color:#5a7fff;border-color:#5a7fff }
+.btn-outline-primary{color:#7fb3ff;border-color:#7fb3ff }
+.btn-outline-primary:hover{background-color:#5a7fff;border-color:#5a7fff;color:#fff }
+.nav-link.active{color:#fff;background-color:rgba(90,127,255,.3) }
+.section-title,h2.section-title{color:var(--color-text-primary)}
+p{color:var(--color-text-secondary)}
+.accordion-header h2,h2.accordion-header{color:var(--color-text-primary)}
+h6.mb-1,.text-primary{color:#7fb3ff}
+.btn-outline-secondary{color:var(--color-text-secondary);border-color:var(--color-border-primary) }
+.btn-outline-secondary:hover,.btn-outline-secondary.active{background-color:var(--color-bg-secondary);border-color:var(--color-border-primary);color:var(--color-text-primary) }
+.form-control{background-color:var(--color-bg-secondary);border-color:var(--color-border-primary);color:var(--color-text-primary) }
+.form-control:focus{background-color:var(--color-bg-secondary);border-color:var(--color-primary);color:var(--color-text-primary);box-shadow:0 0 0 .2rem rgba(90,127,255,.25) }
+.theme-toggle,.theme-toggle-btn,button[aria-label*="切換"],button[title*="模式"]{color:var(--color-text-secondary);background-color:transparent;border:1px solid var(--color-border-primary) !important;border-radius:var(--radius-md) }
+.theme-toggle:hover,.theme-toggle-btn:hover,button[aria-label*="切換"]:hover,button[title*="模式"]:hover{color:var(--color-text-primary);background-color:var(--color-bg-secondary);border-color:var(--color-primary) }
+.btn-primary:hover{background-color:#002890;border-color:#002890 }
+.nav-link.active{color:#002fa7;background-color:rgba(0,47,167,.15) }
+button:focus-visible,.btn:focus-visible,.nav-link:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px }
+[data-theme="dark"] .text-dark{color:var(--color-text-primary)}
+[data-theme="dark"] .text-muted{color:var(--color-text-secondary)}
+:root{--orion-primary:var(--color-primary);--orion-primary-50:var(--orion-blue-50);--orion-primary-100:var(--orion-blue-100);--orion-primary-200:var(--orion-blue-200);--orion-primary-300:var(--orion-blue-300);--orion-primary-400:var(--orion-blue-400);--orion-primary-500:var(--orion-blue-500);--orion-primary-600:var(--orion-blue-600);--orion-primary-700:var(--orion-blue-700);--orion-primary-800:var(--orion-blue-800);--orion-primary-900:var(--orion-blue-900);--orion-neutral:var(--orion-silver-400);--orion-neutral-50:var(--orion-silver-50);--orion-neutral-100:var(--orion-silver-100);--orion-neutral-200:var(--orion-silver-200);--orion-neutral-300:var(--orion-silver-300);--orion-neutral-400:var(--orion-silver-400);--orion-neutral-500:var(--orion-silver-500);--orion-neutral-600:var(--orion-silver-600);--orion-neutral-700:var(--orion-silver-700);--orion-neutral-800:var(--orion-silver-800);--orion-neutral-900:var(--orion-silver-900);--bs-primary:var(--color-primary);--bs-success:var(--color-success);--bs-info:var(--color-info);--bs-warning:var(--color-warning);--bs-danger:var(--color-danger);--bs-dark:var(--orion-silver-900);--brand-primary:var(--color-primary);--brand-secondary:var(--color-primary-dark);--brand-accent:var(--color-accent);--brand-neutral:var(--color-secondary);--text-primary:var(--color-text-primary);--text-secondary:var(--color-text-secondary);--text-muted:var(--color-text-muted);--text-inverse:var(--color-text-inverse);--bg-primary:var(--color-bg-primary);--bg-secondary:var(--color-bg-secondary);--bg-tertiary:var(--color-bg-tertiary);--bg-accent:var(--color-primary-light);--border-color:var(--color-border-primary);--border-color-strong:var(--color-border-secondary);--nav-link-active-bg:var(--color-primary-light)}

@@ -1,0 +1,72 @@
+// OrionLabs 自定義 Bootstrap 載入
+// 只載入專案實際使用的組件，減少檔案大小
+
+// 1. Bootstrap 核心系統 (必要)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps"; 
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// 2. 基礎重置和排版 (必要)
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+
+// 3. 布局系統
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// 4. 使用的組件 (基於分析結果)
+// container (custom)
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/toast";
+// spacing (custom)
+// display (custom)
+// flexbox (custom)
+// colors (custom)
+// backgrounds (custom)
+// borders (custom)
+// typography (custom)
+@import "bootstrap/scss/card";
+// shadows (custom)
+// grid (custom)
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+
+// 5. 工具類別系統
+@import "bootstrap/scss/helpers";
+
+// 6. 使用的工具類別 (只載入需要的)
+@import "bootstrap/scss/utilities/api";
+
+// 7. 自定義變數覆蓋 (整合 Orion 主題)
+:root {
+  --bs-primary: var(--orion-primary-900);
+  --bs-secondary: var(--orion-neutral-600);
+  --bs-success: var(--orion-success-600);
+  --bs-info: var(--orion-info-600);
+  --bs-warning: var(--orion-warning-600);
+  --bs-danger: var(--orion-error-600);
+  --bs-light: var(--orion-neutral-100);
+  --bs-dark: var(--orion-neutral-800);
+}
+
+// 8. 深色模式支持
+[data-theme="dark"] {
+  --bs-primary: var(--orion-primary-300);
+  --bs-secondary: var(--orion-neutral-400);
+  --bs-light: var(--orion-neutral-800);
+  --bs-dark: var(--orion-neutral-200);
+}

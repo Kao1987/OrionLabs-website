@@ -1,0 +1,149 @@
+/**
+ * 對比度增強樣式 - WCAG AA 標準 (4.5:1)
+ * A-core/D-style 合規
+ */
+
+[data-theme="dark"] {
+  /* === 按鈕對比度增強 === */
+  .btn-primary {
+    background-color: #6b82ff !important;
+    border-color: #6b82ff !important;
+    color: #ffffff !important;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a7fff !important;
+    border-color: #5a7fff !important;
+  }
+
+  .btn-outline-primary {
+    color: #7fb3ff !important;
+    border-color: #7fb3ff !important;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #5a7fff !important;
+    border-color: #5a7fff !important;
+    color: #ffffff !important;
+  }
+
+  /* === 導航活躍狀態增強 === */
+  .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgba(90, 127, 255, 0.3) !important;
+  }
+
+  /* === 關於頁面的暗色標題 === */
+  .section-title,
+  h2.section-title {
+    color: var(--color-text-primary) !important;
+  }
+
+  /* === 一般段落文字 === */
+  p {
+    color: var(--color-text-secondary) !important;
+  }
+
+  /* === 聯絡頁面的 FAQ 標題 === */
+  .accordion-header h2,
+  h2.accordion-header {
+    color: var(--color-text-primary) !important;
+  }
+
+  /* === 藍色標題文字增強 === */
+  h6.mb-1,
+  .text-primary {
+    color: #7fb3ff !important;
+  }
+
+  /* === 部落格筛选按鈕增強 === */
+  .btn-outline-secondary {
+    color: var(--color-text-secondary) !important;
+    border-color: var(--color-border-primary) !important;
+  }
+
+  .btn-outline-secondary:hover,
+  .btn-outline-secondary.active {
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-border-primary) !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  /* === 表單控制項增強 === */
+  .form-control {
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-border-primary) !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  .form-control:focus {
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-text-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(90, 127, 255, 0.25) !important;
+  }
+
+  /* === 主題切換按鈕增強識別 === */
+  .theme-toggle,
+  .theme-toggle-btn,
+  button[aria-label*="切換"],
+  button[title*="模式"] {
+    color: var(--color-text-secondary) !important;
+    background-color: transparent !important;
+    border: 1px solid var(--color-border-primary) !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle-btn:hover,
+  button[aria-label*="切換"]:hover,
+  button[title*="模式"]:hover {
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-primary) !important;
+  }
+}
+
+/* === 淺色模式對比度確認 === */
+[data-theme="light"] {
+  .btn-primary {
+    background-color: #002fa7 !important;
+    border-color: #002fa7 !important;
+    color: #ffffff !important;
+  }
+
+  .btn-primary:hover {
+    background-color: #002890 !important;
+    border-color: #002890 !important;
+  }
+
+  .nav-link.active {
+    color: #002fa7 !important;
+    background-color: rgba(0, 47, 167, 0.15) !important;
+  }
+}
+
+/* === 通用對比度確保 === */
+.low-contrast-fix {
+  /* 為任何低對比度元素添加此類別 */
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border-primary) !important;
+}
+
+/* === 可訪問性增強 === */
+button:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* === 確保所有文字對比度 === */
+[data-theme="dark"] .text-dark {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}

@@ -1,0 +1,163 @@
+/*
+ * CSS 效能優化 - 整合載入系統
+ * 目標：減少 HTTP 請求，整合多個小檔案
+ * 最大允許：6 個 CSS 檔案 (含 ultimate-fix.css + bootstrap)
+ */
+
+/* === 核心變數系統 === */
+:root {
+  /* Orion 品牌色彩 */
+  --orion-primary-900: #002fa7;
+  --orion-primary-700: #3441e3;
+  --orion-primary-600: #5570ff;
+
+  /* 中性色系 */
+  --orion-silver-50: #fafafa;
+  --orion-silver-100: #f5f5f4;
+  --orion-silver-200: #e7e5e4;
+  --orion-silver-300: #d6d3d1;
+  --orion-silver-400: #c8c7c5;
+  --orion-silver-500: #a8a29e;
+  --orion-silver-600: #78716c;
+  --orion-silver-700: #57534e;
+  --orion-silver-800: #44403c;
+  --orion-silver-900: #292524;
+  --orion-silver-950: #1c1917;
+
+  /* 語意化顏色 */
+  --color-primary: var(--orion-primary-900);
+  --color-primary-hover: #001a64;
+  --color-primary-light: rgba(0, 47, 167, 0.1);
+
+  /* 背景色 */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: var(--orion-silver-50);
+  --color-bg-tertiary: var(--orion-silver-100);
+  --color-bg-card: #ffffff;
+
+  /* 文字色 - WCAG 4.5:1 對比度 */
+  --color-text-primary: var(--orion-silver-900);
+  --color-text-secondary: #666666; /* 4.5:1 對比度 */
+  --color-text-muted: #595959; /* 4.5:1+ 對比度 */
+  --color-text-light: #ffffff;
+  --color-text-inverse: var(--orion-silver-900);
+
+  /* 邊框色 */
+  --color-border-primary: var(--orion-silver-300);
+  --color-border-secondary: var(--orion-silver-200);
+  --color-border-focus: var(--color-primary);
+
+  /* 間距 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* 圓角 */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 50%;
+
+  /* 字體 */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* 過渡 */
+  --transition-fast: all 0.15s ease;
+  --transition-base: all 0.3s ease;
+
+  /* 陰影 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* === 深色模式變數 === */
+[data-theme="dark"] {
+  --color-bg-primary: var(--orion-silver-950);
+  --color-bg-secondary: var(--orion-silver-900);
+  --color-bg-tertiary: var(--orion-silver-800);
+  --color-bg-card: var(--orion-silver-900);
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c8c7c5; /* 高對比度 */
+  --color-text-muted: #b3b3b3;
+  --color-text-light: #ffffff;
+  --color-text-inverse: var(--orion-silver-900);
+
+  --color-border-primary: var(--orion-silver-700);
+  --color-border-secondary: var(--orion-silver-600);
+}
+
+/* === 基礎重置 === */
+*,*::before,*::after{box-sizing:border-box}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0;font-family:var(--font-family-primary);font-size:var(--font-size-base);font-weight:var(--font-weight-normal);line-height:var(--line-height-normal);color:var(--color-text-primary);background-color:var(--color-bg-primary);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* === 佈局系統 === */
+.container{width:100%;padding-right:.75rem;padding-left:.75rem;margin-right:auto;margin-left:auto;max-width:1200px}@media(min-width:576px){.container{max-width:540px}}@media(min-width:768px){.container{max-width:720px}}@media(min-width:992px){.container{max-width:960px}}@media(min-width:1200px){.container{max-width:1140px}}@media(min-width:1400px){.container{max-width:1320px}}.row{display:flex;flex-wrap:wrap;margin-right:-0.75rem;margin-left:-0.75rem}.col{flex:1 0 0%;padding-right:.75rem;padding-left:.75rem}.section{padding:var(--spacing-3xl) 0}.section-sm{padding:var(--spacing-2xl) 0}.section-lg{padding:calc(var(--spacing-3xl) * 1.5) 0}
+
+/* === 按鈕系統 === */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:var(--spacing-sm) var(--spacing-lg);font-family:inherit;font-size:var(--font-size-base);font-weight:var(--font-weight-medium);line-height:1;text-decoration:none;border:1px solid transparent;border-radius:var(--radius-md);cursor:pointer;transition:var(--transition-fast)}.btn-primary{background-color:var(--color-primary);border-color:var(--color-primary);color:var(--color-text-light)}.btn-primary:hover,.btn-primary:focus{background-color:var(--color-primary-hover);border-color:var(--color-primary-hover);color:var(--color-text-light);text-decoration:none;transform:translateY(-1px);box-shadow:var(--shadow-md)}.btn-secondary{background-color:var(--color-bg-secondary);border-color:var(--color-border-primary);color:var(--color-text-primary)}.btn-outline{background-color:transparent;border-color:var(--color-primary);color:var(--color-primary)}.btn-outline:hover{background-color:var(--color-primary);color:var(--color-text-light)}
+
+/* === 表單系統 === */
+.form-control{display:block;width:100%;padding:var(--spacing-sm) var(--spacing-md);font-size:var(--font-size-base);color:var(--color-text-primary);background-color:var(--color-bg-primary);border:1px solid var(--color-border-primary);border-radius:var(--radius-sm);transition:var(--transition-fast)}.form-control:focus{outline:none;border-color:var(--color-border-focus);box-shadow:0 0 0 0.2rem rgba(0,47,167,0.25)}
+
+/* === 卡片系統 === */
+.card{background-color:var(--color-bg-card);border:1px solid var(--color-border-secondary);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;transition:var(--transition-base)}.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}.card_header,.card-header{padding:var(--spacing-lg);border-bottom:1px solid var(--color-border-secondary)}.card_body,.card-body{padding:var(--spacing-lg)}.card_title,.card-title{color:var(--color-text-primary);font-weight:var(--font-weight-semibold);font-size:var(--font-size-xl);margin-bottom:var(--spacing-md)}.card_text,.card-text{color:var(--color-text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--spacing-md)}
+
+/* === 導航系統 === */
+.navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:var(--spacing-sm) var(--spacing-md);background-color:var(--color-bg-primary);border-bottom:1px solid var(--color-border-primary);transition:var(--transition-base)}.navbar-brand{color:var(--color-text-primary);font-weight:var(--font-weight-bold);text-decoration:none;transition:var(--transition-fast)}.navbar-brand:hover{color:var(--color-primary);text-decoration:none}.nav-link{display:block;padding:var(--spacing-sm) var(--spacing-md);color:var(--color-text-secondary);font-weight:var(--font-weight-medium);text-decoration:none;border-radius:var(--radius-sm);transition:var(--transition-fast)}.nav-link:hover,.nav-link:focus{color:var(--color-primary);background-color:var(--color-bg-secondary);text-decoration:none}.nav-link.active{color:var(--color-primary);background-color:var(--color-primary-light);font-weight:var(--font-weight-semibold)}
+
+/* === Hero 區域 === */
+.hero-section,.hero_section{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-hover) 100%);color:var(--color-text-light);position:relative;overflow:hidden;padding:var(--spacing-3xl) 0;min-height:60vh;display:flex;align-items:center}.hero-section::before,.hero_section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,0.1) 0%,transparent 50%);pointer-events:none}.hero_title,.hero-title{color:var(--color-text-light);font-weight:var(--font-weight-bold);font-size:var(--font-size-4xl);text-shadow:0 2px 4px rgba(0,0,0,0.3);margin-bottom:var(--spacing-lg)}.hero_subtitle,.hero-subtitle{color:var(--color-text-light);font-size:var(--font-size-xl);opacity:0.9;text-shadow:0 1px 2px rgba(0,0,0,0.2);margin-bottom:var(--spacing-xl)}.hero_content,.hero-content{position:relative;z-index:2}
+
+/* === 工具類別 === */
+.u-mb-0{margin-bottom:0}.u-mb-xs{margin-bottom:var(--spacing-xs)}.u-mb-sm{margin-bottom:var(--spacing-sm)}.u-mb-md{margin-bottom:var(--spacing-md)}.u-mb-lg{margin-bottom:var(--spacing-lg)}.u-mb-xl{margin-bottom:var(--spacing-xl)}.u-mb-2xl{margin-bottom:var(--spacing-2xl)}.u-mt-0{margin-top:0}.u-mt-xs{margin-top:var(--spacing-xs)}.u-mt-sm{margin-top:var(--spacing-sm)}.u-mt-md{margin-top:var(--spacing-md)}.u-mt-lg{margin-top:var(--spacing-lg)}.u-mt-xl{margin-top:var(--spacing-xl)}.u-mt-2xl{margin-top:var(--spacing-2xl)}.u-p-0{padding:0}.u-p-xs{padding:var(--spacing-xs)}.u-p-sm{padding:var(--spacing-sm)}.u-p-md{padding:var(--spacing-md)}.u-p-lg{padding:var(--spacing-lg)}.u-p-xl{padding:var(--spacing-xl)}.u-p-2xl{padding:var(--spacing-2xl)}.u-text-center{text-align:center}.u-text-left{text-align:left}.u-text-right{text-align:right}.u-text-primary{color:var(--color-text-primary)}.u-text-secondary{color:var(--color-text-secondary)}.u-text-muted{color:var(--color-text-muted)}.u-fw-light{font-weight:var(--font-weight-light)}.u-fw-normal{font-weight:var(--font-weight-normal)}.u-fw-medium{font-weight:var(--font-weight-medium)}.u-fw-semibold{font-weight:var(--font-weight-semibold)}.u-fw-bold{font-weight:var(--font-weight-bold)}.u-bg-primary{background-color:var(--color-bg-primary)}.u-bg-secondary{background-color:var(--color-bg-secondary)}.u-bg-tertiary{background-color:var(--color-bg-tertiary)}.u-bg-card{background-color:var(--color-bg-card)}
+
+/* === 文字樣式 === */
+.text-primary,.text_primary{color:var(--color-text-primary)}.text-secondary,.text_secondary{color:var(--color-text-secondary)}.text-muted,.text_muted{color:var(--color-text-muted)}.text-light,.text_light{color:var(--color-text-light)}h1,h2,h3,h4,h5,h6{font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);color:var(--color-text-primary);margin-bottom:var(--spacing-md)}h1{font-size:var(--font-size-5xl)}h2{font-size:var(--font-size-4xl)}h3{font-size:var(--font-size-3xl)}h4{font-size:var(--font-size-2xl)}h5{font-size:var(--font-size-xl)}h6{font-size:var(--font-size-lg)}p{margin-bottom:var(--spacing-md);line-height:var(--line-height-relaxed)}a{color:var(--color-primary);text-decoration:none;transition:var(--transition-fast)}a:hover{color:var(--color-primary-hover);text-decoration:underline}
+
+/* === 響應式設計 === */
+@media(max-width:768px){.container{padding-right:1rem;padding-left:1rem}.section{padding:var(--spacing-2xl) 0}.section-lg{padding:var(--spacing-3xl) 0}.btn{padding:var(--spacing-xs) var(--spacing-md);font-size:var(--font-size-sm)}.hero_title,.hero-title{font-size:var(--font-size-3xl)}.hero_subtitle,.hero-subtitle{font-size:var(--font-size-lg)}.card_header,.card-header,.card_body,.card-body{padding:var(--spacing-md)}h1{font-size:var(--font-size-3xl)}h2{font-size:var(--font-size-2xl)}h3{font-size:var(--font-size-xl)}}
+
+/* === 無障礙設計 === */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}@media(prefers-contrast:high){.btn,.card,.form-control{border-width:2px}}
+
+/* === 深色模式專用樣式 === */
+[data-theme="dark"] .hero-section,[data-theme="dark"] .hero_section{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-hover) 100%)}[data-theme="dark"] a{color:#ffffff}[data-theme="dark"] a:hover{color:#c8c7c5}[data-theme="dark"] .navbar{background-color:var(--color-bg-primary);border-bottom-color:var(--color-border-primary)}
+
+/* === 載入指示器 === */
+.loading{display:flex;justify-content:center;align-items:center;min-height:200px}.loading::after{content:'';width:2rem;height:2rem;border:3px solid var(--color-border-secondary);border-top:3px solid var(--color-primary);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+/* === 調試標記 === */
+@media (max-width: 1px) {
+  body::before {
+    content: "CONSOLIDATED-PERFORMANCE-LOADED";
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+  }
+}
