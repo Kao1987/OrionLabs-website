@@ -119,7 +119,7 @@ const socialLinks = [
     </main>
 
     <!-- 底部 -->
-    <Footer
+    <footer
       v-if="!isAdminRoute"
       brand-name="Orion"
       description="致力於創造優質的數位體驗，專注於前端開發與 UI/UX 設計。"

@@ -1,7 +1,7 @@
 <template>
   <section class="container py-5">
     <h1 class="mb-4">服務條款</h1>
-    
+
     <div class="alert alert-info">
       <strong>最後更新日期：</strong> 2025年8月31日<br>
       <strong>生效日期：</strong> 2025年8月31日
@@ -13,7 +13,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">一、條款接受與適用範圍</h2>
-    
+
     <h3 class="mt-4 mb-2">1.1 條款接受</h3>
     <p>
       透過訪問或使用本網站，您確認您已閱讀、理解並同意受本服務條款以及我們的隱私權政策約束。
@@ -30,7 +30,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">二、服務說明與可用性</h2>
-    
+
     <h3 class="mt-4 mb-2">2.1 服務內容</h3>
     <p>OrionLabs 提供以下服務：</p>
     <ul>
@@ -50,7 +50,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">三、使用者責任與行為規範</h2>
-    
+
     <h3 class="mt-4 mb-2">3.1 合法使用</h3>
     <p>您承諾在使用本服務時：</p>
     <ul>
@@ -90,7 +90,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">四、智慧財產權</h2>
-    
+
     <h3 class="mt-4 mb-2">4.1 我們的智慧財產權</h3>
     <p>
       本網站的所有內容，包括但不限於：
@@ -122,14 +122,14 @@
     </p>
 
     <h2 class="mt-5 mb-3">五、隱私權與資料保護</h2>
-    
+
     <p>
       您的隱私對我們非常重要。我們如何收集、使用和保護您的個人資料，
       請參閱我們的 <router-link to="/privacy" class="text-decoration-none">隱私權政策</router-link>。
     </p>
 
     <h2 class="mt-5 mb-3">六、免責聲明與責任限制</h2>
-    
+
     <h3 class="mt-4 mb-2">6.1 內容免責聲明</h3>
     <ul>
       <li>本網站內容僅供資訊參考，我們不保證其準確性、完整性或即時性</li>
@@ -159,7 +159,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">七、第三方服務與連結</h2>
-    
+
     <h3 class="mt-4 mb-2">7.1 第三方服務</h3>
     <p>本網站可能整合以下第三方服務：</p>
     <ul>
@@ -177,7 +177,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">八、服務終止</h2>
-    
+
     <h3 class="mt-4 mb-2">8.1 終止條件</h3>
     <p>在以下情況下，我們可能終止或限制您的服務使用權：</p>
     <ul>
@@ -195,7 +195,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">九、條款修訂</h2>
-    
+
     <h3 class="mt-4 mb-2">9.1 修訂權利</h3>
     <p>
       我們保留隨時修訂本服務條款的權利。修訂可能因以下原因：
@@ -222,7 +222,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">十、爭議解決與適用法律</h2>
-    
+
     <h3 class="mt-4 mb-2">10.1 適用法律</h3>
     <p>
       本服務條款受中華民國法律管轄，不適用法律衝突原則。
@@ -241,7 +241,7 @@
     </ol>
 
     <h2 class="mt-5 mb-3">十一、其他條款</h2>
-    
+
     <h3 class="mt-4 mb-2">11.1 條款分離性</h3>
     <p>
       如本條款任何部分被認定為無效或不可執行，其餘部分仍然有效。
@@ -259,7 +259,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">十二、聯絡資訊</h2>
-    
+
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">服務提供者資訊</h5>
@@ -269,7 +269,7 @@
           <strong>電子郵件：</strong><a href="mailto:orionkaolabs@gmail.com">orionkaolabs@gmail.com</a><br>
           <strong>電話：</strong>+886-912-345-678
         </p>
-        
+
         <h6 class="mt-3">法務聯絡</h6>
         <p class="card-text">
           <strong>電子郵件：</strong><a href="mailto:orionkaolabs@gmail.com">orionkaolabs@gmail.com</a><br>

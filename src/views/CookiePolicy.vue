@@ -1,7 +1,7 @@
 <template>
   <section class="container py-5">
     <h1 class="mb-4">Cookie 使用政策</h1>
-    
+
     <div class="alert alert-info">
       <strong>最後更新日期：</strong> 2025年8月31日<br>
       <strong>生效日期：</strong> 2025年8月31日
@@ -13,7 +13,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">一、什麼是 Cookie？</h2>
-    
+
     <p>
       Cookie 是網站在您訪問時於您的裝置（電腦、平板、手機）上儲存的小型文字檔案。
       Cookie 被廣泛用來讓網站運作，或更有效率地運作，以及向網站所有者提供資訊。
@@ -28,7 +28,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">二、我們使用的 Cookie 類型</h2>
-    
+
     <div class="row">
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <div class="card-header bg-success text-white">
@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <div class="card-header bg-info text-white">
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <div class="card-header bg-warning text-dark">
@@ -104,7 +104,7 @@
     </div>
 
     <h2 class="mt-5 mb-3">三、具體使用的 Cookie 清單</h2>
-    
+
     <div class="table-responsive">
       <table class="table table-striped">
         <thead class="table-dark">
@@ -171,13 +171,13 @@
     </div>
 
     <h2 class="mt-5 mb-3">四、第三方 Cookie</h2>
-    
+
     <h3 class="mt-4 mb-2">4.1 Google Analytics</h3>
     <div class="alert alert-light">
       <p><strong>用途：</strong>網站流量分析和使用者行為統計</p>
       <p><strong>資料處理：</strong>匿名或假名化的統計資料</p>
       <p><strong>保留期間：</strong>26個月</p>
-      <p><strong>選擇退出：</strong>您可以安裝 
+      <p><strong>選擇退出：</strong>您可以安裝
         <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">
           Google Analytics 選擇退出瀏覽器附加元件
         </a>
@@ -202,7 +202,7 @@
     </div>
 
     <h2 class="mt-5 mb-3">五、如何管理 Cookie 偏好</h2>
-    
+
     <h3 class="mt-4 mb-2">5.1 透過我們的 Cookie 偏好中心</h3>
     <div class="alert alert-primary">
       <p class="mb-2">
@@ -221,7 +221,7 @@
 
     <h3 class="mt-4 mb-2">5.2 透過瀏覽器設定</h3>
     <p>您也可以透過瀏覽器設定來控制 Cookie：</p>
-    
+
     <div class="row">
       <div class="col-md-6 mb-3">
         <h6><i class="bi bi-browser-chrome"></i> Chrome</h6>
@@ -232,7 +232,7 @@
           <li>選擇您偏好的 Cookie 設定</li>
         </ol>
       </div>
-      
+
       <div class="col-md-6 mb-3">
         <h6><i class="bi bi-browser-firefox"></i> Firefox</h6>
         <ol class="small">
@@ -242,7 +242,7 @@
           <li>在「Cookie 與網站資料」區塊調整設定</li>
         </ol>
       </div>
-      
+
       <div class="col-md-6 mb-3">
         <h6><i class="bi bi-browser-safari"></i> Safari</h6>
         <ol class="small">
@@ -252,7 +252,7 @@
           <li>調整「Cookie 和網站資料」設定</li>
         </ol>
       </div>
-      
+
       <div class="col-md-6 mb-3">
         <h6><i class="bi bi-browser-edge"></i> Edge</h6>
         <ol class="small">
@@ -276,9 +276,9 @@
     </div>
 
     <h2 class="mt-5 mb-3">六、移動裝置上的 Cookie</h2>
-    
+
     <p>在移動裝置上，Cookie 的管理方式可能略有不同：</p>
-    
+
     <h3 class="mt-4 mb-2">6.1 移動瀏覽器</h3>
     <ul>
       <li><strong>iOS Safari：</strong>設定 → Safari → 阻擋所有 Cookie</li>
@@ -293,7 +293,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">七、Cookie 政策更新</h2>
-    
+
     <p>
       我們可能會不時更新本 Cookie 政策以反映：
     </p>
@@ -309,7 +309,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">八、更多資訊與聯絡方式</h2>
-    
+
     <h3 class="mt-4 mb-2">8.1 相關資源</h3>
     <ul>
       <li><a href="/privacy" class="text-decoration-none">隱私權政策</a></li>

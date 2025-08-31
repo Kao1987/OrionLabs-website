@@ -1,7 +1,7 @@
 <template>
   <section class="container py-5">
     <h1 class="mb-4">網站地圖</h1>
-    
+
     <p class="lead">
       探索 OrionLabs 的所有頁面和內容，快速找到您需要的資訊。
     </p>
@@ -257,8 +257,8 @@
 
     <!-- 回到頂部 -->
     <div class="text-center mt-5">
-      <button 
-        class="btn btn-outline-primary" 
+      <button
+        class="btn btn-outline-primary"
         onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
       >
         <i class="bi bi-arrow-up"></i> 回到頂部

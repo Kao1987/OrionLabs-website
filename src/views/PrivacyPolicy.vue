@@ -1,7 +1,7 @@
 <template>
   <section class="container py-5">
     <h1 class="mb-4">隱私權政策</h1>
-    
+
     <div class="alert alert-info">
       <strong>最後更新日期：</strong> 2025年8月31日<br>
       <strong>生效日期：</strong> 2025年8月31日
@@ -21,7 +21,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">二、資料蒐集方式與類型</h2>
-    
+
     <h3 class="mt-4 mb-2">2.1 直接提供的資訊</h3>
     <p>當您使用以下服務時，我們可能蒐集您主動提供的個人資料：</p>
     <ul>
@@ -42,7 +42,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">三、資料使用目的與法律依據</h2>
-    
+
     <h3 class="mt-4 mb-2">3.1 使用目的</h3>
     <p>我們基於以下目的處理您的個人資料：</p>
     <ul>
@@ -63,9 +63,9 @@
     </ul>
 
     <h2 class="mt-5 mb-3">四、Cookie 和追蹤技術</h2>
-    
+
     <p>我們使用以下類型的 Cookie 和相似技術：</p>
-    
+
     <h3 class="mt-4 mb-2">4.1 必要性 Cookie</h3>
     <ul>
       <li>網站基本功能運作（無法停用）</li>
@@ -93,9 +93,9 @@
     </p>
 
     <h2 class="mt-5 mb-3">五、資料分享與揭露</h2>
-    
+
     <p>我們不會出售您的個人資料。在以下情況下，我們可能會分享您的資料：</p>
-    
+
     <ul>
       <li><strong>服務提供商：</strong>與協助我們提供服務的第三方（如主機服務、分析工具）</li>
       <li><strong>法律要求：</strong>因應法律程序、政府要求或保護權利</li>
@@ -104,7 +104,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">六、資料保護與安全</h2>
-    
+
     <p>我們採取以下措施保護您的個人資料：</p>
     <ul>
       <li>SSL/TLS 加密傳輸</li>
@@ -115,7 +115,7 @@
     </ul>
 
     <h2 class="mt-5 mb-3">七、資料保存期限</h2>
-    
+
     <p>我們僅在必要期間內保存您的個人資料：</p>
     <ul>
       <li><strong>聯絡紀錄：</strong>3年或法律要求的期限</li>
@@ -125,9 +125,9 @@
     </ul>
 
     <h2 class="mt-5 mb-3">八、您的權利</h2>
-    
+
     <p>依據適用的資料保護法律，您享有以下權利：</p>
-    
+
     <div class="row">
       <div class="col-md-6">
         <ul>
@@ -153,7 +153,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">九、國際資料傳輸</h2>
-    
+
     <p>
       您的個人資料可能會傳輸至您所在國家/地區以外的地方進行處理。
       在此情況下，我們會確保採取適當的保護措施，包括：
@@ -165,14 +165,14 @@
     </ul>
 
     <h2 class="mt-5 mb-3">十、兒童隱私保護</h2>
-    
+
     <p>
       本網站不針對 13 歲以下兒童設計，我們不會故意蒐集兒童的個人資料。
       如果我們發現無意中蒐集了兒童的個人資料，將立即採取步驟刪除相關資訊。
     </p>
 
     <h2 class="mt-5 mb-3">十一、隱私權政策修訂</h2>
-    
+
     <p>
       我們可能會不時修訂本隱私權政策。重大變更將透過以下方式通知您：
     </p>
@@ -186,7 +186,7 @@
     </p>
 
     <h2 class="mt-5 mb-3">十二、聯絡資訊</h2>
-    
+
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">資料控制者資訊</h5>
@@ -196,7 +196,7 @@
           <strong>電子郵件：</strong><a href="mailto:orionkaolabs@gmail.com">orionkaolabs@gmail.com</a><br>
           <strong>電話：</strong>+886-912-345-678
         </p>
-        
+
         <h6 class="mt-3">資料保護專員</h6>
         <p class="card-text">
           <strong>電子郵件：</strong><a href="mailto:orionkaolabs@gmail.com">orionkaolabs@gmail.com</a><br>

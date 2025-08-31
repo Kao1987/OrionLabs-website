@@ -74,7 +74,7 @@ export class SitemapGenerator {
 
   static generateDefault(): string {
     const generator = new SitemapGenerator('https://orionlabs.pro');
-    
+
     // 主要頁面
     generator.addUrl({
       loc: '/',

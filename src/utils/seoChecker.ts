@@ -251,7 +251,7 @@ export class SEOChecker {
 
     links.forEach((link, index) => {
       const href = link.getAttribute('href');
-      
+
       if (!href || href === '#') {
         issues.push({
           type: 'warning',
@@ -302,7 +302,7 @@ export class SEOChecker {
     inputs.forEach((input, index) => {
       const id = input.getAttribute('id');
       const label = id ? this.document.querySelector(`label[for="${id}"]`) : null;
-      
+
       if (!label && !input.getAttribute('aria-label') && !input.getAttribute('aria-labelledby')) {
         issues.push({
           type: 'error',
