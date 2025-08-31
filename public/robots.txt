@@ -1,0 +1,21 @@
+# robots.txt for OrionLabs
+User-agent: *
+Allow: /
+
+# 重要頁面
+Allow: /about
+Allow: /portfolio
+Allow: /blog
+Allow: /contact
+
+# 不允許索引的頁面
+Disallow: /admin
+Disallow: /login
+Disallow: /messages
+Disallow: /api
+
+# Sitemap 位置
+Sitemap: https://orionlabs.pro/sitemap.xml
+
+# 爬蟲延遲（毫秒）
+Crawl-delay: 1

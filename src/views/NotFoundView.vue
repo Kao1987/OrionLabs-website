@@ -12,7 +12,7 @@
               <h2 class="error-subtitle mb-4">頁面不存在</h2>
               <p class="error-description mb-4">
                 抱歉，您要找的頁面可能已被移動、刪除或不存在。
-                請檢查網址是否正確，或返回首頁繼續瀏覽。
+                請檢查網址是否正確，或者瀏覽我們的<router-link to="/sitemap" class="text-decoration-none">網站地圖</router-link>找到您需要的內容。
               </p>
               <div class="error-actions">
                 <router-link to="/" class="btn btn-primary btn-lg me-3">

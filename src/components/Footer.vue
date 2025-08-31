@@ -93,6 +93,7 @@
       <router-link to="/privacy" class="legal-footer__link">隱私政策</router-link>
       <router-link to="/terms" class="legal-footer__link">服務條款</router-link>
       <router-link to="/cookie" class="legal-footer__link">Cookie 政策</router-link>
+      <router-link to="/sitemap" class="legal-footer__link">網站地圖</router-link>
     </nav>
   </footer>
 </template>
