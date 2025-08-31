@@ -32,8 +32,9 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           source: "dist/*"
-          target: "/var/www/orionlabs.pro/personal-brand-website"
+          target: "/var/www/orionlabs.pro/personal-brand-website/dist"
           strip_components: 1
+          overwrite: true
           
       - name: Set correct permissions
         uses: appleboy/ssh-action@v1.0.3
