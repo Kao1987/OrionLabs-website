@@ -32,7 +32,8 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           source: "dist/*"
-          target: "/var/www/orionlabs-website"
+          target: "/var/www/orionlabs.pro/personal-brand-website"
+          strip_components: 1
           
       - name: Set correct permissions
         uses: appleboy/ssh-action@v1.0.3
@@ -41,7 +42,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            sudo chown -R www-data:www-data /var/www/orionlabs-website
-            sudo chmod -R 755 /var/www/orionlabs-website
+            sudo chown -R www-data:www-data /var/www/orionlabs.pro/personal-brand-website/dist
+            sudo chmod -R 755 /var/www/orionlabs.pro/personal-brand-website/dist
             sudo systemctl reload nginx
             echo "✅ 部署完成！"
