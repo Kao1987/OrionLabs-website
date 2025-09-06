@@ -4,9 +4,9 @@ const DEFAULT_API_URL = import.meta.env.VITE_DEFAULT_API_URL || "";
 const DEFAULT_CONTACT_API_URL = import.meta.env.VITE_DEFAULT_CONTACT_API_URL || "";
 
 // 環境變數優先，確保生產環境安全
-// 測試環境需要 /api 前綴，生產環境使用環境變數
-const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "/api" : DEFAULT_API_URL);
-const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || (import.meta.env.DEV ? "/api/contact" : DEFAULT_CONTACT_API_URL);
+// 臨時直接連接，因為 Vite 代理出現網路問題
+const API_BASE_URL = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || "/api") : (import.meta.env.VITE_API_URL || DEFAULT_API_URL);
+const CONTACT_API_URL = import.meta.env.DEV ? (import.meta.env.VITE_CONTACT_API_URL || "/api") : (import.meta.env.VITE_CONTACT_API_URL || DEFAULT_CONTACT_API_URL);
 
 // 環境配置
 export const config = {
@@ -23,44 +23,50 @@ export const config = {
   retryDelay: 1000,
 };
 
-// 統一的 API 端點配置
+// 統一的 API 端點配置 - 更新為 v1 API 結構
 export const API_ENDPOINTS = {
   // 認證相關
   AUTH: {
-    LOGIN: "/auth/login",
-    LOGOUT: "/auth/logout",
-    REFRESH: "/auth/refresh",
-    ME: "/auth/me",
+    LOGIN: "/v1/auth/login",
+    LOGOUT: "/v1/auth/logout",
+    REFRESH: "/v1/auth/refresh",
+    ME: "/v1/auth/me",
   },
   // 部落格相關
   BLOG: {
-    POSTS: "/blog/posts",
-    POST: (id: string) => `/blog/posts/${id}`,
-    CREATE: "/blog/posts",
-    UPDATE: (id: string) => `/blog/posts/${id}`,
-    DELETE: (id: string) => `/blog/posts/${id}`,
+    POSTS: "/v1/blog/",
+    POST: (id: string) => `/v1/blog/${id}`,
+    PUBLIC: "/v1/blog/public",
+    PUBLIC_POST: (id: string) => `/v1/blog/public/${id}`,
+    CREATE: "/v1/blog/",
+    UPDATE: (id: string) => `/v1/blog/${id}`,
+    DELETE: (id: string) => `/v1/blog/${id}`,
+    LIKE: (id: string) => `/v1/blog/${id}/like`,
   },
   // 作品集相關
   PORTFOLIO: {
-    PROJECTS: "/portfolio/projects",
-    PROJECT: (id: string) => `/portfolio/projects/${id}`,
-    CREATE: "/portfolio/projects",
-    UPDATE: (id: string) => `/portfolio/projects/${id}`,
-    DELETE: (id: string) => `/portfolio/projects/${id}`,
+    PROJECTS: "/v1/blog/portfolio",
+    PROJECT: (id: string) => `/v1/blog/portfolio/${id}`,
+    PUBLIC: "/v1/blog/portfolio/public",
+    PUBLIC_PROJECT: (id: string) => `/v1/blog/portfolio/public/${id}`,
+    CREATE: "/v1/blog/portfolio",
+    UPDATE: (id: string) => `/v1/blog/portfolio/${id}`,
+    DELETE: (id: string) => `/v1/blog/portfolio/${id}`,
   },
   // 聯絡相關
   CONTACT: {
-    MESSAGES: "/messages",
-    MESSAGE: (id: string) => `/messages/${id}`,
+    MESSAGES: "/v1/blog/messages",
+    MESSAGE: (id: string) => `/v1/blog/messages/${id}`,
   },
   // 系統相關
   SYSTEM: {
     HEALTH: "/health",
-    STATS: "/stats",
+    STATS: "/v1/blog/stats",
   },
-  // 測試端點
-  TEST: {
-    ENDPOINT: "/test-endpoint",
+  // 檔案上傳
+  UPLOAD: {
+    IMAGE: "/v1/upload/image",
+    DELETE: (filename: string) => `/v1/upload/${filename}`,
   },
 };
 
@@ -635,7 +641,7 @@ export const authAPI = {
 
     // 登入請求跳過認證檢查，避免錯誤的 401 處理
     const result = await apiRequest<LoginResponse>(
-      "/auth/login",
+      API_ENDPOINTS.AUTH.LOGIN,
       {
         method: "POST",
         body: JSON.stringify(loginData),
@@ -672,18 +678,18 @@ export const authAPI = {
   },
 
   getCurrentUser: async (): Promise<User> => {
-    return apiRequest<User>("/auth/me");
+    return apiRequest<User>(API_ENDPOINTS.AUTH.ME);
   },
 
   refreshToken: async (): Promise<LoginResponse> => {
-    return apiRequest<LoginResponse>("/auth/refresh", {
+    return apiRequest<LoginResponse>(API_ENDPOINTS.AUTH.REFRESH, {
       method: "POST",
     });
   },
 
   logout: async (): Promise<{ ok: boolean }> => {
     try {
-      const result = await apiRequest<{ ok: boolean }>("/auth/logout", {
+      const result = await apiRequest<{ ok: boolean }>(API_ENDPOINTS.AUTH.LOGOUT, {
         method: "POST",
       });
       // 清除本地認證信息
