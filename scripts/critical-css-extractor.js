@@ -26,13 +26,13 @@ const criticalPages = [
     title: '首頁'
   },
   {
-    name: 'about', 
+    name: 'about',
     path: '/about',
     title: '關於頁面'
   },
   {
     name: 'portfolio',
-    path: '/portfolio', 
+    path: '/portfolio',
     title: '作品集頁面'
   },
   {
@@ -55,48 +55,48 @@ const criticalConfig = {
     { width: 768, height: 1024, name: 'tablet' },
     { width: 375, height: 667, name: 'mobile' }
   ],
-  
+
   // 關鍵 CSS 選擇器（必須包含）
   criticalSelectors: [
     // 全域重置和基礎樣式
     'html', 'body', '*', '::before', '::after',
-    
+
     // 佈局容器
     '.container', '.container-fluid', '.row', '[class*="col-"]',
-    
+
     // 導航欄（始終可見）
     '.navbar', '.navbar-brand', '.navbar-nav', '.nav-link',
-    
+
     // Hero 區塊（首屏）
     '.hero_section', '.hero_title', '.hero_subtitle',
-    
+
     // 按鈕（互動元素）
     '.btn', '.btn-primary', '.btn-secondary', '.btn-outline-primary',
-    
+
     // 字體和排版
     'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a',
-    
+
     // 基本工具類
     '.d-none', '.d-block', '.d-flex', '.text-center', '.mb-3', '.mt-3'
   ],
-  
+
   // 非關鍵選擇器（可延遲載入）
   nonCriticalSelectors: [
     // 模態框（用戶觸發才顯示）
     '.modal', '.modal-dialog', '.modal-content', '.modal-header', '.modal-body', '.modal-footer',
-    
+
     // 下拉選單（用戶觸發才顯示）
     '.dropdown-menu', '.dropdown-item',
-    
+
     // 吐司通知（動態生成）
     '.toast', '.toast-header', '.toast-body',
-    
+
     // 載入器（動態顯示）
     '.spinner-border', '.spinner-grow',
-    
+
     // 表單驗證樣式（動態添加）
     '.is-valid', '.is-invalid', '.valid-feedback', '.invalid-feedback',
-    
+
     // 動畫和特效
     '@keyframes', '.animate', '.fade', '.slide'
   ]
@@ -104,7 +104,7 @@ const criticalConfig = {
 
 async function startLocalServer() {
   console.log('🚀 啟動本地開發服務器...');
-  
+
   // 檢查是否有現有的開發服務器
   try {
     const response = await fetch('http://localhost:5173');
@@ -115,46 +115,46 @@ async function startLocalServer() {
   } catch (error) {
     // 服務器未運行，需要啟動
   }
-  
+
   console.log('⚠️  需要啟動開發服務器');
-  console.log('請在另一個終端執行: npm run dev');
+  console.log('請在另一個終端執行: yarn dev');
   console.log('然後重新運行此腳本\n');
-  
+
   return null;
 }
 
 async function extractUsedCSS(url, viewport) {
   console.log(`📱 分析 ${viewport.name} (${viewport.width}x${viewport.height})...`);
-  
-  const browser = await puppeteer.launch({ 
+
+  const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
-  
+
   try {
     const page = await browser.newPage();
     await page.setViewport(viewport);
-    
+
     // 載入頁面
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
-    
+
     // 等待動態內容載入
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // 提取使用的 CSS 規則
     const usedCSS = await page.evaluate(() => {
       const usedRules = new Set();
       const styleSheets = Array.from(document.styleSheets);
-      
+
       // 分析所有樣式表
       for (const styleSheet of styleSheets) {
         try {
           const rules = Array.from(styleSheet.cssRules || styleSheet.rules || []);
-          
+
           for (const rule of rules) {
             if (rule.type === CSSRule.STYLE_RULE) {
               const selector = rule.selectorText;
-              
+
               // 檢查選擇器是否匹配頁面元素
               try {
                 const elements = document.querySelectorAll(selector);
@@ -169,7 +169,7 @@ async function extractUsedCSS(url, viewport) {
                       break;
                     }
                   }
-                  
+
                   usedRules.add({
                     selector: selector,
                     cssText: rule.cssText,
@@ -187,13 +187,13 @@ async function extractUsedCSS(url, viewport) {
           console.log('跨域樣式表，跳過:', e.message);
         }
       }
-      
+
       return Array.from(usedRules);
     });
-    
+
     await browser.close();
     return usedCSS;
-    
+
   } catch (error) {
     await browser.close();
     throw error;
@@ -203,34 +203,34 @@ async function extractUsedCSS(url, viewport) {
 async function analyzePage(baseUrl, pageConfig) {
   console.log(`\n🔍 分析頁面: ${pageConfig.title} (${pageConfig.path})`);
   console.log('─'.repeat(50));
-  
+
   const fullUrl = baseUrl + pageConfig.path;
   const pageResults = {};
-  
+
   // 分析不同視窗大小
   for (const viewport of criticalConfig.viewports) {
     try {
       const usedCSS = await extractUsedCSS(fullUrl, viewport);
-      
+
       // 分類關鍵和非關鍵 CSS
       const criticalRules = [];
       const nonCriticalRules = [];
-      
+
       for (const rule of usedCSS) {
-        const isForcedCritical = criticalConfig.criticalSelectors.some(selector => 
+        const isForcedCritical = criticalConfig.criticalSelectors.some(selector =>
           rule.selector.includes(selector)
         );
         const isForcedNonCritical = criticalConfig.nonCriticalSelectors.some(selector =>
           rule.selector.includes(selector)
         );
-        
+
         if (isForcedCritical || (rule.isCritical && !isForcedNonCritical)) {
           criticalRules.push(rule);
         } else {
           nonCriticalRules.push(rule);
         }
       }
-      
+
       pageResults[viewport.name] = {
         viewport: viewport,
         totalRules: usedCSS.length,
@@ -239,14 +239,14 @@ async function analyzePage(baseUrl, pageConfig) {
         criticalCount: criticalRules.length,
         nonCriticalCount: nonCriticalRules.length
       };
-      
+
       console.log(`  ${viewport.name}: ${criticalRules.length}/${usedCSS.length} 關鍵規則`);
-      
+
     } catch (error) {
       console.log(`  ❌ ${viewport.name} 分析失敗:`, error.message);
     }
   }
-  
+
   return {
     page: pageConfig,
     results: pageResults
@@ -255,14 +255,14 @@ async function analyzePage(baseUrl, pageConfig) {
 
 function generateCriticalCSS(analysisResults) {
   console.log('\n📝 生成 Critical CSS...');
-  
+
   // 合併所有頁面的關鍵 CSS
   const allCriticalRules = new Map();
-  
+
   for (const pageResult of analysisResults) {
     for (const [viewportName, result] of Object.entries(pageResult.results)) {
       const key = `${pageResult.page.name}-${viewportName}`;
-      
+
       for (const rule of result.criticalRules) {
         const ruleKey = `${rule.selector}-${rule.cssText}`;
         if (!allCriticalRules.has(ruleKey)) {
@@ -277,10 +277,10 @@ function generateCriticalCSS(analysisResults) {
       }
     }
   }
-  
+
   // 按優先級排序
   const sortedRules = Array.from(allCriticalRules.values()).sort((a, b) => a.priority - b.priority);
-  
+
   // 生成 CSS 內容
   const criticalCSSContent = `/* OrionLabs Critical CSS */
 /* 自動生成於 ${new Date().toISOString()} */
@@ -291,14 +291,14 @@ ${sortedRules.map(rule => {
   return `${comment}\n${rule.cssText}`;
 }).join('\n\n')}
 `;
-  
+
   // 寫入 Critical CSS 檔案
   const criticalCSSPath = path.join(projectRoot, 'src/assets/css/critical.css');
   fs.writeFileSync(criticalCSSPath, criticalCSSContent, 'utf8');
-  
+
   console.log(`✅ Critical CSS 已生成: ${path.relative(projectRoot, criticalCSSPath)}`);
   console.log(`📊 包含 ${sortedRules.length} 個關鍵樣式規則`);
-  
+
   return {
     filePath: criticalCSSPath,
     rulesCount: sortedRules.length,
@@ -308,7 +308,7 @@ ${sortedRules.map(rule => {
 
 function generateOptimizedMainTS(criticalCSS, analysisResults) {
   console.log('\n⚙️  生成優化的 main.ts...');
-  
+
   const optimizedMainTS = `import { createApp } from "vue";
 import { createPinia } from "pinia";
 
@@ -345,20 +345,20 @@ function loadNonCriticalCSS() {
     bootstrapLink.media = 'all';
   };
   document.head.appendChild(bootstrapLink);
-  
+
   // Bootstrap Icons (延遲載入)
   const iconsLink = document.createElement('link');
-  iconsLink.rel = 'stylesheet'; 
+  iconsLink.rel = 'stylesheet';
   iconsLink.href = '/node_modules/bootstrap-icons/font/bootstrap-icons.css';
   iconsLink.media = 'print';
   iconsLink.onload = () => {
     iconsLink.media = 'all';
   };
   document.head.appendChild(iconsLink);
-  
+
   // Bootstrap 自定義覆蓋
   import("./assets/css/bootstrap-custom.css");
-  
+
   // 其他非關鍵 CSS
   import("./assets/utilities.css");
   import("./assets/css/contrast-enhancements.css");
@@ -390,41 +390,41 @@ if (import.meta.env.DEV) {
 
 console.log("Vue app mounted with Critical CSS and performance optimization");
 `;
-  
+
   // 備份原始 main.ts
   const mainTSPath = path.join(projectRoot, 'src/main.ts');
   const backupPath = mainTSPath + '.pre-critical';
-  
+
   if (fs.existsSync(mainTSPath)) {
     fs.copyFileSync(mainTSPath, backupPath);
     console.log(`💾 原始 main.ts 已備份: ${path.relative(projectRoot, backupPath)}`);
   }
-  
+
   // 寫入優化版本
   const optimizedPath = path.join(projectRoot, 'src/main-critical.ts');
   fs.writeFileSync(optimizedPath, optimizedMainTS, 'utf8');
-  
+
   console.log(`✅ 優化版 main.ts 已生成: ${path.relative(projectRoot, optimizedPath)}`);
   console.log('💡 如需啟用，請將 main-critical.ts 重命名為 main.ts');
-  
+
   return optimizedPath;
 }
 
 async function generateReport(analysisResults, criticalCSS, optimizedMainTS) {
   console.log('\n📋 生成 Critical CSS 分析報告...');
-  
+
   const totalPages = analysisResults.length;
   const totalRules = analysisResults.reduce((sum, page) => {
     return sum + Object.values(page.results).reduce((pageSum, result) => pageSum + result.totalRules, 0);
   }, 0);
-  
+
   const avgCriticalRatio = analysisResults.reduce((sum, page) => {
     const pageAvg = Object.values(page.results).reduce((pageSum, result) => {
       return pageSum + (result.criticalCount / result.totalRules);
     }, 0) / Object.keys(page.results).length;
     return sum + pageAvg;
   }, 0) / totalPages;
-  
+
   const report = `# Critical CSS 分析報告
 
 **生成時間:** ${new Date().toLocaleString('zh-TW')}
@@ -490,8 +490,8 @@ requestIdleCallback(() => {
 
 2. **驗證效果:**
    \`\`\`bash
-   npm run build
-   npm run preview
+   yarn build
+   yarn preview
    \`\`\`
 
 3. **性能測試:**
@@ -502,14 +502,14 @@ requestIdleCallback(() => {
 ---
 *此報告由 OrionLabs Critical CSS 提取器自動生成*
 `;
-  
+
   const reportPath = path.join(projectRoot, 'docs/reports/CRITICAL_CSS_REPORT.md');
   const reportsDir = path.dirname(reportPath);
-  
+
   if (!fs.existsSync(reportsDir)) {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
-  
+
   fs.writeFileSync(reportPath, report, 'utf8');
   console.log(`📄 報告已生成: ${path.relative(projectRoot, reportPath)}`);
 }
@@ -518,29 +518,29 @@ requestIdleCallback(() => {
 async function main() {
   try {
     console.log('🎯 開始 Critical CSS 分析...\n');
-    
+
     // Step 1: 確認開發服務器運行
     const baseUrl = await startLocalServer();
     if (!baseUrl) {
       process.exit(1);
     }
-    
+
     // Step 2: 分析所有關鍵頁面
     const analysisResults = [];
     for (const pageConfig of criticalPages) {
       const result = await analyzePage(baseUrl, pageConfig);
       analysisResults.push(result);
     }
-    
+
     // Step 3: 生成 Critical CSS
     const criticalCSS = generateCriticalCSS(analysisResults);
-    
+
     // Step 4: 生成優化的 main.ts
     const optimizedMainTS = generateOptimizedMainTS(criticalCSS, analysisResults);
-    
+
     // Step 5: 生成分析報告
     await generateReport(analysisResults, criticalCSS, optimizedMainTS);
-    
+
     console.log('\n🎉 Critical CSS 提取完成！');
     console.log('\n📋 摘要:');
     console.log(`  • 分析頁面: ${analysisResults.length} 個`);
@@ -548,7 +548,7 @@ async function main() {
     console.log(`  • Critical CSS 大小: ${Math.round(criticalCSS.content.length / 1024)} KB`);
     console.log('\n📄 詳細報告: docs/reports/CRITICAL_CSS_REPORT.md');
     console.log('💡 啟用方式: cp src/main-critical.ts src/main.ts');
-    
+
   } catch (error) {
     console.error('❌ Critical CSS 提取失敗:', error);
     process.exit(1);

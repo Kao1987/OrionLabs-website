@@ -664,20 +664,28 @@ declare global {
 }
 
 /* === Dark Mode Support === */
-[data-bs-theme="dark"] .contact-form {
+[data-theme="dark"] .contact-form {
   background-color: var(--color-bg-card);
   color: var(--color-text-primary);
 }
 
-[data-bs-theme="dark"] .contact-form__input {
+[data-theme="dark"] .contact-form__input {
   background-color: var(--color-bg-secondary);
   border-color: var(--color-border-secondary);
   color: var(--color-text-primary);
 }
 
-[data-bs-theme="dark"] .contact-form__input:focus {
+[data-theme="dark"] .contact-form__input:focus {
   background-color: var(--color-bg-secondary);
   border-color: var(--color-border-focus);
+}
+
+[data-theme="dark"] .contact-form__label {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
 }
 
 /* === Responsive Design === */

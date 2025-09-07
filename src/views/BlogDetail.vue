@@ -847,4 +847,23 @@ onMounted(() => {
     margin-top: 1rem;
   }
 }
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .article-content {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .article-meta {
+  color: var(--color-text-secondary);
+}
 </style>

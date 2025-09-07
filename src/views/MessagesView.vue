@@ -691,4 +691,25 @@ onMounted(() => {
     gap: 0.5rem;
   }
 }
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .stats-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .message-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
 </style>

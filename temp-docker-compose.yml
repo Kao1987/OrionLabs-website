@@ -1,0 +1,109 @@
+version: '3.8'
+
+services:
+  # Nginx 反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: orionlabs-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+      - main-frontend
+      - lineagew-frontend
+      - backend
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # 主前端 (OrionLabs-Main)
+  main-frontend:
+    build:
+      context: ../OrionLabs-Main
+      dockerfile: Dockerfile
+    container_name: orionlabs-main
+    environment:
+      - NODE_ENV=production
+      - API_BASE_URL=http://backend:8000
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # LineageW Labs 前端
+  lineagew-frontend:
+    build:
+      context: ../lineageW-Labs
+      dockerfile: Dockerfile
+    container_name: orionlabs-lineagew
+    environment:
+      - NODE_ENV=production
+      - API_BASE_URL=http://backend:8000
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # 後端 API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: orionlabs-backend
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=mysql+pymysql://navicat_user:Cc0932173427!@161.33.209.198:3306/orionlabs
+      - SECRET_KEY=${SECRET_KEY}
+      - FRONTEND_URL=https://orionlabs.pro
+      - redis
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # MySQL 資料庫
+  db:
+    image: mysql:8.0
+    container_name: orionlabs-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=orionlabs
+      - MYSQL_CHARACTER_SET_SERVER=utf8mb4
+      - MYSQL_COLLATION_SERVER=utf8mb4_unicode_ci
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # Redis (用於快取和會話管理)
+  redis:
+    image: redis:7-alpine
+    container_name: orionlabs-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - orionlabs-network
+    restart: unless-stopped
+
+  # 資料庫備份服務
+  db-backup:
+    image: mysql:8.0
+    container_name: orionlabs-backup
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./backups:/backups
+      - ./backup-scripts:/scripts
+    entrypoint: /scripts/backup.sh
+    networks:
+      - orionlabs-network
+    restart: "no"
+
+volumes:
+  db_data:
+  redis_data:
+
+networks:
+  orionlabs-network:
+    driver: bridge 

@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { onMounted, onErrorCaptured } from "vue";
 // import HelloWorld from './components/HelloWorld.vue'
 import Navbar from "./components/Navbar.vue";
-import Footer from "./components/Footer.vue";
+import FooterComponent from "./components/Footer.vue";
 import CookieBanner from "./components/CookieBanner.vue";
 import { useStructuredData } from "./composables/useSEO";
 import { useUIStore } from "./stores/ui";
@@ -119,7 +119,7 @@ const socialLinks = [
     </main>
 
     <!-- 底部 -->
-    <footer
+    <footer-component
       v-if="!isAdminRoute"
       brand-name="Orion"
       description="致力於創造優質的數位體驗，專注於前端開發與 UI/UX 設計。"

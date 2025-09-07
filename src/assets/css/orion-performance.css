@@ -1,0 +1,275 @@
+/* === Orion Labs Performance CSS === */
+/* 簡化版 Phase 3 - 性能優化整合版 */
+/* 基於現有設計系統，增強性能表現 */
+
+/* 性能優化變數 */
+:root {
+  /* 關鍵渲染路徑優化 */
+  --critical-font-display: swap;
+  --critical-will-change: transform, opacity;
+
+  /* 載入狀態 */
+  --loading-opacity: 0.6;
+  --loading-transition: opacity 0.2s ease;
+
+  /* 優化的陰影 - 降低複雜度 */
+  --shadow-optimized: 0 2px 4px rgba(0, 47, 167, 0.08);
+  --shadow-hover-optimized: 0 4px 8px rgba(0, 47, 167, 0.12);
+
+  /* 動畫持續時間 - 符合 Material Design */
+  --duration-fast: 150ms;
+  --duration-medium: 250ms;
+  --duration-slow: 300ms;
+}
+
+/* 關鍵渲染路徑 - 首屏必要樣式 */
+.orion-critical {
+  /* 立即可見的元素 */
+  contain: layout style paint;
+}
+
+/* 字體載入優化 - 預留用於未來 */
+/* @font-face {
+  font-family: 'OrionFont';
+  font-display: var(--critical-font-display);
+  src: url('./fonts/orion-font.woff2') format('woff2');
+} */
+
+/* 導航欄性能優化 */
+.navbar {
+  will-change: var(--critical-will-change);
+  contain: layout style;
+  /* 使用 GPU 加速但保持現有樣式 */
+}
+
+.nav-link {
+  /* 減少重繪 */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* 按鈕互動優化 */
+.btn {
+  /* 避免 layout thrashing */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.btn:hover {
+  /* 使用 transform 而非 box-shadow 變化 */
+  transform: translateY(-1px) translateZ(0);
+}
+
+/* 卡片元素優化 */
+.card {
+  /* 合成層優化 */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.card:hover {
+  /* 效能友善的 hover 效果 */
+  box-shadow: var(--shadow-hover-optimized);
+}
+
+/* 載入狀態優化 */
+.loading-state {
+  opacity: var(--loading-opacity);
+  pointer-events: none;
+  transition: var(--loading-transition);
+}
+
+/* 圖片懶載入優化 */
+.orion-lazy-img {
+  opacity: 0;
+  transition: opacity var(--duration-medium) ease;
+}
+
+.orion-lazy-img.loaded {
+  opacity: 1;
+}
+
+/* 滾動效能優化 */
+.orion-scroll-container {
+  /* 避免滾動時重繪 */
+  overflow-anchor: auto;
+  scroll-behavior: smooth;
+}
+
+/* 文字渲染優化 */
+.orion-text-optimized {
+  /* 文字渲染優化 */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 動畫效能優化類別 */
+.orion-animate-fade {
+  animation: orionFadeIn var(--duration-medium) ease-out;
+}
+
+.orion-animate-slide {
+  animation: orionSlideUp var(--duration-medium) ease-out;
+}
+
+@keyframes orionFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes orionSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 性能監控友善的樣式 */
+.orion-perf-marker {
+  /* 用於性能測量的隱藏元素 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* 響應式效能優化 */
+@media (max-width: 599px) {
+  /* Compact 裝置優化 */
+  .orion-mobile-optimized {
+    /* 減少移動裝置的複雜動畫 */
+    animation-duration: var(--duration-fast);
+  }
+
+  .card:hover {
+    /* 移動裝置減少 hover 效果 */
+    box-shadow: var(--shadow-optimized);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 動畫減少偏好 */
+  .orion-animate-fade,
+  .orion-animate-slide,
+  .btn:hover,
+  .card:hover {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
+
+/* 高對比模式效能優化 */
+@media (prefers-contrast: high) {
+  .card {
+    /* 高對比模式下簡化陰影 */
+    box-shadow: 0 0 0 1px var(--color-border-primary);
+  }
+}
+
+/* 暗色模式效能優化 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 暗色模式下的優化設定 */
+    --shadow-optimized: 0 2px 4px rgba(255, 255, 255, 0.05);
+    --shadow-hover-optimized: 0 4px 8px rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* 印刷樣式優化 */
+@media print {
+  .orion-no-print {
+    display: none !important;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .btn {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+  }
+}
+
+/* 效能優化工具類別 */
+.orion-gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.orion-contain-layout {
+  contain: layout;
+}
+
+.orion-contain-paint {
+  contain: paint;
+}
+
+.orion-contain-strict {
+  contain: strict;
+}
+
+/* 互動狀態效能優化 */
+.orion-interactive {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 47, 167, 0.1);
+}
+
+/* 視覺穩定性優化 */
+.orion-stable-width {
+  /* 防止內容變化導致的佈局偏移 */
+  min-width: fit-content;
+}
+
+.orion-stable-height {
+  /* 防止高度變化導致的佈局偏移 */
+  min-height: fit-content;
+}
+
+/* 記憶體效能優化 */
+.orion-memory-efficient {
+  /* 減少記憶體使用的樣式 */
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* 開發環境效能提示 */
+.orion-dev-perf-warning {
+  /* 開發環境中標記效能問題的元素 */
+  outline: 2px dashed orange;
+  position: relative;
+}
+
+.orion-dev-perf-warning::after {
+  content: "⚡ 效能優化建議";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 10px;
+  color: orange;
+  background: rgba(255, 165, 0, 0.1);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* 最終優化：關鍵樣式內聯標記 */
+.orion-inline-critical {
+  /* 標記需要內聯到 HTML 的關鍵 CSS */
+  /* 這些樣式應該在 main.ts 中內聯 */
+  position: relative;
+}

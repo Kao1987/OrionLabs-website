@@ -26,14 +26,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
+        cache: 'yarn'
         
     - name: Install dependencies
-      run: npm ci
+      run: yarn install --frozen-lockfile
       
     - name: Run CSS Performance Monitor
       run: |
-        npm run css:performance
+        yarn css:performance
         
     - name: Check Performance Threshold
       run: |

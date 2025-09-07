@@ -1,4 +1,3 @@
-import { globalIgnores } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
 
@@ -13,19 +12,25 @@ export default defineConfigWithVueTs(
     files: ['**/*.{ts,mts,tsx,vue}'],
   },
 
-  globalIgnores([
-    '**/dist/**', 
-    '**/dist-ssr/**', 
-    '**/coverage/**',
-    'api-example/**',
-    'scripts/**/*.js',
-    '**/*.js',
-    '**/node_modules/**'
-  ]),
+  {
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/.nuxt/**',
+      '**/.output/**',
+      '**/.vite/**',
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**',
+      'deprecated_files/**',
+      'deprecated_css_backup/**'
+    ],
+  },
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
-  
+
   // 測試檔案的寬鬆規則
   {
     files: ['tests/**/*.{ts,spec.ts}'],

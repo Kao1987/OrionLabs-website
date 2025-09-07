@@ -250,14 +250,23 @@ const removeNotification = (id: string) => {
 }
 
 /* 深色模式支持 */
-[data-bs-theme="dark"] .notification-toast {
-  background: var(--bs-dark, #212529);
-  border-color: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
+[data-theme="dark"] .notification-toast {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-[data-bs-theme="dark"] .notification-toast__close:hover {
-  background-color: var(--bs-secondary, #6c757d);
+[data-theme="dark"] .notification-toast__close:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .notification-toast__title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .notification-toast__message {
+  color: var(--color-text-secondary);
 }
 
 /* 減少動畫偏好設定 */

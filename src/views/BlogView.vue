@@ -1,11 +1,11 @@
 <template>
   <div class="blog-page">
     <!-- 頁面標題 -->
-    <section class="page-header">
+    <section class="page-header" style="padding: var(--section-padding-sm) 0;">
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <h1 class="page-header__title display-4 fw-bold">部落格</h1>
+            <h1 class="page-header__title display-4 fw-bold" style="margin-bottom: var(--spacing-4);">部落格</h1>
             <p class="page-header__lead lead">分享技術心得與開發經驗</p>
           </div>
         </div>
@@ -13,22 +13,22 @@
     </section>
 
     <!-- 文章列表 -->
-    <section class="section">
+    <section class="section" style="padding: var(--section-padding) 0;">
       <div class="container">
         <!-- 分類篩選 -->
-        <div class="row mb-4">
+        <div class="row" style="margin-bottom: var(--spacing-6);">
           <div class="col-12">
-            <div class="blog-filter">
-              <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+            <div class="blog-filter" style="padding: var(--spacing-6); border-radius: var(--radius-lg); background: var(--color-bg-card); margin-bottom: var(--spacing-8);">
+              <div class="d-flex flex-wrap align-items-center justify-content-between" style="margin-bottom: var(--spacing-5);">
                 <h5 class="mb-0">文章列表</h5>
                 <div class="d-flex align-items-center">
-                  <span class="text-muted me-2">共 {{ filteredPosts.length }} 篇文章</span>
+                  <span class="text-muted" style="margin-right: var(--spacing-3);">共 {{ filteredPosts.length }} 篇文章</span>
                 </div>
               </div>
 
               <!-- 分類按鈕 -->
-              <div class="blog-filter__categories mb-3">
-                <div class="d-flex flex-wrap gap-2">
+              <div class="blog-filter__categories" style="margin-bottom: var(--spacing-5);">
+                <div class="d-flex flex-wrap" style="gap: var(--spacing-3);">
                   <button
                     @click="selectCategory('')"
                     class="blog-filter__category-btn btn btn-sm"
@@ -36,6 +36,7 @@
                       'blog-filter__category-btn--active': selectedCategory === '',
                       'btn-outline-primary': selectedCategory !== ''
                     }"
+                    style="padding: var(--btn-padding-y) var(--spacing-4);"
                   >
                     全部
                   </button>
@@ -48,6 +49,7 @@
                       'blog-filter__category-btn--active': selectedCategory === category,
                       'btn-outline-primary': selectedCategory !== category
                     }"
+                    style="padding: var(--btn-padding-y) var(--spacing-4);"
                   >
                     {{ category }}
                   </button>
@@ -56,8 +58,8 @@
 
               <!-- 搜尋框 -->
               <div class="blog-filter__search">
-                <div class="input-group">
-                  <span class="input-group-text">
+                <div class="input-group" style="border-radius: var(--radius-lg); overflow: hidden;">
+                  <span class="input-group-text" style="background: var(--color-primary); border: none; color: var(--color-text-light);">
                     <i class="bi bi-search"></i>
                   </span>
                   <input
@@ -66,12 +68,14 @@
                     type="text"
                     class="form-control"
                     placeholder="搜尋文章標題或內容..."
+                    style="border: none; padding: var(--spacing-3) var(--spacing-4); background: var(--color-bg-primary);"
                   />
                   <button
                     v-if="searchQuery"
                     @click="clearSearch"
                     class="btn btn-outline-secondary"
                     type="button"
+                    style="border: none; padding: var(--spacing-3) var(--spacing-4);"
                   >
                     <i class="bi bi-x"></i>
                   </button>
@@ -85,7 +89,7 @@
           <!-- 文章內容 -->
           <div class="col-lg-8">
             <!-- 有文章時顯示列表 -->
-            <div class="row g-4" v-if="paginatedPosts.length > 0">
+            <div class="row" style="gap: var(--spacing-6);" v-if="paginatedPosts.length > 0">
               <div
                 v-for="(post, index) in paginatedPosts"
                 :key="post.id"
@@ -106,34 +110,36 @@
                       </div>
                     </div>
                     <div class="col-md-8 blog-card__column d-flex">
-                      <div class="card-body d-flex flex-column">
-                        <div class="d-flex align-items-center mb-2">
+                      <div class="card-body d-flex flex-column" style="padding: var(--card-padding);">
+                        <div class="d-flex align-items-center" style="margin-bottom: var(--spacing-3);">
                           <span
                             :class="getCategoryBadgeClass((post as any).category || 'general')"
-                            class="badge me-2"
+                            class="badge"
+                            style="margin-right: var(--spacing-3); padding: var(--spacing-1) var(--spacing-3);"
                             >{{ (post as any).category || "一般" }}</span
                           >
                           <small class="text-muted">
-                            <i class="bi bi-calendar3 me-1"></i>{{ formatDate(post.publishedAt) }}
+                            <i class="bi bi-calendar3" style="margin-right: var(--spacing-1);"></i>{{ formatDate(post.publishedAt) }}
                           </small>
                         </div>
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="margin-bottom: var(--spacing-4);">
                           <a href="#" class="text-decoration-none" @click.prevent="openPost(post)">
                             {{ post.title }}
                           </a>
                         </h5>
-                        <p class="card-text text-muted flex-grow-1">{{ post.excerpt }}</p>
+                        <p class="card-text text-muted flex-grow-1" style="margin-bottom: var(--spacing-4);">{{ post.excerpt }}</p>
                         <div class="mt-auto">
-                          <div class="d-flex flex-wrap gap-1 mb-2">
+                          <div class="d-flex flex-wrap" style="gap: var(--spacing-2); margin-bottom: var(--spacing-3);">
                             <span
                               v-for="tag in (post.tags || []).slice(0, 3)"
                               :key="tag"
                               class="blog-card__tag-badge badge bg-light"
                               @click="filterByTag(tag)"
+                              style="padding: var(--spacing-1) var(--spacing-3); cursor: pointer;"
                             >
                               #{{ tag }}
                             </span>
-                            <span v-if="(post.tags || []).length > 3" class="badge bg-light">
+                            <span v-if="(post.tags || []).length > 3" class="badge bg-light" style="padding: var(--spacing-1) var(--spacing-3);">
                               +{{ (post.tags || []).length - 3 }}
                             </span>
                           </div>
@@ -141,7 +147,7 @@
                             class="d-flex align-items-center justify-content-between text-muted small"
                           >
                             <span>
-                              <i class="bi bi-clock me-1"></i
+                              <i class="bi bi-clock" style="margin-right: var(--spacing-1);"></i
                               >{{ (post as any).readTime || 5 }} 分鐘閱讀
                             </span>
                             <div class="d-flex align-items-center gap-3">
@@ -285,12 +291,12 @@
           <div class="col-lg-4">
             <div class="position-sticky" style="top: 100px">
               <!-- 關於作者 -->
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <div class="d-flex align-items-center justify-content-center mb-3">
+              <div class="card" style="margin-bottom: var(--spacing-6);">
+                <div class="card-body text-center" style="padding: var(--card-padding);">
+                  <div class="d-flex align-items-center justify-content-center" style="margin-bottom: var(--spacing-5);">
                     <i class="bi bi-person-circle display-4 text-primary"></i>
                   </div>
-                  <h6 class="card-title">Orion</h6>
+                  <h6 class="card-title" style="margin-bottom: var(--spacing-3);">Orion</h6>
                   <p class="card-text text-muted small">
                     前端開發工程師，專注於 Vue.js 和現代網頁開發技術
                   </p>
@@ -298,17 +304,17 @@
               </div>
 
               <!-- 熱門標籤 -->
-              <div class="card mb-4" v-if="popularTags.length > 0">
-                <div class="card-header">
+              <div class="card" style="margin-bottom: var(--spacing-6);" v-if="popularTags.length > 0">
+                <div class="card-header" style="padding: var(--spacing-4) var(--spacing-5);">
                   <h6 class="mb-0">熱門標籤</h6>
                 </div>
-                <div class="card-body">
-                  <div class="d-flex flex-wrap gap-1">
+                <div class="card-body" style="padding: var(--card-padding);">
+                  <div class="d-flex flex-wrap" style="gap: var(--spacing-2);">
                     <span
                       v-for="tag in popularTags"
                       :key="tag.name"
                       class="badge bg-light text-dark"
-                      style="cursor: pointer"
+                      style="cursor: pointer; padding: var(--spacing-2) var(--spacing-3);"
                       @click="filterByTag(tag.name)"
                     >
                       #{{ tag.name }} ({{ tag.count }})
@@ -318,17 +324,17 @@
               </div>
 
               <!-- 最新文章 -->
-              <div class="card mb-4" v-if="recentPosts.length > 0">
-                <div class="card-header">
+              <div class="card" style="margin-bottom: var(--spacing-6);" v-if="recentPosts.length > 0">
+                <div class="card-header" style="padding: var(--spacing-4) var(--spacing-5);">
                   <h6 class="mb-0">最新文章</h6>
                 </div>
-                <div class="card-body">
-                  <div v-for="recentPost in recentPosts" :key="recentPost.id" class="d-flex mb-3">
-                    <div class="flex-shrink-0 me-2">
+                <div class="card-body" style="padding: var(--card-padding);">
+                  <div v-for="recentPost in recentPosts" :key="recentPost.id" class="d-flex" style="margin-bottom: var(--spacing-5);">
+                    <div class="flex-shrink-0" style="margin-right: var(--spacing-3);">
                       <i class="bi bi-file-text text-muted"></i>
                     </div>
                     <div>
-                      <h6 class="mb-1">
+                      <h6 style="margin-bottom: var(--spacing-1);">
                         <a
                           href="#"
                           class="text-decoration-none small"
@@ -345,12 +351,12 @@
 
               <!-- 文章歸檔 -->
               <div class="card" v-if="archives.length > 0">
-                <div class="card-header">
+                <div class="card-header" style="padding: var(--spacing-4) var(--spacing-5);">
                   <h6 class="mb-0">文章歸檔</h6>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="padding: var(--card-padding);">
                   <ul class="list-unstyled mb-0">
-                    <li v-for="archive in archives" :key="(archive as any).month" class="mb-1">
+                    <li v-for="archive in archives" :key="(archive as any).month" style="margin-bottom: var(--spacing-2);">
                       <a href="#" class="text-decoration-none text-muted">
                         {{ (archive as any).month }} ({{ (archive as any).count }})
                       </a>
@@ -545,40 +551,48 @@ onMounted(async () => {
 
 .page-header__title {
   font-weight: 700;
-  margin-bottom: 1rem;
+  color: var(--color-text-primary);
 }
 
 .page-header__lead {
   font-size: 1.25rem;
   opacity: 0.9;
+  color: var(--color-text-secondary);
 }
 
 /* 篩選區域 */
 .blog-filter {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-filter__categories .btn {
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.3s ease;
   border: 1px solid var(--color-border-primary);
 }
 
+.blog-filter__category-btn--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
 .blog-filter__search .input-group {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
 
 .blog-filter__search .form-control {
-  border: none;
-  padding: var(--spacing-md);
-  background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
+  transition: all 0.3s ease;
 }
 
-.blog-filter__search .input-group-text {
-  background: var(--color-primary);
-  border: none;
-  color: var(--color-text-light);
+.blog-filter__search .form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.25rem var(--color-shadow-focus);
 }
 
 /* 文章卡片 */
@@ -586,8 +600,8 @@ onMounted(async () => {
   border: none;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s ease;
   background: var(--color-bg-card);
   position: relative;
   animation: fadeInUp 0.6s ease forwards;
@@ -783,43 +797,111 @@ onMounted(async () => {
 }
 
 /* 響應式設計 */
-@media (max-width: 992px) {
-  .section { padding: 4rem 0; }
-  .page-header { padding: 3rem 0; }
-  .page-header__title { font-size: 2.5rem; }
-  .blog-filter { padding: 1.5rem; }
+/* 響應式設計 - Google Material Design 3 Breakpoints */
+@media (max-width: 599px) { /* Compact */
+  .page-header {
+    padding: var(--spacing-8) 0;
+  }
+
+  .page-header__title {
+    font-size: 1.75rem;
+  }
+
+  .blog-filter {
+    padding: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .blog-filter__categories .btn {
+    font-size: 0.8rem;
+    padding: var(--spacing-2) var(--spacing-3);
+    margin: var(--spacing-1);
+  }
+
+  .blog-card .card-body {
+    padding: var(--card-padding-sm);
+  }
+
+  .blog-card__image {
+    min-height: 150px !important;
+  }
+
+  .card-header {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  .position-sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .pagination {
+    margin-top: var(--spacing-8);
+  }
+
+  .page-link {
+    padding: var(--spacing-2) var(--spacing-3);
+    margin: 0 var(--spacing-1);
+  }
 }
 
-@media (max-width: 768px) {
-  .section { padding: 3rem 0; }
-  .page-header { padding: 2.5rem 0; }
-  .page-header__title { font-size: 2rem; }
-  .position-sticky { position: relative !important; top: auto !important; }
-  .blog-filter { padding: 1rem; }
-  .blog-filter__categories .btn { font-size: 0.875rem; padding: 0.4rem 0.8rem; margin: 0.2rem; }
-  .blog-card .card-body { padding: 1.5rem; }
-  .pagination { margin-top: 2rem; }
-  .page-link { padding: 0.5rem 0.75rem; margin: 0 0.1rem; }
+@media (min-width: 600px) and (max-width: 839px) { /* Medium */
+  .page-header {
+    padding: var(--spacing-10) 0;
+  }
+
+  .page-header__title {
+    font-size: 2rem;
+  }
+
+  .blog-filter {
+    padding: var(--spacing-5);
+  }
+
+  .blog-card .card-body {
+    padding: var(--card-padding);
+  }
 }
 
-@media (max-width: 576px) {
-  .page-header__title { font-size: 1.75rem; }
-  .blog-filter { margin-bottom: 1.5rem; }
-  .blog-card { margin-bottom: 1.5rem; }
-  .blog-card__column { flex: 0 0 100%; max-width: 100%; }
-  .blog-card__image { min-height: 150px !important; }
+@media (min-width: 840px) and (max-width: 1199px) { /* Expanded */
+  .page-header {
+    padding: var(--spacing-12) 0;
+  }
+
+  .page-header__title {
+    font-size: 2.5rem;
+  }
+
+  .blog-filter {
+    padding: var(--spacing-6);
+  }
+}
+
+@media (min-width: 1200px) { /* Large & Extra Large */
+  .page-header {
+    padding: var(--section-padding-lg) 0;
+  }
+
+  .blog-filter {
+    padding: var(--spacing-8);
+  }
+
+  .container {
+    max-width: var(--container-large);
+  }
 }
 
 /* 預設內容樣式 */
 .blog-empty-state {
-  padding: 2rem 0;
+  padding: var(--spacing-8) 0;
 }
 
 .preview-card {
   border: none;
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   transition: all 0.3s ease;
   box-shadow: var(--shadow-sm);
+  background: var(--color-bg-card);
 }
 
 .preview-card:hover {
@@ -827,18 +909,63 @@ onMounted(async () => {
   box-shadow: var(--shadow-lg);
 }
 
+.preview-card .card-body {
+  padding: var(--card-padding);
+}
+
 .subscribe-prompt {
   border: none;
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
   box-shadow: var(--shadow-sm);
   max-width: 500px;
   margin: 0 auto;
 }
 
+.subscribe-prompt .card-body {
+  padding: var(--card-padding-lg);
+}
+
 .subscribe-prompt .btn {
   border-radius: 25px;
-  padding: 0.6rem 1.5rem;
+  padding: var(--btn-padding-y) var(--spacing-6);
   font-weight: 500;
+}
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .blog-page {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .page-header {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .blog-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .blog-filter {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-text {
+  color: var(--color-text-secondary);
 }
 </style>

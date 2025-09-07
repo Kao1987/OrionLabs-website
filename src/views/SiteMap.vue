@@ -296,4 +296,19 @@ updateSEO({
 .btn {
   transition: all 0.2s ease-in-out;
 }
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--color-text-primary);
+}
 </style>

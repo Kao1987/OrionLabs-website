@@ -267,4 +267,19 @@ const onLogin = async () => {
     max-width: 100%;
   }
 }
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .form-control {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .form-check-label {
+  color: var(--color-text-secondary);
+}
 </style>

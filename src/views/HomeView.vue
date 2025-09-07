@@ -328,8 +328,26 @@ const adminLogin = async () => {
     router.push("/admin");
   } catch (error: unknown) {
     console.error("登入錯誤:", error);
-    const errorMessage = error instanceof Error ? error.message : "登入失敗";
-    alert(errorMessage);
+    
+    // 處理不同類型的錯誤，提供更友善的訊息
+    const errorObj = error as { status?: number; message?: string; detail?: string };
+    let errorMessage = "登入失敗，請重試";
+    
+    if (errorObj.status === 401) {
+      errorMessage = "帳號或密碼錯誤，請檢查輸入";
+    } else if (errorObj.status === 429) {
+      errorMessage = "登入嘗試過於頻繁，請稍後再試";
+    } else if (errorObj.status === 0 || errorObj.status === 408) {
+      errorMessage = "無法連接到伺服器，請檢查網路連線";
+    } else if (errorObj.status && errorObj.status >= 500) {
+      errorMessage = "伺服器暫時無法使用，請稍後再試";
+    } else if (errorObj.detail) {
+      errorMessage = errorObj.detail;
+    } else if (errorObj.message) {
+      errorMessage = errorObj.message;
+    }
+    
+    alert(`🔐 登入失敗\n\n${errorMessage}\n\n請確認您的帳號密碼是否正確。`);
   }
 };
 
@@ -462,7 +480,7 @@ onMounted(() => {
             <div class="home-page__hero-visual">
               <div class="home-page__profile">
                 <div class="home-page__profile-avatar">
-                  <i class="bi bi-person-circle home-page__profile-icon" aria-hidden="true"></i>
+                  <img src="/images/profile-avatar.png" alt="Orion's Profile Avatar" class="home-page__profile-image" />
                 </div>
               </div>
             </div>
@@ -856,7 +874,7 @@ onMounted(() => {
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-6); /* 使用新的統一間距 */
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -869,7 +887,7 @@ onMounted(() => {
 .home-page__hero-name--interactive {
   cursor: pointer;
   user-select: none;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-1) var(--spacing-2); /* 使用新的統一間距 */
   border-radius: var(--radius-sm);
 }
 
@@ -884,20 +902,20 @@ onMounted(() => {
 .home-page__hero-subtitle {
   font-size: var(--font-size-xl);
   line-height: var(--line-height-relaxed);
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-12); /* 使用新的統一間距 */
   opacity: 0.9;
 }
 
 .home-page__hero-actions {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-4); /* 使用新的統一間距 */
   flex-wrap: wrap;
 }
 
 .home-page__hero-btn {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-md) var(--spacing-2xl);
+  padding: var(--btn-padding-y) var(--btn-padding-x); /* 使用語義化按鈕間距 */
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
@@ -958,16 +976,18 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-.home-page__profile-icon {
-  font-size: 6rem;
-  color: var(--color-text-light);
+.home-page__profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
 }
 
 /* === Section Styles === */
 .home-page__services,
 .home-page__projects,
 .home-page__cta {
-  padding: var(--spacing-5xl) 0;
+  padding: var(--section-padding) 0; /* 使用語義化節區間距 */
   position: relative;
 }
 
@@ -981,14 +1001,14 @@ onMounted(() => {
 
 .home-page__section-header {
   text-align: center;
-  margin-bottom: var(--spacing-4xl);
+  margin-bottom: var(--spacing-20); /* 使用新的統一間距 */
 }
 
 .home-page__section-title {
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-4); /* 使用新的統一間距 */
   line-height: var(--line-height-tight);
 }
 
@@ -1454,9 +1474,6 @@ onMounted(() => {
     height: 150px;
   }
 
-  .home-page__profile-icon {
-    font-size: 4rem;
-  }
 
   .home-page__cta-btn {
     padding: var(--spacing-md) var(--spacing-xl);

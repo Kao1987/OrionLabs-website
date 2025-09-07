@@ -77,24 +77,25 @@
       <hr class="main-footer__divider my-4" style="border-color: rgba(255, 255, 255, 0.2)" />
       <div class="main-footer__copyright row align-items-center">
         <div class="col-md-6">
-          <p class="main-footer__copyright-text mb-0">&copy; {{ currentYear }} {{ brandName }}. All rights reserved.</p>
+          <p class="main-footer__copyright-text mb-0">&copy; {{ currentYear }} OrionLabs. All rights reserved.</p>
         </div>
         <div class="col-md-6 text-md-end">
           <span class="main-footer__credits">Made with ❤️ in Taiwan</span>
         </div>
       </div>
+      
+      <!-- 法遵連結整合 -->
+      <div class="main-footer__legal row mt-3">
+        <div class="col-12 text-center">
+          <nav class="main-footer__legal-nav">
+            <router-link to="/privacy" class="main-footer__legal-link">隱私政策</router-link>
+            <router-link to="/terms" class="main-footer__legal-link">服務條款</router-link>
+            <router-link to="/cookie" class="main-footer__legal-link">Cookie 政策</router-link>
+            <router-link to="/sitemap" class="main-footer__legal-link">網站地圖</router-link>
+          </nav>
+        </div>
+      </div>
     </div>
-  </footer>
-
-  <!-- 法遵簡易 Footer -->
-  <footer class="legal-footer">
-    <p class="mb-2">© 2025 OrionLabs</p>
-    <nav class="legal-footer__nav">
-      <router-link to="/privacy" class="legal-footer__link">隱私政策</router-link>
-      <router-link to="/terms" class="legal-footer__link">服務條款</router-link>
-      <router-link to="/cookie" class="legal-footer__link">Cookie 政策</router-link>
-      <router-link to="/sitemap" class="legal-footer__link">網站地圖</router-link>
-    </nav>
   </footer>
 </template>
 <script setup lang="ts">
@@ -136,6 +137,8 @@ const currentYear = computed(() => new Date().getFullYear());
 .main-footer {
   background: linear-gradient(135deg, #1c1917 0%, #3f3f46 100%) !important;
   color: #ffffff !important;
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-xl);
 }
 
 .main-footer__brand {
@@ -158,11 +161,59 @@ const currentYear = computed(() => new Date().getFullYear());
   color: var(--color-text-light) !important;
 }
 
+/* Footer 區塊間距優化 */
+.main-footer__section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.main-footer__section-title {
+  margin-bottom: var(--spacing-md);
+}
+
+.main-footer__nav-item, 
+.main-footer__service-item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.main-footer__contact-item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.main-footer__copyright {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+}
+
+.main-footer__legal-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.main-footer__legal-link {
+  color: var(--color-text-light-secondary) !important;
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+}
+
+.main-footer__legal-link:hover {
+  color: var(--color-text-light) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* 響應式調整 */
 @media (max-width: 768px) {
   .main-footer .text-md-end {
     text-align: center !important;
     margin-top: var(--spacing-lg);
+  }
+  
+  .main-footer__section {
+    margin-bottom: var(--spacing-lg);
   }
 }
 </style>

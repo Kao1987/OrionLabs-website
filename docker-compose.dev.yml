@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 後端服務 - 開發模式
+  backend-dev:
+    build: 
+      context: ../Orionlabs-backend
+      dockerfile: Dockerfile
+    container_name: orionlabs-backend-dev
+    ports:
+      - "8001:8000"  # 使用不同端口避免衝突
+    volumes:
+      - ../Orionlabs-backend:/app  # 檔案同步，支援熱重載
+      - /app/__pycache__  # 排除快取
+    environment:
+      - DEBUG=True
+      - DATABASE_URL=mysql+pymysql://admin:CcBb0932173427!@161.33.209.198:3306/orionlabs
+      - HOST=0.0.0.0
+      - PORT=8000
+      - SECRET_KEY=dev-secret-key
+      - ACCESS_TOKEN_EXPIRE_MINUTES=1440
+      - FRONTEND_URL=http://localhost:5174
+      - BACKEND_URL=http://localhost:8001
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - orion-dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis (如果需要)
+  redis-dev:
+    image: redis:7-alpine
+    container_name: orionlabs-redis-dev
+    ports:
+      - "6380:6379"  # 使用不同端口
+    networks:
+      - orion-dev
+    profiles:
+      - "with-redis"
+
+networks:
+  orion-dev:
+    driver: bridge
+
+volumes:
+  backend_cache:

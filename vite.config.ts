@@ -33,10 +33,39 @@ function findAvailablePort(startPort: number = 5173, maxAttempts: number = 10): 
 }
 
 // https://vite.dev/config/
-export default defineConfig(async () => {
+export default defineConfig(async ({ mode }) => {
   const availablePort = await findAvailablePort(5173, 10)
 
+  // 載入環境變數
+  const envDir = './'
+  const envFiles = ['.env', `.env.${mode}`, '.env.local']
+  const env: Record<string, string> = {}
+  
+  for (const file of envFiles) {
+    try {
+      const envPath = `${envDir}${file}`
+      if (await import('fs').then(fs => fs.promises.access(envPath).then(() => true, () => false))) {
+        const content = await import('fs').then(fs => fs.promises.readFile(envPath, 'utf-8'))
+        content.split('\n').forEach(line => {
+          const [key, ...values] = line.trim().split('=')
+          if (key && !key.startsWith('#')) {
+            env[key] = values.join('=')
+          }
+        })
+      }
+    } catch {}
+  }
+
+  // 根據模式顯示不同的啟動信息
+  const modeNames: Record<string, string> = {
+    development: '純前端開發 (使用線上API)',
+    local: '本地全端開發',
+    remote: '前端開發 (連接線上API)',
+    performance: '性能測試模式'
+  }
+
   console.log(`🚀 啟動 Orion 前端開發服務器...`)
+  console.log(`📋 開發模式: ${modeNames[mode] || mode}`)
   console.log(`🔌 端口: ${availablePort}`)
   console.log(`🌐 本地訪問: http://localhost:${availablePort}`)
   console.log("-".repeat(50))
@@ -62,26 +91,39 @@ export default defineConfig(async () => {
       host: true,
       port: availablePort,
       strictPort: false, // 允許 Vite 自動尋找可用端口
-      // 添加代理配置來解決 CORS 問題 - 使用環境變數確保安全
-      proxy: {
+      // 根據模式動態配置代理
+      proxy: mode === 'local' ? {
+        // 本地模式：代理到本地後端
         '/api': {
-          target: process.env.VITE_PROXY_API_TARGET || 'http://localhost:8000',
-          changeOrigin: true,
-          secure: false,
-          rewrite: (path: string) => path.replace(/^\/api/, '/api')
-        },
-        '/auth': {
-          target: process.env.VITE_PROXY_API_TARGET || 'http://localhost:8000',
+          target: 'http://localhost:8000',
           changeOrigin: true,
           secure: false
         },
         '/health': {
-          target: process.env.VITE_PROXY_API_TARGET || 'http://localhost:8000',
+          target: 'http://localhost:8000',
           changeOrigin: true,
           secure: false
         },
         '/contact-api': {
-          target: process.env.VITE_PROXY_CONTACT_TARGET || 'http://localhost:3002',
+          target: 'http://localhost:8000',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path: string) => path.replace(/^\/contact-api/, '')
+        }
+      } : {
+        // 其他模式：使用環境變數配置的代理目標
+        '/api': {
+          target: env.VITE_PROXY_API_TARGET || 'http://161.33.209.198:8000',
+          changeOrigin: true,
+          secure: false
+        },
+        '/health': {
+          target: env.VITE_PROXY_API_TARGET || 'http://161.33.209.198:8000',
+          changeOrigin: true,
+          secure: false
+        },
+        '/contact-api': {
+          target: env.VITE_PROXY_CONTACT_TARGET || 'http://161.33.209.198:8000',
           changeOrigin: true,
           secure: false,
           rewrite: (path: string) => path.replace(/^\/contact-api/, '')

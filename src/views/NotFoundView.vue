@@ -149,4 +149,15 @@ const goBack = () => {
     margin-right: 0 !important;
   }
 }
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
 </style>

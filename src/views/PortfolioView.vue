@@ -161,7 +161,7 @@
         </div>
 
         <!-- 分頁 -->
-        <nav aria-label="Portfolio pagination" class="mt-5" v-if="totalPages > 1">
+        <nav aria-label="Portfolio pagination" class="mt-5" v-if="totalPages > 1" style="margin-top: var(--spacing-12) !important;">
           <ul class="pagination justify-content-center">
             <li class="page-item" :class="{ disabled: currentPage <= 1 }">
               <button
@@ -533,20 +533,20 @@ onMounted(async () => {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: var(--section-padding) 0; /* 使用語義化節區間距 */
 }
 
 /* 頁面標題 */
 .page-header {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: var(--color-text-light);
-  padding: 4rem 0;
+  padding: var(--section-padding-sm) 0; /* 使用語義化節區間距 */
   margin-bottom: 0;
 }
 
 .page-header__title {
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4); /* 使用統一間距系統 */
 }
 
 .page-header__lead {
@@ -556,14 +556,14 @@ onMounted(async () => {
 
 /* 篩選按鈕 */
 .portfolio-filter__categories {
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-12); /* 使用統一間距系統 */
 }
 
 .portfolio-filter__category-btn {
   border-radius: 25px;
-  padding: 0.6rem 1.5rem;
+  padding: var(--btn-padding-y) var(--spacing-6); /* 使用統一間距系統 */
   font-weight: 500;
-  margin: 0.25rem;
+  margin: var(--spacing-1); /* 使用統一間距系統 */
   transition: all 0.3s ease;
   border: 2px solid var(--color-border-primary);
   background: var(--color-bg-primary);
@@ -694,24 +694,24 @@ onMounted(async () => {
 
 /* 卡片內容 */
 .card-body {
-  padding: 1.8rem;
+  padding: var(--card-padding); /* 使用語義化卡片間距 */
 }
 
 .card-title {
   font-weight: 600;
   color: var(--color-text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4); /* 使用統一間距系統 */
 }
 
 .card-text {
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4); /* 使用統一間距系統 */
 }
 
 /* 技術標籤 */
 .badge {
   font-size: 0.75rem;
-  padding: 0.4rem 0.8rem;
+  padding: var(--spacing-1) var(--spacing-3); /* 使用統一間距系統 */
   border-radius: 12px;
   font-weight: 500;
 }
@@ -720,7 +720,7 @@ onMounted(async () => {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.8rem;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-2) var(--spacing-4); /* 使用統一間距系統 */
   background-color: var(--color-bg-tertiary);
   border-radius: 20px;
 }
@@ -738,7 +738,7 @@ onMounted(async () => {
 /* 搜尋與篩選區域 */
 .portfolio-filter {
   background: var(--color-bg-card);
-  padding: 2rem;
+  padding: var(--spacing-8); /* 使用統一間距系統 */
   border-radius: 15px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border-primary);
@@ -746,7 +746,7 @@ onMounted(async () => {
 
 .portfolio-filter__technology {
   background: var(--color-bg-secondary);
-  padding: 1.5rem;
+  padding: var(--spacing-6); /* 使用統一間距系統 */
   border-radius: 12px;
   border: 1px solid var(--color-border-primary);
 }
@@ -784,17 +784,18 @@ onMounted(async () => {
 
 .modal-header {
   border-bottom: 1px solid var(--color-border-primary);
-  padding: 1.5rem;
+  padding: var(--spacing-4) var(--spacing-6); /* 使用統一間距系統 */
   background-color: var(--color-bg-secondary);
 }
 
 .modal-body {
-  padding: 2rem;
+  padding: var(--spacing-6); /* 使用統一間距系統 */
 }
 
 .modal-footer {
   border-top: 1px solid var(--color-border-primary);
-  padding: 1.5rem;
+  padding: var(--spacing-4) var(--spacing-6); /* 使用統一間距系統 */
+  gap: var(--spacing-3); /* 使用統一間距系統 */
 }
 
 /* 空狀態 */
@@ -849,22 +850,89 @@ onMounted(async () => {
   }
 }
 
-@media (max-width: 576px) {
+/* 響應式設計 - Google Material Design 3 Breakpoints */
+@media (max-width: 599px) { /* Compact */
   .page-header__title {
     font-size: 1.75rem;
   }
 
+  .page-header__lead {
+    font-size: 1rem;
+  }
+
+  .portfolio-filter {
+    padding: var(--spacing-6);
+    margin-bottom: var(--spacing-8);
+  }
+
   .portfolio-filter__categories {
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-8);
   }
 
   .portfolio-filter__category-btn {
     font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    padding: var(--spacing-2) var(--spacing-4);
+    margin: var(--spacing-1);
+  }
+
+  .portfolio-filter__technology {
+    padding: var(--spacing-4);
   }
 
   .card-body {
-    padding: 1.5rem;
+    padding: var(--card-padding-sm);
+  }
+
+  .portfolio-card__overlay-content .btn {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: 0.8rem;
+  }
+
+  .modal-dialog {
+    margin: var(--spacing-4);
+  }
+
+  .modal-header,
+  .modal-footer {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  .modal-body {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 839px) { /* Medium */
+  .portfolio-filter {
+    padding: var(--spacing-7);
+  }
+
+  .card-body {
+    padding: var(--card-padding);
+  }
+}
+
+@media (min-width: 840px) and (max-width: 1199px) { /* Expanded */
+  .portfolio-filter {
+    padding: var(--spacing-8);
+  }
+
+  .section {
+    padding: var(--section-padding) 0;
+  }
+}
+
+@media (min-width: 1200px) { /* Large & Extra Large */
+  .container {
+    max-width: var(--container-large);
+  }
+
+  .section {
+    padding: var(--section-padding-lg) 0;
+  }
+
+  .portfolio-filter {
+    padding: var(--spacing-10);
   }
 }
 
@@ -891,7 +959,7 @@ onMounted(async () => {
 
 /* 預設內容樣式 */
 .portfolio-empty-state {
-  padding: 2rem 0;
+  padding: var(--spacing-8) 0;
 }
 
 .preview-card {
@@ -899,11 +967,16 @@ onMounted(async () => {
   border-radius: 15px;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-sm);
+  background: var(--color-bg-card);
 }
 
 .preview-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
+}
+
+.preview-card .card-body {
+  padding: var(--card-padding);
 }
 
 .contact-prompt {
@@ -915,9 +988,100 @@ onMounted(async () => {
   margin: 0 auto;
 }
 
+.contact-prompt .card-body {
+  padding: var(--card-padding-lg);
+}
+
 .contact-prompt .btn {
   border-radius: 25px;
-  padding: 0.6rem 1.5rem;
+  padding: var(--btn-padding-y) var(--spacing-6);
   font-weight: 500;
+}
+
+/* 分頁樣式 */
+.pagination {
+  margin-bottom: 0;
+}
+
+.page-link {
+  padding: var(--spacing-3) var(--spacing-4);
+  margin: 0 var(--spacing-1);
+  border-radius: 8px;
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-card);
+  transition: all 0.3s ease;
+}
+
+.page-link:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.page-item.disabled .page-link {
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-muted);
+  border-color: var(--color-border-muted);
+  cursor: not-allowed;
+}
+
+.page-item.disabled .page-link:hover {
+  transform: none;
+}
+
+/* === Dark Mode Support === */
+[data-theme="dark"] .portfolio-page {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .page-header {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .portfolio-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .portfolio-filter {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .card-text {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+  border-color: var(--color-border-primary);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
 }
 </style>

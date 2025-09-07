@@ -13,9 +13,9 @@ export const DEV_DEFAULTS = {
 
 // 生產環境配置
 export const PROD_DEFAULTS = {
-  API_URL: "https://api.orionlabs.dev", // 請根據實際域名修改
-  CONTACT_API_URL: "https://contact.orionlabs.dev",
-  BACKEND_PORT: 80,
+  API_URL: "http://161.33.209.198:8000", // 已部署的後端API
+  CONTACT_API_URL: "http://161.33.209.198:8000", // 聯絡表單使用同一個API
+  BACKEND_PORT: 8000,
   FRONTEND_PORT: 80,
 };
 
@@ -45,61 +45,65 @@ export const API_CONFIG = {
   VERSION: import.meta.env.VITE_APP_VERSION ?? "1.0.0",
 };
 
-// API 端點配置
+// API 端點配置 - 更新為 v1 API 結構
 export const API_ENDPOINTS = {
   // 認證相關
   AUTH: {
-    LOGIN: "/auth/login",
-    LOGOUT: "/auth/logout",
-    REFRESH: "/auth/refresh",
-    ME: "/auth/me",
+    LOGIN: "/api/v1/auth/login",
+    LOGOUT: "/api/v1/auth/logout",
+    REFRESH: "/api/v1/auth/refresh",
+    ME: "/api/v1/auth/me",
   },
 
   // 部落格相關
   BLOG: {
-    POSTS: "/api/blog/posts",
-    POST: (id: string | number) => `/api/blog/posts/${id}`,
-    PUBLIC: "/api/blog/public",
-    PUBLIC_POST: (id: string | number) => `/api/blog/public/${id}`,
-    CATEGORIES: "/api/blog/categories",
-    TAGS: "/api/blog/tags",
-    SEARCH: "/api/blog/search",
+    POSTS: "/api/v1/blog/",
+    POST: (id: string | number) => `/api/v1/blog/${id}`,
+    PUBLIC: "/api/v1/blog/public",
+    PUBLIC_POST: (id: string | number) => `/api/v1/blog/public/${id}`,
+    CATEGORIES: "/api/v1/blog/categories",
+    TAGS: "/api/v1/blog/tags",
+    POPULAR_TAGS: "/api/v1/blog/tags/popular",
+    SEARCH: "/api/v1/blog/search",
+    LIKE_POST: (id: string | number) => `/api/v1/blog/${id}/like`,
   },
 
   // 作品集相關
   PORTFOLIO: {
-    ITEMS: "/api/portfolio",
-    ITEM: (id: string | number) => `/api/portfolio/${id}`,
-    PUBLIC: "/api/portfolio/public",
-    PUBLIC_ITEM: (id: string | number) => `/api/portfolio/public/${id}`,
-    CATEGORIES: "/api/portfolio/categories",
-    TECHNOLOGIES: "/api/portfolio/technologies",
+    ITEMS: "/api/v1/blog/portfolio",
+    ITEM: (id: string | number) => `/api/v1/blog/portfolio/${id}`,
+    PUBLIC: "/api/v1/blog/portfolio/public",
+    PUBLIC_ITEM: (id: string | number) => `/api/v1/blog/portfolio/public/${id}`,
+    CATEGORIES: "/api/v1/blog/portfolio/categories",
+    TECHNOLOGIES: "/api/v1/blog/portfolio/technologies",
   },
 
   // 留言相關
   MESSAGE: {
-    MESSAGES: "/api/messages",
-    MESSAGE: (id: string | number) => `/api/messages/${id}`,
-    STATUS: (id: string | number) => `/api/messages/${id}/status`,
-    BATCH_READ: "/api/messages/batch/read",
+    MESSAGES: "/api/v1/blog/messages",
+    MESSAGE: (id: string | number) => `/api/v1/blog/messages/${id}`,
+    STATUS: (id: string | number) => `/api/v1/blog/messages/${id}/status`,
+    MARK_READ: (id: string | number) => `/api/v1/blog/messages/${id}/mark-read`,
+    UNREAD_COUNT: "/api/v1/blog/messages/stats/unread",
   },
 
-  // 聯絡表單
+  // 聯絡表單（使用留言API）
   CONTACT: {
-    SUBMIT: "/api/contact",
+    SUBMIT: "/api/v1/blog/messages",
   },
 
   // 統計相關
   STATS: {
-    OVERVIEW: "/api/stats",
-    DETAILED: "/api/stats/detailed",
-    VISITORS: "/api/stats/visitors",
+    OVERVIEW: "/api/v1/blog/stats",
+    DETAILED: "/api/v1/blog/stats/detailed",
+    VISITORS: "/api/v1/blog/stats/visitors",
   },
 
   // 檔案上傳
   UPLOAD: {
-    IMAGE: "/api/upload/image",
-    FILE: "/api/upload/file",
+    IMAGE: "/api/v1/upload/image",
+    FILE: "/api/v1/upload/file",
+    DELETE: (filename: string) => `/api/v1/upload/${filename}`,
   },
 
   // 系統相關
