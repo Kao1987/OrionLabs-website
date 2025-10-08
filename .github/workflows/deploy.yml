@@ -37,39 +37,44 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Prepare deployment directory
+      - name: Deploy to server using rsync
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            echo "🧹 準備部署目錄..."
-            sudo rm -rf /var/www/orionlabs.pro/personal-brand-website/dist
-            sudo mkdir -p /var/www/orionlabs.pro/personal-brand-website/dist
-            sudo chown -R $USER:$USER /var/www/orionlabs.pro/personal-brand-website/dist
-            sudo chmod -R 755 /var/www/orionlabs.pro/personal-brand-website/dist
-            echo "✅ 目錄準備完成"
+            echo "🚀 開始部署..."
+            # 建立臨時目錄
+            mkdir -p ~/deploy-temp
+            echo "✅ 臨時目錄已建立"
 
-      - name: Deploy to server
+      - name: Upload build files
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           source: "dist/*"
-          target: "/var/www/orionlabs.pro/personal-brand-website/dist"
+          target: "~/deploy-temp"
           strip_components: 1
-          overwrite: true
 
-      - name: Set correct permissions
+      - name: Move files to production and set permissions
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
+            echo "📦 移動檔案到生產目錄..."
+            # 使用 sudo 移除舊檔案並複製新檔案
+            sudo rm -rf /var/www/orionlabs.pro/personal-brand-website/dist/*
+            sudo cp -r ~/deploy-temp/* /var/www/orionlabs.pro/personal-brand-website/dist/
+            # 清理臨時目錄
+            rm -rf ~/deploy-temp
+            # 設置正確權限
             sudo chown -R www-data:www-data /var/www/orionlabs.pro/personal-brand-website/dist
             sudo chmod -R 755 /var/www/orionlabs.pro/personal-brand-website/dist
+            # 重載 nginx
             sudo systemctl reload nginx
             echo "✅ 部署完成！"
