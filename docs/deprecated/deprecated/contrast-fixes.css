@@ -1,0 +1,258 @@
+/* === OrionLabs 色彩對比度修復 - 緊急修補 === */
+/* @deprecated 2025-07-26 此檔案將被 orion-bem-system.css 替代 */
+/* 建議使用 BEM 類別系統，避免硬編碼顏色 */
+
+/* ❗ 緊急修復：覆蓋所有低對比度色彩 - 將被棄用 */
+
+/* 全域文字色彩強化 */
+body {
+  color: #1c1917 !important; /* 確保深色文字 */
+}
+
+[data-theme="dark"] body {
+  color: #fafafa !important; /* 確保淺色文字 */
+}
+
+/* === 導航列優化 === */
+.navbar-brand {
+  color: #002fa7 !important;
+  font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+  color: #002fa7 !important;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #001d6d !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: #001d6d !important;
+  background-color: rgba(0, 47, 167, 0.1);
+}
+
+/* === Hero 區塊文字確保可見 === */
+.hero-section,
+.hero-section * {
+  color: #ffffff !important;
+}
+
+.hero-section .text-warning {
+  color: #fbbf24 !important; /* 更高對比的警告色 */
+}
+
+.hero-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  color: #f5f5f4 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* === 按鈕色彩強化 === */
+.btn-primary {
+  background-color: #002fa7 !important;
+  border-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #001d6d !important;
+  border-color: #001d6d !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-light {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus {
+  background-color: #ffffff !important;
+  color: #002fa7 !important;
+}
+
+/* === Footer 色彩完全修復 === */
+.footer {
+  background: linear-gradient(135deg, #1c1917 0%, #44403c 100%) !important;
+  color: #ffffff !important;
+}
+
+.footer h5,
+.footer h6 {
+  color: #ffffff !important;
+}
+
+.footer p {
+  color: #e7e5e4 !important;
+}
+
+.footer .footer_link {
+  color: #d6d3d1 !important;
+}
+
+.footer .footer_link:hover {
+  color: #ffffff !important;
+}
+
+.footer .footer_brand-link {
+  color: #80c2ff !important;
+}
+
+.footer .footer_brand-link:hover {
+  color: #b3d9ff !important;
+}
+
+/* === 卡片與內容區塊 === */
+.card {
+  color: #1c1917;
+}
+
+.card-title {
+  color: #1c1917 !important;
+}
+
+.card-text {
+  color: #57534e !important;
+}
+
+.text-muted {
+  color: #78716c !important;
+}
+
+.text-primary {
+  color: #002fa7 !important;
+}
+
+/* === 強調元素 === */
+.badge-primary {
+  background-color: #002fa7 !important;
+  color: #ffffff !important;
+}
+
+.badge-secondary {
+  background-color: #78716c !important;
+  color: #ffffff !important;
+}
+
+/* === 互動元素 === */
+a {
+  color: #002fa7;
+}
+
+a:hover,
+a:focus {
+  color: #001d6d;
+}
+
+/* === 表單元素 === */
+.form-control {
+  color: #1c1917;
+  background-color: #ffffff;
+  border-color: #c8c7c5;
+}
+
+.form-control:focus {
+  border-color: #002fa7;
+  box-shadow: 0 0 0 0.25rem rgba(0, 47, 167, 0.25);
+}
+
+/* === 暗色模式專用修復 === */
+[data-theme="dark"] .footer {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1c1917 100%) !important;
+}
+
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] .navbar-nav .nav-link {
+  color: #4dabff !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover {
+  color: #80c2ff !important;
+}
+
+[data-theme="dark"] .text-primary {
+  color: #4dabff !important;
+}
+
+[data-theme="dark"] .card {
+  background-color: #292524;
+  color: #fafafa;
+}
+
+[data-theme="dark"] .card-title {
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .card-text {
+  color: #d6d3d1 !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: #a8a29e !important;
+}
+
+/* === 最終確保條款 === */
+/* 確保所有深色背景上的文字都是淺色 */
+.bg-dark,
+.bg-primary,
+.hero-section,
+.footer {
+  color: #ffffff !important;
+}
+
+.bg-dark *,
+.bg-primary *,
+.hero-section *,
+.footer * {
+  color: inherit;
+}
+
+/* 確保所有淺色背景上的文字都是深色 */
+.bg-light,
+.bg-white,
+.card {
+  color: #1c1917 !important;
+}
+
+/* 頭條文字強化 */
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  font-weight: 600;
+}
+
+.hero-section h1,
+.hero-section h2,
+.hero-section h3,
+.hero-section h4,
+.hero-section h5,
+.hero-section h6 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  font-weight: 700 !important;
+}
+
+/* 夜間模式下的額外加強 */
+[data-theme="dark"] .hero-section h1,
+[data-theme="dark"] .hero-section h2,
+[data-theme="dark"] .hero-section h3,
+[data-theme="dark"] .hero-section h4,
+[data-theme="dark"] .hero-section h5,
+[data-theme="dark"] .hero-section h6 {
+  color: #ffffff !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8) !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .hero-section * {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}

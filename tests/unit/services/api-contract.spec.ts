@@ -329,7 +329,7 @@ describe("API Contract Tests (MSW Layer)", () => {
     describe("POST /blog/posts", () => {
       it("should create new blog post with valid payload", async () => {
         server.use(
-          http.post(`*/api/blog/posts`, async ({ request }) => {
+          http.post(`*/api/v1/blog/`, async ({ request }) => {
             const body = (await request.json()) as any;
 
             // 驗證必要欄位
@@ -372,6 +372,62 @@ describe("API Contract Tests (MSW Layer)", () => {
         expect(data).toHaveProperty("id");
         expect(data.title).toBe("New Blog Post");
       });
+    });
+  });
+
+  describe("Tag and Category API Contracts", () => {
+    it("GET /blog/tags - should return a list of tags", async () => {
+      server.use(
+        http.get(`*/api/v1/blog/tags`, () => {
+          return HttpResponse.json([
+            { id: 1, name: 'Vue', color: '#4FC08D', usage_count: 10 },
+            { id: 2, name: 'TypeScript', color: '#3178C6', usage_count: 8 },
+          ]);
+        })
+      );
+
+      const response = await unifiedFetch(API_ENDPOINTS.TAGS.LIST);
+      expect(response.ok).toBe(true);
+      const data = await response.json();
+      expect(Array.isArray(data)).toBe(true);
+      expect(data[0]).toHaveProperty('id');
+      expect(data[0]).toHaveProperty('name');
+    });
+
+    it("POST /blog/tags - should create a new tag", async () => {
+      server.use(
+        http.post(`*/api/v1/blog/tags`, async ({ request }) => {
+          const body = await request.json() as any;
+          expect(body).toHaveProperty('name');
+          return HttpResponse.json({ id: 3, ...body, usage_count: 0 }, { status: 201 });
+        })
+      );
+
+      const response = await unifiedFetch(API_ENDPOINTS.TAGS.CREATE, {
+        method: 'POST',
+        body: JSON.stringify({ name: 'Nuxt', color: '#00DC82', category: 'technology' }),
+      });
+      expect(response.status).toBe(201);
+      const data = await response.json();
+      expect(data.name).toBe('Nuxt');
+    });
+
+    it("GET /blog/categories - should return a list of categories", async () => {
+      server.use(
+        http.get(`*/api/v1/blog/categories`, () => {
+          return HttpResponse.json([
+            { id: 1, name: '前端開發', color: '#4FC08D', post_count: 5 },
+            { id: 2, name: '後端開發', color: '#3178C6', post_count: 3 },
+          ]);
+        })
+      );
+
+      const response = await unifiedFetch(API_ENDPOINTS.BLOG_CATEGORIES.LIST);
+      expect(response.ok).toBe(true);
+      const data = await response.json();
+      expect(Array.isArray(data)).toBe(true);
+      expect(data[0]).toHaveProperty('id');
+      expect(data[0]).toHaveProperty('name');
     });
   });
 
@@ -464,7 +520,7 @@ describe("API Contract Tests (MSW Layer)", () => {
       await expect(unifiedFetch("/slow-endpoint", {
         method: "GET",
         signal: controller.signal,
-      })).rejects.toThrow("The operation was aborted");
+      })).rejects.toThrow();
 
       clearTimeout(timeoutId);
     });

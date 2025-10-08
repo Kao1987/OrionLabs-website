@@ -5,6 +5,8 @@ import {
   type BlogPost as APIBlogPost,
   type BlogPostCreate,
   type BlogPostUpdate,
+  blogCategoryAPI,
+  type BlogCategory,
 } from "@/services/api";
 
 export type BlogPost = APIBlogPost;
@@ -18,8 +20,13 @@ export const useBlogStore = defineStore("blog", () => {
     create: false,
     update: false,
     delete: false,
+    categories: false,
   });
   const error = ref<{ message: string; code?: number } | null>(null);
+
+  // 部落格分類相關狀態
+  const blogCategories = ref<BlogCategory[]>([]);
+  const categoryMap = ref<Map<number, BlogCategory>>(new Map());
 
   // 新增的篩選和分頁狀態
   const searchQuery = ref("");
@@ -267,6 +274,47 @@ export const useBlogStore = defineStore("blog", () => {
     currentPage.value = 1;
   };
 
+  // 部落格分類相關方法
+  const fetchBlogCategories = async () => {
+    try {
+      loading.value.categories = true;
+      const fetchedCategories = await blogCategoryAPI.getCategories();
+      blogCategories.value = fetchedCategories;
+
+      // 更新 categoryMap 以便快速查找
+      categoryMap.value.clear();
+      fetchedCategories.forEach(cat => {
+        categoryMap.value.set(cat.id, cat);
+      });
+    } catch (err) {
+      console.error('載入部落格分類失敗:', err);
+      setError('載入分類失敗', 500);
+    } finally {
+      loading.value.categories = false;
+    }
+  };
+
+  const getCategoryById = (id: number): BlogCategory | null => {
+    return categoryMap.value.get(id) || null;
+  };
+
+  const getCategoryByName = (name: string): BlogCategory | null => {
+    return blogCategories.value.find(cat => cat.name === name) || null;
+  };
+
+  const getActiveBlogCategories = computed(() => {
+    return blogCategories.value.filter(cat => cat.is_active);
+  });
+
+  const getBlogCategoriesWithCounts = computed(() => {
+    return blogCategories.value.map(category => {
+      const postCount = publishedPosts.value.filter(post =>
+        post.category === category.name
+      ).length;
+      return { ...category, actual_post_count: postCount };
+    });
+  });
+
   return {
     // State
     posts: computed(() => posts.value),
@@ -295,6 +343,11 @@ export const useBlogStore = defineStore("blog", () => {
     paginatedPosts,
     tagCounts,
 
+    // Blog Categories State
+    blogCategories: computed(() => blogCategories.value),
+    activeCategories: getActiveBlogCategories,
+    categoriesWithCounts: getBlogCategoriesWithCounts,
+
     // Actions
     setLoading,
     setError,
@@ -308,5 +361,10 @@ export const useBlogStore = defineStore("blog", () => {
     setPage,
     toggleTag,
     clearFilters,
+
+    // Blog Category Actions
+    fetchBlogCategories,
+    getCategoryById,
+    getCategoryByName,
   };
 });

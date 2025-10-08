@@ -22,6 +22,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
         
+      - name: Security and Environment Check
+        run: |
+          echo "🔒 執行安全檢查..."
+          yarn security:check
+          
+      - name: Type Check
+        run: yarn type-check
+        
+      - name: Run Tests
+        run: yarn test:run
+        
       - name: Build project
         run: yarn build
         

@@ -23,8 +23,8 @@ import "./assets/css/responsive-system.css"; // 📱 RWD 系統
 // 3. CSS 層級系統（最優先載入，管理特異性）
 import "./assets/css/orion-layer-system.css"; // 🎯 CSS Layer 架構系統
 
-// 4. 統一主題系統（合併 9 個主題檔案，減少 HTTP 請求）
-import "./assets/css/orion-consolidated-theme.css"; // 🎯 統一主題系統 - 369 個 CSS 變數
+// 4. 主題系統（使用基礎主題文件）
+import "./assets/theme.css"; // 🎯 Orion 主題系統
 
 // 5. 關鍵 CSS 檔案（無法合併）
 import "./assets/utilities.css"; // 🛠️ 工具類
@@ -33,6 +33,9 @@ import "./assets/css/contrast-enhancements.css"; // 🎯 WCAG 對比度增強
 // 6. 向後相容支持（逐步深度 Deprecated）
 import "./assets/global.css"; // ⚠️ 向後相容，將逐步移除
 import "./assets/css/bootstrap-overrides.css"; // 🎯 Bootstrap 覆蓋（@layer overrides）
+
+// 7. 管理後台深色模式修復
+import "./assets/css/admin-dark-mode-fix.css"; // 🎯 管理後台深色模式修復
 
 // === 主題驗證工具 (開發環境) ===
 import { runThemeConsistencyCheck } from "./utils/themeValidator";

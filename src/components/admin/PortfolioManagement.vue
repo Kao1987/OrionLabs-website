@@ -368,17 +368,12 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label"
-                      >使用技術（用逗號分隔） <span class="text-danger">*</span></label
-                    >
-                    <input
-                      v-model="technologiesInput"
-                      type="text"
-                      class="form-control"
-                      placeholder="Vue.js, Node.js, MongoDB, TypeScript"
-                      required
+                    <!-- 使用新的技術標籤輸入組件 -->
+                    <technology-tag-input
+                      v-model="selectedTechnologyTags"
+                      :max-tags="10"
+                      placeholder="選擇或新增技術標籤..."
                     />
-                    <div class="form-text">請列出主要使用的技術和工具</div>
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -539,6 +534,8 @@ import { ref, computed, onMounted, watch } from "vue";
 import { usePortfolioStore, type PortfolioProject } from "@/stores/portfolio";
 import { useUIStore } from "@/stores/ui";
 import ImageUpload from "@/components/ImageUpload.vue";
+import TechnologyTagInput from "@/components/TechnologyTagInput.vue";
+import type { TechnologyTag } from "@/services/api";
 
 const portfolioStore = usePortfolioStore();
 const uiStore = useUIStore();
@@ -574,6 +571,7 @@ const currentProject = ref<Partial<PortfolioProject>>({
 });
 
 const technologiesInput = ref("");
+const selectedTechnologyTags = ref<TechnologyTag[]>([]);
 const imagesInput = ref("");
 const startDateInput = ref("");
 const endDateInput = ref("");
@@ -734,10 +732,8 @@ const validateForm = () => {
 const saveProject = async () => {
   if (!validateForm()) return;
 
-  const technologies = technologiesInput.value
-    .split(",")
-    .map((tech) => tech.trim())
-    .filter((tech) => tech);
+  // 從技術標籤中提取名稱
+  const technologies = selectedTechnologyTags.value.map(tag => tag.name);
   const images = imagesInput.value
     .split("\n")
     .map((img) => img.trim())
@@ -777,9 +773,20 @@ const saveProject = async () => {
   }
 };
 
-const editProject = (project: PortfolioProject) => {
+const editProject = async (project: PortfolioProject) => {
   currentProject.value = { ...project };
   technologiesInput.value = project.technologies.join(", ");
+
+  // 根據技術名稱載入對應的技術標籤
+  try {
+    await portfolioStore.fetchTechnologyTags();
+    selectedTechnologyTags.value = portfolioStore.getTechnologyTagsByNames(project.technologies);
+  } catch (error) {
+    console.error('載入技術標籤失敗:', error);
+    // 如果載入失敗，至少保持舊的輸入方式作為後備
+    selectedTechnologyTags.value = [];
+  }
+
   imagesInput.value = project.images.join("\n");
   startDateInput.value = project.startDate
     ? new Date(project.startDate).toISOString().split("T")[0]
@@ -843,6 +850,7 @@ const closeModal = () => {
     status: "active",
   };
   technologiesInput.value = "";
+  selectedTechnologyTags.value = [];
   imagesInput.value = "";
   startDateInput.value = "";
   endDateInput.value = "";
@@ -867,6 +875,7 @@ const handleFilesAdded = (files: File[]) => {
 // Lifecycle
 onMounted(() => {
   portfolioStore.fetchProjects({ forAdmin: true });
+  portfolioStore.fetchTechnologyTags(); // 載入技術標籤
 });
 
 // Watchers

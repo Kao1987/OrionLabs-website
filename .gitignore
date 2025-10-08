@@ -29,11 +29,19 @@ coverage
 # Environment files
 *.env
 !.env.example
+temp-env
+*.key
+*.pem
+*.p12
+
+# Security sensitive files
+config/secrets.*
+.secrets/
+*.secret
 
 # Temporary docs to ignore
 /docs/temp/
 /docs/drafts/
-/docs/
 
 *.tsbuildinfo
 

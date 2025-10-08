@@ -1,0 +1,71 @@
+# === OrionLabs 廢棄檔案清單 ===
+# 遵循 A-core §1.5：@deprecated 三版過渡期後移除
+
+deprecated_files:
+  # P2 檔案結構優化（v2.8.2 標記）
+  - path: "src/assets/css/dark-mode-comprehensive-fix.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
+  - path: "src/assets/css/dark-mode-fixes.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
+  - path: "src/assets/css/dark-mode-enhancements.css"
+    reason: "功能已整合至 dark-theme-enhancement.css"
+    deprecated_version: "v2.8.2"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/dark-theme-enhancement.css"
+
+  # CSS 架構重構相關（v2.8.1 標記）
+  - path: "src/assets/color-optimizations.css"
+    reason: "已移至 bootstrap-overrides.css 與 @layer 架構"
+    deprecated_version: "v2.8.1"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/bootstrap-overrides.css"
+    
+  - path: "src/assets/css/page-theme-consistency.css"
+    reason: "已整合至 orion-unified-theme.css"
+    deprecated_version: "v2.8.1"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/orion-unified-theme.css"
+    
+  - path: "src/assets/css/page-color-consistency.css"
+    reason: "已整合至 orion-unified-theme.css"
+    deprecated_version: "v2.8.1"
+    removal_target: "v3.0.0"
+    replacement: "src/assets/css/orion-unified-theme.css"
+    
+  - path: "src/assets/global.css"
+    reason: "建議遷移至 orion-unified-theme.css 統一主題系統"
+    deprecated_version: "v2.8.1"
+    removal_target: "v3.1.0"
+    replacement: "src/assets/css/orion-unified-theme.css + color-adapter.css"
+    
+  - path: "src/assets/components.css"
+    reason: "建議遷移至 BEM-Lite 系統"
+    deprecated_version: "v2.8.1"
+    removal_target: "v3.1.0"
+    replacement: "src/assets/css/orion-bem-system.css"
+
+# 遷移指引
+migration_guide:
+  - from: "var(--orion-primary)"
+    to: "var(--color-primary)"
+    note: "使用語意化色彩變數"
+    
+  - from: "var(--brand-primary)"
+    to: "var(--color-primary)"
+    note: "統一品牌色彩命名"
+    
+  - from: "var(--text-primary)"
+    to: "var(--color-text-primary)"
+    note: "統一文字色彩命名"
+    
+  - from: ".u-mb-md { margin-bottom: var(--spacing-md) !important; }"
+    to: ".u-mb-md { margin-bottom: var(--spacing-md); }"
+    note: "移除 !important，使用 @layer utilities 管理優先級"

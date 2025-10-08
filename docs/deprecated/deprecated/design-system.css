@@ -1,0 +1,320 @@
+/* Orion Portfolio - Design System Variables */
+/* 遵循規格書定義的色彩、字體、斷點規範 */
+
+:root {
+  /* === 主要色彩 (規格書定義) === */
+  --color-primary: #2c3e50;
+  --color-secondary: #34495e;
+  --color-accent: #3498db;
+  --color-background-light: #f8f9fa;
+
+  /* === 擴展色彩系統 === */
+  --color-white: #ffffff;
+  --color-black: #1c1c1c;
+
+  /* 語意化色彩 */
+  --color-success: #27ae60;
+  --color-warning: #f39c12;
+  --color-danger: #e74c3c;
+  --color-info: #3498db;
+
+  /* 文字色彩 */
+  --color-text-primary: #2c3e50;
+  --color-text-secondary: #34495e;
+  --color-text-muted: #7f8c8d;
+  --color-text-light: #ecf0f1;
+
+  /* 背景色彩 */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-muted: #ecf0f1;
+  --color-bg-dark: #2c3e50;
+
+  /* 邊框色彩 */
+  --color-border: #dee2e6;
+  --color-border-light: #e9ecef;
+  --color-border-dark: #adb5bd;
+
+  /* === 字體系統 (規格書定義) === */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-code: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+  /* 字重 */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* 行高 (規格書定義) */
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+  --line-height-tight: 1.4;
+
+  /* 字體大小 */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+
+  /* === 間距系統 === */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  --spacing-4xl: 6rem;      /* 96px */
+
+  /* === 圓角 (規格書定義) === */
+  --border-radius-sm: 0.25rem;  /* 4px */
+  --border-radius-md: 0.5rem;   /* 8px - 規格書指定 */
+  --border-radius-lg: 1rem;     /* 16px */
+  --border-radius-full: 9999px;
+
+  /* === 陰影系統 (規格書定義) === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.05); /* 規格書指定 */
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.15);
+
+  /* === Z-index 層級 === */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* === 過渡動畫 === */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-base: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+
+  /* === 容器最大寬度 === */
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+}
+
+/* === 日夜主題支援 === */
+[data-theme="dark"] {
+  --color-text-primary: #ecf0f1;
+  --color-text-secondary: #bdc3c7;
+  --color-text-muted: #95a5a6;
+
+  --color-bg-primary: #2c3e50;
+  --color-bg-secondary: #34495e;
+  --color-bg-muted: #4a5e7a;
+
+  --color-border: #4a5e7a;
+  --color-border-light: #5d6d7e;
+  --color-border-dark: #34495e;
+
+  /* 調整陰影在暗色主題下的表現 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* === 媒體查詢斷點 (規格書定義) === */
+/* xs: 0 (預設) */
+/* sm: 480px */
+@media (min-width: 480px) {
+  :root {
+    --font-size-base: 1.0625rem; /* 17px */
+  }
+}
+
+/* md: 768px */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 1.125rem; /* 18px */
+  }
+}
+
+/* lg: 992px */
+@media (min-width: 992px) {
+  :root {
+    --spacing-section: var(--spacing-4xl);
+  }
+}
+
+/* xl: 1280px */
+@media (min-width: 1280px) {
+  :root {
+    --container-max: var(--container-xxl);
+  }
+}
+
+/* === 全域基礎樣式 === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--line-height-base);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === 標題樣式 (規格書: 700 weight) === */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-weight: var(--font-weight-bold); /* 規格書指定 700 */
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+/* === 段落樣式 (規格書: 400 weight, 1.6 行高) === */
+p {
+  margin: 0 0 var(--spacing-md) 0;
+  font-weight: var(--font-weight-normal); /* 規格書指定 400 */
+  line-height: var(--line-height-base);   /* 規格書指定 1.6 */
+}
+
+/* === 連結樣式 === */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* === 列表樣式 === */
+ul, ol {
+  margin: 0 0 var(--spacing-md) 0;
+  padding-left: var(--spacing-lg);
+}
+
+li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* === 程式碼樣式 === */
+code, pre {
+  font-family: var(--font-family-code);
+}
+
+code {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.875em;
+  background-color: var(--color-bg-muted);
+  border-radius: var(--border-radius-sm);
+}
+
+pre {
+  margin: 0 0 var(--spacing-md) 0;
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  background-color: var(--color-bg-muted);
+  border-radius: var(--border-radius-md);
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+/* === 圖片樣式 === */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md);
+}
+
+/* === 表單樣式重置 === */
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+/* === 焦點樣式 === */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* === 無障礙 - 減少動畫偏好 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === 列印樣式 === */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  img {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+  }
+
+  h1, h2, h3,
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+}

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { portfolioAPI, type PortfolioItem, type PortfolioItemCreate } from "@/services/api";
+import { portfolioAPI, type PortfolioItem, type PortfolioItemCreate, technologyTagAPI, type TechnologyTag } from "@/services/api";
 
 // 為了向下兼容，保留原有的 PortfolioProject 介面但使用 PortfolioItem 數據
 export interface PortfolioProject {
@@ -114,6 +114,10 @@ export const usePortfolioStore = defineStore("portfolio", () => {
   const currentPage = ref(1);
   const projectsPerPage = ref(9);
 
+  // 技術標籤相關狀態
+  const availableTechnologyTags = ref<TechnologyTag[]>([]);
+  const technologyTagsLoading = ref(false);
+
   const activeProjects = computed(() =>
     projects.value.filter((project) => project.status === "active"),
   );
@@ -198,6 +202,53 @@ export const usePortfolioStore = defineStore("portfolio", () => {
 
   const setError = (err: PortfolioError) => {
     error.value = err;
+  };
+
+  // 技術標籤相關方法
+  const fetchTechnologyTags = async () => {
+    try {
+      technologyTagsLoading.value = true;
+      const tags = await technologyTagAPI.getTechnologyTags('technology');
+      availableTechnologyTags.value = tags;
+    } catch (err) {
+      console.error('載入技術標籤失敗:', err);
+      setError({
+        code: 'FETCH_TAGS_ERROR',
+        message: '載入技術標籤失敗',
+        operation: 'fetchTechnologyTags'
+      });
+    } finally {
+      technologyTagsLoading.value = false;
+    }
+  };
+
+  const getTechnologyTagsByNames = (names: string[]): TechnologyTag[] => {
+    return availableTechnologyTags.value.filter(tag =>
+      names.some(name => name.toLowerCase() === tag.name.toLowerCase())
+    );
+  };
+
+  const getOrCreateTechnologyTags = async (names: string[]): Promise<TechnologyTag[]> => {
+    const existingTags = getTechnologyTagsByNames(names);
+    const existingNames = existingTags.map(tag => tag.name.toLowerCase());
+    const newNames = names.filter(name => !existingNames.includes(name.toLowerCase()));
+
+    const newTags: TechnologyTag[] = [];
+    for (const name of newNames) {
+      try {
+        const newTag = await technologyTagAPI.createTechnologyTag({
+          name,
+          color: '#3498db',
+          category: 'technology'
+        });
+        newTags.push(newTag);
+        availableTechnologyTags.value.push(newTag);
+      } catch (err) {
+        console.error(`建立標籤 "${name}" 失敗:`, err);
+      }
+    }
+
+    return [...existingTags, ...newTags];
   };
 
   const fetchProjects = async (options: { forAdmin?: boolean } = {}) => {
@@ -421,19 +472,23 @@ export const usePortfolioStore = defineStore("portfolio", () => {
   };
 
   return {
+    // Portfolio data
     projects,
     currentProject,
+
+    // Loading states
     isLoading,
     fetchLoading,
     createLoading,
     updateLoading,
     deleteLoading,
+    technologyTagsLoading,
+
+    // Error handling
     error,
-    selectedCategory,
-    selectedTechnologies,
-    searchQuery,
-    currentPage,
-    projectsPerPage,
+    hasError,
+
+    // Computed data
     activeProjects,
     featuredProjects,
     categories,
@@ -442,12 +497,30 @@ export const usePortfolioStore = defineStore("portfolio", () => {
     totalPages,
     technologies,
     technologyCounts,
-    hasError,
+
+    // Technology tags
+    availableTechnologyTags,
+
+    // Filters and pagination
+    selectedCategory,
+    selectedTechnologies,
+    searchQuery,
+    currentPage,
+    projectsPerPage,
+
+    // Actions - Portfolio CRUD
     fetchProjects,
     fetchProject,
     createProject,
     updateProject,
     deleteProject,
+
+    // Actions - Technology tags
+    fetchTechnologyTags,
+    getTechnologyTagsByNames,
+    getOrCreateTechnologyTags,
+
+    // Actions - Filters and navigation
     setCategory,
     setSearchQuery,
     toggleTechnology,
@@ -455,6 +528,8 @@ export const usePortfolioStore = defineStore("portfolio", () => {
     setProjectsPerPage,
     clearFilters,
     performSearch,
+
+    // Actions - Error handling
     clearError,
     setError,
   };

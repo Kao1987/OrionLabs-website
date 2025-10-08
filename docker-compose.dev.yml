@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # 後端服務 - 開發模式
+  # 後端服務 - 開發模式 (連接線上資料庫)
   backend-dev:
     build: 
       context: ../Orionlabs-backend
@@ -14,12 +14,18 @@ services:
       - /app/__pycache__  # 排除快取
     environment:
       - DEBUG=True
-      - DATABASE_URL=mysql+pymysql://admin:CcBb0932173427!@161.33.209.198:3306/orionlabs
+      # 線上資料庫連接 (需要先建立SSH隧道)
+      - DATABASE_URL=mysql://your_db_user:your_db_password@host.docker.internal:3306/your_database_name
+      - DATABASE_HOST=host.docker.internal  # Docker訪問主機的特殊域名
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=your_database_name
+      - DATABASE_USER=your_db_user
+      - DATABASE_PASSWORD=your_db_password
       - HOST=0.0.0.0
       - PORT=8000
-      - SECRET_KEY=dev-secret-key
+      - SECRET_KEY=dev-secret-key-change-in-production
       - ACCESS_TOKEN_EXPIRE_MINUTES=1440
-      - FRONTEND_URL=http://localhost:5174
+      - FRONTEND_URL=http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176
       - BACKEND_URL=http://localhost:8001
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     networks:

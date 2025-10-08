@@ -70,7 +70,7 @@ start_frontend_api() {
     # 確保相依套件已安裝
     if [ ! -d "node_modules" ]; then
         log_info "安裝前端 API 相依套件..."
-        npm install
+        yarn install
     fi
     
     # 檢查 .env 檔案
@@ -79,7 +79,7 @@ start_frontend_api() {
         cp .env.example .env
     fi
     
-    npm run dev &
+    yarn dev &
     API_PID=$!
     
     log_success "前端 API 服務已啟動 (PID: $API_PID)"

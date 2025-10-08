@@ -61,6 +61,28 @@
                   作品集管理
                 </a>
               </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: activeTab === 'categories' }"
+                  @click="activeTab = 'categories'"
+                  href="#"
+                >
+                  <i class="bi bi-tags me-2"></i>
+                  分類管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :class="{ active: activeTab === 'system' }"
+                  @click="activeTab = 'system'"
+                  href="#"
+                >
+                  <i class="bi bi-cpu me-2"></i>
+                  系統監控
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -140,6 +162,48 @@
 
           <!-- 作品集管理 -->
           <portfolio-management v-if="activeTab === 'portfolio'" />
+
+          <!-- 分類管理 -->
+          <div v-if="activeTab === 'categories'" class="categories-management">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">分類管理</h1>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">
+                      <i class="bi bi-tags me-2"></i>
+                      部落格分類
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <blog-category-manager />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">
+                      <i class="bi bi-gear me-2"></i>
+                      技術標籤
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <technology-tag-manager />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 系統監控 -->
+          <system-monitor v-if="activeTab === 'system'" />
         </main>
       </div>
     </div>
@@ -152,7 +216,10 @@ import { useRouter } from "vue-router";
 import { authAPI } from "@/services/api";
 import BlogManagement from "@/components/admin/BlogManagement.vue";
 import PortfolioManagement from "@/components/admin/PortfolioManagement.vue";
+import BlogCategoryManager from "@/components/BlogCategoryManager.vue";
+import TechnologyTagManager from "@/components/TechnologyTagManager.vue";
 import UserStatusWidget from "@/components/UserStatusWidget.vue";
+import SystemMonitor from "@/components/admin/SystemMonitor.vue";
 
 const router = useRouter();
 const activeTab = ref("dashboard");

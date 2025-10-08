@@ -1,12 +1,39 @@
-// API 基本配置 - 安全的環境變數優先配置
+// API 基本配置 - 遵循 M-BE-security.md 安全規範
 // 移除硬編碼 IP，使用環境變數確保安全性
-const DEFAULT_API_URL = import.meta.env.VITE_DEFAULT_API_URL || "";
-const DEFAULT_CONTACT_API_URL = import.meta.env.VITE_DEFAULT_CONTACT_API_URL || "";
+const DEFAULT_API_URL = import.meta.env.VITE_DEFAULT_API_URL || "http://localhost:8000/api/v1";
+const DEFAULT_CONTACT_API_URL = import.meta.env.VITE_DEFAULT_CONTACT_API_URL || "http://localhost:8000/api/v1";
 
 // 環境變數優先，確保生產環境安全
-// 臨時直接連接，因為 Vite 代理出現網路問題
-const API_BASE_URL = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || "/api") : (import.meta.env.VITE_API_URL || DEFAULT_API_URL);
-const CONTACT_API_URL = import.meta.env.DEV ? (import.meta.env.VITE_CONTACT_API_URL || "/api") : (import.meta.env.VITE_CONTACT_API_URL || DEFAULT_CONTACT_API_URL);
+// 開發模式使用代理，生產模式使用直接URL
+const API_BASE_URL = import.meta.env.DEV ?
+  (import.meta.env.VITE_API_URL || "/api/v1") :
+  (import.meta.env.VITE_API_URL || DEFAULT_API_URL);
+
+// 安全檢查：生產環境必須使用 HTTPS
+if (import.meta.env.PROD && !API_BASE_URL.startsWith('https://') && !API_BASE_URL.startsWith('/')) {
+  console.warn('⚠️ 安全警告：生產環境應使用 HTTPS');
+}
+const CONTACT_API_URL = import.meta.env.DEV ?
+  (import.meta.env.VITE_CONTACT_API_URL || "/api/v1") :
+  (import.meta.env.VITE_CONTACT_API_URL || DEFAULT_CONTACT_API_URL);
+
+// 判斷後端連接類型
+function getBackendConnectionType(): 'local' | 'remote' | 'docker' {
+  const url = DEFAULT_API_URL.toLowerCase();
+
+  // 檢查是否為本地後端
+  if (url.includes('localhost') || url.includes('127.0.0.1')) {
+    return 'local';
+  }
+
+  // 檢查是否為 Docker 後端（通常使用 8001 端口）
+  if (url.includes('docker') || url.includes(':8001')) {
+    return 'docker';
+  }
+
+  // 其他情況視為遠端後端
+  return 'remote';
+}
 
 // 環境配置
 export const config = {
@@ -21,52 +48,77 @@ export const config = {
   timeout: 10000, // 10秒超時
   maxRetries: 3,
   retryDelay: 1000,
+  // 後端連接資訊
+  backendConnection: {
+    type: getBackendConnectionType(),
+    target: DEFAULT_API_URL,
+  },
 };
 
 // 統一的 API 端點配置 - 更新為 v1 API 結構
 export const API_ENDPOINTS = {
-  // 認證相關
+  // 認證相關 - 已測試可用
   AUTH: {
-    LOGIN: "/v1/auth/login",
-    LOGOUT: "/v1/auth/logout",
-    REFRESH: "/v1/auth/refresh",
-    ME: "/v1/auth/me",
+    LOGIN: "/auth/login", // ✅ 已測試 - 端點存在，返回401表示需要正確帳密
+    LOGOUT: "/auth/logout", // 需要認證
+    REFRESH: "/auth/refresh", // 需要認證
+    ME: "/auth/me", // 需要認證
   },
   // 部落格相關
   BLOG: {
-    POSTS: "/v1/blog/",
-    POST: (id: string) => `/v1/blog/${id}`,
-    PUBLIC: "/v1/blog/public",
-    PUBLIC_POST: (id: string) => `/v1/blog/public/${id}`,
-    CREATE: "/v1/blog/",
-    UPDATE: (id: string) => `/v1/blog/${id}`,
-    DELETE: (id: string) => `/v1/blog/${id}`,
-    LIKE: (id: string) => `/v1/blog/${id}/like`,
+    POSTS: "/blog/", // 需要認證
+    POST: (id: string) => `/blog/${id}`, // 需要認證
+    PUBLIC: "/blog/public", // ✅ 已測試 - 可用，返回空陣列
+    PUBLIC_POST: (id: string) => `/blog/public/${id}`, // 公開端點
+    CREATE: "/blog/", // 需要認證
+    UPDATE: (id: string) => `/blog/${id}`, // 需要認證
+    DELETE: (id: string) => `/blog/${id}`, // 需要認證
+    LIKE: (id: string) => `/blog/${id}/like`, // 需要認證
   },
   // 作品集相關
   PORTFOLIO: {
-    PROJECTS: "/v1/blog/portfolio",
-    PROJECT: (id: string) => `/v1/blog/portfolio/${id}`,
-    PUBLIC: "/v1/blog/portfolio/public",
-    PUBLIC_PROJECT: (id: string) => `/v1/blog/portfolio/public/${id}`,
-    CREATE: "/v1/blog/portfolio",
-    UPDATE: (id: string) => `/v1/blog/portfolio/${id}`,
-    DELETE: (id: string) => `/v1/blog/portfolio/${id}`,
+    PROJECTS: "/blog/portfolio",
+    PROJECT: (id: string) => `/blog/portfolio/${id}`,
+    PUBLIC: "/blog/portfolio/public",
+    PUBLIC_PROJECT: (id: string) => `/blog/portfolio/public/${id}`,
+    CREATE: "/blog/portfolio",
+    UPDATE: (id: string) => `/blog/portfolio/${id}`,
+    DELETE: (id: string) => `/blog/portfolio/${id}`,
   },
   // 聯絡相關
   CONTACT: {
-    MESSAGES: "/v1/blog/messages",
-    MESSAGE: (id: string) => `/v1/blog/messages/${id}`,
+    MESSAGES: "/blog/messages",
+    MESSAGE: (id: string) => `/blog/messages/${id}`,
+    CREATE: "/blog/messages",
   },
   // 系統相關
   SYSTEM: {
     HEALTH: "/health",
-    STATS: "/v1/blog/stats",
+    STATS: "/blog/stats",
   },
   // 檔案上傳
   UPLOAD: {
-    IMAGE: "/v1/upload/image",
-    DELETE: (filename: string) => `/v1/upload/${filename}`,
+    IMAGE: "/upload/image",
+    DELETE: (filename: string) => `/upload/${filename}`,
+  },
+  // 標籤相關（技術標籤）
+  TAGS: {
+    LIST: "/blog/tags",
+    TAG: (id: string) => `/blog/tags/${id}`,
+    CREATE: "/blog/tags",
+    UPDATE: (id: string) => `/blog/tags/${id}`,
+    DELETE: (id: string) => `/blog/tags/${id}`,
+    POPULAR: "/blog/tags/popular",
+    BY_CATEGORY: (category: string) => `/blog/tags?category=${category}`,
+  },
+  // 部落格分類相關
+  BLOG_CATEGORIES: {
+    LIST: "/blog/categories",
+    CATEGORY: (id: string) => `/blog/categories/${id}`,
+    CREATE: "/blog/categories",
+    UPDATE: (id: string) => `/blog/categories/${id}`,
+    DELETE: (id: string) => `/blog/categories/${id}`,
+    STATS: "/blog/categories/stats",
   },
 };
 
@@ -80,7 +132,18 @@ export const unifiedFetch = async (
   endpoint: string,
   options: RequestInit = {},
 ): Promise<Response> => {
-  const url = createApiUrl(endpoint);
+  // 如果endpoint已經是完整URL，直接使用；
+  // 如果是health端點，使用特殊處理，直接加到基礎代理路徑
+  // 否則添加API前綴
+  let url: string;
+  if (endpoint.startsWith('http')) {
+    url = endpoint;
+  } else if (endpoint.startsWith('/health')) {
+    // Health 端點特殊處理，直接使用代理路徑
+    url = import.meta.env.DEV ? `/api${endpoint}` : `${config.DEFAULT_API_URL.replace('/v1', '')}${endpoint}`;
+  } else {
+    url = createApiUrl(endpoint);
+  }
 
   const defaultOptions: RequestInit = {
     headers: {
@@ -194,6 +257,50 @@ export interface PortfolioItemCreate {
 
 export type PortfolioItemUpdate = Partial<PortfolioItemCreate>;
 
+// 技術標籤相關介面（基於擴充後的 tags 表）
+export interface TechnologyTag {
+  id: number;
+  name: string;
+  color: string;
+  description?: string;
+  post_count: number;
+  category: "technology" | "blog" | "general";
+  usage_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TechnologyTagCreate {
+  name: string;
+  color: string;
+  description?: string;
+  category: "technology" | "blog" | "general";
+}
+
+export type TechnologyTagUpdate = Partial<TechnologyTagCreate>;
+
+// 部落格分類相關介面（基於新的 blog_categories 表）
+export interface BlogCategory {
+  id: number;
+  name: string;
+  description?: string;
+  color: string;
+  post_count: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface BlogCategoryCreate {
+  name: string;
+  description?: string;
+  color: string;
+}
+
+export interface BlogCategoryUpdate extends Partial<BlogCategoryCreate> {
+  is_active?: boolean;
+}
+
 export interface Message {
   id: number;
   name: string;
@@ -216,6 +323,43 @@ export interface Stats {
   portfolioItems: number;
   totalViews?: number;
   totalMessages?: number;
+}
+
+// 系統監控相關介面
+export interface BuildInfo {
+  commitHash: string;
+  branch: string;
+  buildTime: string;
+}
+
+export interface BackendInfo {
+  version: string;
+  buildInfo: BuildInfo;
+  environment: string;
+}
+
+export interface HealthInfo {
+  status: 'healthy' | 'unhealthy';
+  database: boolean;
+  authSystem: boolean;
+}
+
+export interface SystemStatusData {
+  backend: BackendInfo;
+  health: HealthInfo;
+  timestamp: string;
+}
+
+export interface SystemStatus {
+  data: SystemStatusData;
+}
+
+export interface EndpointTest {
+  endpoint: string;
+  status: 'success' | 'error' | 'pending';
+  latency?: number;
+  statusCode?: number;
+  error?: string;
 }
 
 export interface APIError {
@@ -718,32 +862,32 @@ export const blogAPI = {
   // 公開API
   getPublishedPosts: async (params?: PaginationParams & FilterParams): Promise<BlogPost[]> => {
     const queryString = params ? buildQueryParams(params as Record<string, unknown>) : "";
-    return cachedApiRequest<BlogPost[]>(`/api/blog/public${queryString ? `?${queryString}` : ""}`);
+    return cachedApiRequest<BlogPost[]>(`${API_ENDPOINTS.BLOG.PUBLIC}${queryString ? `?${queryString}` : ""}`);
   },
 
   getPublishedPost: async (id: number): Promise<BlogPost> => {
-    return apiRequest<BlogPost>(`/api/blog/public/${id}`);
+    return apiRequest<BlogPost>(API_ENDPOINTS.BLOG.PUBLIC_POST(id.toString()));
   },
 
   getPublishedPostBySlug: async (slug: string): Promise<BlogPost> => {
-    return apiRequest<BlogPost>(`/api/blog/public/slug/${slug}`);
+    return apiRequest<BlogPost>(`${API_ENDPOINTS.BLOG.PUBLIC}/slug/${slug}`);
   },
 
   likePost: async (id: number): Promise<{ likes: number; message: string }> => {
-    return apiRequest<{ likes: number; message: string }>(`/api/blog/posts/${id}/like`, {
+    return apiRequest<{ likes: number; message: string }>(API_ENDPOINTS.BLOG.LIKE(id.toString()), {
       method: "POST",
     });
   },
 
   // 獲取文章分類
   getCategories: async (): Promise<string[]> => {
-    return cachedApiRequest<string[]>("/api/blog/posts/categories");
+    return cachedApiRequest<string[]>(`${API_ENDPOINTS.BLOG.POSTS}categories`);
   },
 
   // 獲取熱門標籤
   getPopularTags: async (limit = 10): Promise<{ name: string; count: number }[]> => {
     return cachedApiRequest<{ name: string; count: number }[]>(
-      `/api/blog/posts/tags/popular?limit=${limit}`,
+      `${API_ENDPOINTS.BLOG.POSTS}tags/popular?limit=${limit}`,
     );
   },
 
@@ -751,35 +895,35 @@ export const blogAPI = {
   searchPosts: async (query: string, params?: PaginationParams): Promise<BlogPost[]> => {
     const searchParams = { ...params, search: query };
     const queryString = buildQueryParams(searchParams);
-    return apiRequest<BlogPost[]>(`/api/blog/posts/search?${queryString}`);
+    return apiRequest<BlogPost[]>(`${API_ENDPOINTS.BLOG.POSTS}search?${queryString}`);
   },
 
   // 管理員API
   getAllPosts: async (params?: PaginationParams & FilterParams): Promise<BlogPost[]> => {
     const queryString = params ? buildQueryParams(params) : "";
-    return apiRequest<BlogPost[]>(`/api/blog${queryString ? `?${queryString}` : ""}`);
+    return apiRequest<BlogPost[]>(`${API_ENDPOINTS.BLOG.POSTS}${queryString ? `?${queryString}` : ""}`);
   },
 
   getPost: async (id: number): Promise<BlogPost> => {
-    return apiRequest<BlogPost>(`/api/blog/${id}`);
+    return apiRequest<BlogPost>(API_ENDPOINTS.BLOG.POST(id.toString()));
   },
 
   createPost: async (postData: BlogPostCreate): Promise<BlogPost> => {
-    return apiRequest<BlogPost>("/api/blog", {
+    return apiRequest<BlogPost>(API_ENDPOINTS.BLOG.CREATE, {
       method: "POST",
       body: JSON.stringify(postData),
     });
   },
 
   updatePost: async (id: number, postData: BlogPostUpdate): Promise<BlogPost> => {
-    return apiRequest<BlogPost>(`/api/blog/${id}`, {
+    return apiRequest<BlogPost>(API_ENDPOINTS.BLOG.UPDATE(id.toString()), {
       method: "PUT",
       body: JSON.stringify(postData),
     });
   },
 
   deletePost: async (id: number): Promise<{ message: string }> => {
-    return apiRequest<{ message: string }>(`/api/blog/${id}`, {
+    return apiRequest<{ message: string }>(API_ENDPOINTS.BLOG.DELETE(id.toString()), {
       method: "DELETE",
     });
   },
@@ -789,14 +933,14 @@ export const blogAPI = {
     ids: number[],
     updates: BlogPostUpdate,
   ): Promise<{ updated: number }> => {
-    return apiRequest<{ updated: number }>("/api/blog/batch", {
+    return apiRequest<{ updated: number }>(`${API_ENDPOINTS.BLOG.POSTS}batch`, {
       method: "PATCH",
       body: JSON.stringify({ ids, updates }),
     });
   },
 
   batchDeletePosts: async (ids: number[]): Promise<{ deleted: number }> => {
-    return apiRequest<{ deleted: number }>("/api/blog/batch", {
+    return apiRequest<{ deleted: number }>(`${API_ENDPOINTS.BLOG.POSTS}batch`, {
       method: "DELETE",
       body: JSON.stringify({ ids }),
     });
@@ -809,50 +953,50 @@ export const portfolioAPI = {
   getPublishedItems: async (params?: PaginationParams & FilterParams): Promise<PortfolioItem[]> => {
     const queryString = params ? buildQueryParams(params) : "";
     return cachedApiRequest<PortfolioItem[]>(
-      `/api/portfolio/public${queryString ? `?${queryString}` : ""}`,
+      `${API_ENDPOINTS.PORTFOLIO.PUBLIC}${queryString ? `?${queryString}` : ""}`,
     );
   },
 
   getPublishedItem: async (id: number): Promise<PortfolioItem> => {
-    return apiRequest<PortfolioItem>(`/api/portfolio/public/${id}`);
+    return apiRequest<PortfolioItem>(API_ENDPOINTS.PORTFOLIO.PUBLIC_PROJECT(id.toString()));
   },
 
   // 獲取作品分類
   getCategories: async (): Promise<string[]> => {
-    return cachedApiRequest<string[]>("/api/portfolio/categories");
+    return cachedApiRequest<string[]>(`${API_ENDPOINTS.PORTFOLIO.PROJECTS}/categories`);
   },
 
   // 獲取技術標籤
   getTechnologies: async (): Promise<string[]> => {
-    return cachedApiRequest<string[]>("/api/portfolio/technologies");
+    return cachedApiRequest<string[]>(`${API_ENDPOINTS.PORTFOLIO.PROJECTS}/technologies`);
   },
 
   // 管理員API
   getAllItems: async (params?: PaginationParams & FilterParams): Promise<PortfolioItem[]> => {
     const queryString = params ? buildQueryParams(params) : "";
-    return apiRequest<PortfolioItem[]>(`/api/portfolio${queryString ? `?${queryString}` : ""}`);
+    return apiRequest<PortfolioItem[]>(`${API_ENDPOINTS.PORTFOLIO.PROJECTS}${queryString ? `?${queryString}` : ""}`);
   },
 
   getItem: async (id: number): Promise<PortfolioItem> => {
-    return apiRequest<PortfolioItem>(`/api/portfolio/${id}`);
+    return apiRequest<PortfolioItem>(API_ENDPOINTS.PORTFOLIO.PROJECT(id.toString()));
   },
 
   createItem: async (itemData: PortfolioItemCreate): Promise<PortfolioItem> => {
-    return apiRequest<PortfolioItem>("/api/portfolio", {
+    return apiRequest<PortfolioItem>(API_ENDPOINTS.PORTFOLIO.CREATE, {
       method: "POST",
       body: JSON.stringify(itemData),
     });
   },
 
   updateItem: async (id: number, itemData: PortfolioItemUpdate): Promise<PortfolioItem> => {
-    return apiRequest<PortfolioItem>(`/api/portfolio/${id}`, {
+    return apiRequest<PortfolioItem>(API_ENDPOINTS.PORTFOLIO.UPDATE(id.toString()), {
       method: "PUT",
       body: JSON.stringify(itemData),
     });
   },
 
   deleteItem: async (id: number): Promise<{ message: string }> => {
-    return apiRequest<{ message: string }>(`/api/portfolio/${id}`, {
+    return apiRequest<{ message: string }>(API_ENDPOINTS.PORTFOLIO.DELETE(id.toString()), {
       method: "DELETE",
     });
   },
@@ -862,7 +1006,7 @@ export const portfolioAPI = {
     const formData = new FormData();
     formData.append("image", file);
 
-    return apiRequest<{ url: string; message: string }>(`/api/portfolio/${id}/images`, {
+    return apiRequest<{ url: string; message: string }>(`${API_ENDPOINTS.PORTFOLIO.PROJECT(id.toString())}/images`, {
       method: "POST",
       body: formData,
       headers: {
@@ -881,124 +1025,141 @@ export const portfolioAPI = {
 
 // 留言相關API
 export const messageAPI = {
-  // 公開API - 發送留言 (使用聯絡表單 API)
+  // 公開API - 發送留言
   sendMessage: async (messageData: MessageCreate): Promise<{ message: string; id: number }> => {
-    try {
-      // 首先嘗試使用聯絡表單 API
-      return await contactApiRequest<{ message: string; id: number }>("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(messageData),
-      });
-    } catch (err) {
-      Logger.warn("聯絡表單 API 失敗，嘗試使用主要 API", err);
-      // 如果聯絡表單 API 失敗，回退到主要 API
-      return apiRequest<{ message: string; id: number }>("/api/messages", {
-        method: "POST",
-        body: JSON.stringify(messageData),
-      });
-    }
+    return apiRequest<{ message: string; id: number }>(API_ENDPOINTS.CONTACT.CREATE, {
+      method: "POST",
+      body: JSON.stringify(messageData),
+    });
   },
 
   // 管理員API - 獲取留言列表
   getMessages: async (params?: PaginationParams & { status?: string }): Promise<Message[]> => {
     const queryString = params ? buildQueryParams(params) : "";
-    return apiRequest<Message[]>(`/api/messages${queryString ? `?${queryString}` : ""}`);
+    return apiRequest<Message[]>(`${API_ENDPOINTS.CONTACT.MESSAGES}${queryString ? `?${queryString}` : ""}`);
   },
 
   // 獲取單一留言
   getMessage: async (id: number): Promise<Message> => {
-    return apiRequest<Message>(`/api/messages/${id}`);
+    return apiRequest<Message>(API_ENDPOINTS.CONTACT.MESSAGE(id.toString()));
   },
 
   // 更新留言狀態
   updateMessageStatus: async (id: number, status: "new" | "read" | "replied"): Promise<Message> => {
-    return apiRequest<Message>(`/api/messages/${id}/status`, {
-      method: "PATCH",
+    return apiRequest<Message>(API_ENDPOINTS.CONTACT.MESSAGE(id.toString()), {
+      method: "PUT",
       body: JSON.stringify({ status }),
     });
   },
 
   // 刪除留言
   deleteMessage: async (id: number): Promise<{ message: string }> => {
-    return apiRequest<{ message: string }>(`/api/messages/${id}`, {
+    return apiRequest<{ message: string }>(API_ENDPOINTS.CONTACT.MESSAGE(id.toString()), {
       method: "DELETE",
     });
   },
 
-  // 批量標記為已讀
-  markAsRead: async (ids: number[]): Promise<{ updated: number }> => {
-    return apiRequest<{ updated: number }>("/api/messages/batch/read", {
-      method: "PATCH",
-      body: JSON.stringify({ ids }),
+  // 標記單一訊息為已讀
+  markAsRead: async (id: number): Promise<{ message: string }> => {
+    // 後端端點是 /messages/{message_id}/mark-read
+    return apiRequest<{ message: string }>(`${API_ENDPOINTS.CONTACT.MESSAGE(id.toString())}/mark-read`, {
+      method: "POST",
     });
   },
 };
 
-// 標籤相關API (規格書要求但後端尚未實作)
-export const tagAPI = {
-  // 獲取所有標籤 - 待後端實作
-  getTags: async (): Promise<{ name: string; count: number }[]> => {
-    try {
-      return cachedApiRequest<{ name: string; count: number }[]>("/api/tags");
-    } catch {
-      // Ignore error
-      Logger.warn("Tags API not implemented yet, returning mock data");
-      return []; // 暫時回傳空陣列
-    }
+// 技術標籤相關API（基於擴充後的 tags 表）
+export const technologyTagAPI = {
+  // 獲取所有技術標籤
+  getTechnologyTags: async (category?: string): Promise<TechnologyTag[]> => {
+    const endpoint = category ? API_ENDPOINTS.TAGS.BY_CATEGORY(category) : API_ENDPOINTS.TAGS.LIST;
+    return await apiRequest<TechnologyTag[]>(endpoint);
   },
 
-  // 創建標籤 - 待後端實作
-  createTag: async (name: string): Promise<{ name: string; message: string }> => {
-    try {
-      return apiRequest<{ name: string; message: string }>("/api/tags", {
-        method: "POST",
-        body: JSON.stringify({ name }),
-      });
-    } catch {
-      // Ignore error
-      Logger.warn("Create tag API not implemented yet");
-      throw new APIErrorClass(501, "Tags API not yet implemented");
-    }
+  // 獲取單個技術標籤
+  getTechnologyTag: async (id: number): Promise<TechnologyTag> => {
+    return await apiRequest<TechnologyTag>(API_ENDPOINTS.TAGS.TAG(id.toString()));
   },
 
-  // 刪除標籤 - 待後端實作
-  deleteTag: async (id: number): Promise<{ message: string }> => {
-    try {
-      return apiRequest<{ message: string }>(`/api/tags/${id}`, {
-        method: "DELETE",
-      });
-    } catch {
-      // Ignore error
-      Logger.warn("Delete tag API not implemented yet");
-      throw new APIErrorClass(501, "Tags API not yet implemented");
-    }
+  // 創建技術標籤
+  createTechnologyTag: async (tag: TechnologyTagCreate): Promise<TechnologyTag> => {
+    return await apiRequest<TechnologyTag>(API_ENDPOINTS.TAGS.CREATE, {
+      method: "POST",
+      body: JSON.stringify(tag),
+    });
+  },
+
+  // 更新技術標籤
+  updateTechnologyTag: async (id: number, tag: TechnologyTagUpdate): Promise<TechnologyTag> => {
+    return await apiRequest<TechnologyTag>(API_ENDPOINTS.TAGS.UPDATE(id.toString()), {
+      method: "PUT",
+      body: JSON.stringify(tag),
+    });
+  },
+
+  // 刪除技術標籤
+  deleteTechnologyTag: async (id: number): Promise<{ message: string }> => {
+    return await apiRequest<{ message: string }>(API_ENDPOINTS.TAGS.DELETE(id.toString()), {
+      method: "DELETE",
+    });
+  },
+
+  // 獲取熱門技術標籤
+  getPopularTechnologyTags: async (limit: number = 10): Promise<TechnologyTag[]> => {
+    return await apiRequest<TechnologyTag[]>(`${API_ENDPOINTS.TAGS.POPULAR}?limit=${limit}`);
+  },
+
+  // 搜尋技術標籤
+  searchTechnologyTags: async (query: string): Promise<TechnologyTag[]> => {
+    return await apiRequest<TechnologyTag[]>(`${API_ENDPOINTS.TAGS.LIST}?search=${encodeURIComponent(query)}`);
+  },
+};
+
+// 部落格分類相關API（基於新的 blog_categories 表）
+export const blogCategoryAPI = {
+  // 獲取所有部落格分類
+  getCategories: async (): Promise<BlogCategory[]> => {
+    return await apiRequest<BlogCategory[]>(API_ENDPOINTS.BLOG_CATEGORIES.LIST);
+  },
+
+  // 獲取單個分類
+  getCategory: async (id: number): Promise<BlogCategory> => {
+    return await apiRequest<BlogCategory>(API_ENDPOINTS.BLOG_CATEGORIES.CATEGORY(id.toString()));
+  },
+
+  // 創建分類
+  createCategory: async (category: BlogCategoryCreate): Promise<BlogCategory> => {
+    return await apiRequest<BlogCategory>(API_ENDPOINTS.BLOG_CATEGORIES.CREATE, {
+      method: "POST",
+      body: JSON.stringify(category),
+    });
+  },
+
+  // 更新分類
+  updateCategory: async (id: number, category: BlogCategoryUpdate): Promise<BlogCategory> => {
+    return await apiRequest<BlogCategory>(API_ENDPOINTS.BLOG_CATEGORIES.UPDATE(id.toString()), {
+      method: "PUT",
+      body: JSON.stringify(category),
+    });
+  },
+
+  // 刪除分類
+  deleteCategory: async (id: number): Promise<{ message: string }> => {
+    return await apiRequest<{ message: string }>(API_ENDPOINTS.BLOG_CATEGORIES.DELETE(id.toString()), {
+      method: "DELETE",
+    });
+  },
+
+  // 獲取分類統計
+  getCategoryStats: async (): Promise<{ name: string; count: number; color: string }[]> => {
+    return await apiRequest<{ name: string; count: number; color: string }[]>(API_ENDPOINTS.BLOG_CATEGORIES.STATS);
   },
 };
 
 // 統計相關API
 export const statsAPI = {
   getStats: async (): Promise<Stats> => {
-    return apiRequest<Stats>("/api/stats");
-  },
-
-  // 獲取詳細統計
-  getDetailedStats: async (): Promise<{
-    posts: { total: number; published: number; drafts: number };
-    portfolio: { total: number; completed: number; in_progress: number };
-    messages: { total: number; new: number; read: number; replied: number };
-    views: { total: number; this_month: number; this_week: number };
-  }> => {
-    return apiRequest("/api/stats/detailed");
-  },
-
-  // 獲取訪問統計
-  getVisitorStats: async (
-    period: "week" | "month" | "year" = "month",
-  ): Promise<{
-    labels: string[];
-    data: number[];
-  }> => {
-    return apiRequest(`/api/stats/visitors?period=${period}`);
+    return apiRequest<Stats>(API_ENDPOINTS.SYSTEM.STATS);
   },
 };
 
@@ -1013,7 +1174,7 @@ export const uploadAPI = {
     formData.append("file", file);
     formData.append("folder", folder);
 
-    return apiRequest<{ url: string; filename: string }>("/api/upload/image", {
+    return apiRequest<{ url: string; filename: string }>(API_ENDPOINTS.UPLOAD.IMAGE, {
       method: "POST",
       body: formData,
       headers: {} as Record<string, string>, // 讓瀏覽器自動設置 Content-Type
@@ -1022,7 +1183,7 @@ export const uploadAPI = {
 
   // 刪除檔案
   deleteFile: async (filename: string): Promise<{ message: string }> => {
-    return apiRequest<{ message: string }>(`/api/upload/${filename}`, {
+    return apiRequest<{ message: string }>(API_ENDPOINTS.UPLOAD.DELETE(filename), {
       method: "DELETE",
     });
   },
@@ -1031,12 +1192,50 @@ export const uploadAPI = {
 // 健康檢查API
 export const healthAPI = {
   check: async (): Promise<{ status: string; timestamp: string }> => {
-    return apiRequest<{ status: string; timestamp: string }>("/health");
+    return apiRequest<{ status: string; timestamp: string }>(API_ENDPOINTS.SYSTEM.HEALTH);
+  },
+};
+
+// 系統監控 API
+export const systemAPI = {
+  // 獲取完整系統狀態
+  getStatus: async (): Promise<SystemStatus> => {
+    return apiRequest<SystemStatus>('/system/status');
   },
 
-  // 檢查資料庫連線
-  checkDatabase: async (): Promise<{ database: string; status: string }> => {
-    return apiRequest<{ database: string; status: string }>("/health/database");
+  // 測試 API 端點連接
+  testEndpoint: async (endpoint: string): Promise<EndpointTest> => {
+    const startTime = performance.now();
+
+    try {
+      const response = await unifiedFetch(endpoint, {
+        method: 'GET',
+      });
+
+      const latency = Math.round(performance.now() - startTime);
+
+      return {
+        endpoint,
+        status: response.ok ? 'success' : 'error',
+        latency,
+        statusCode: response.status,
+      };
+    } catch (error: unknown) {
+      const latency = Math.round(performance.now() - startTime);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+      return {
+        endpoint,
+        status: 'error',
+        latency,
+        error: errorMessage,
+      };
+    }
+  },
+
+  // 批量測試多個端點
+  testEndpoints: async (endpoints: string[]): Promise<EndpointTest[]> => {
+    return Promise.all(endpoints.map(ep => systemAPI.testEndpoint(ep)));
   },
 };
 
@@ -1082,8 +1281,10 @@ export default {
   blog: blogAPI,
   portfolio: portfolioAPI,
   message: messageAPI,
-  tag: tagAPI,
+  technologyTag: technologyTagAPI,
+  blogCategory: blogCategoryAPI,
   stats: statsAPI,
   upload: uploadAPI,
   health: healthAPI,
+  system: systemAPI,
 };

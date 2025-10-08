@@ -76,17 +76,15 @@
   --primary-alpha-25: rgba(0, 47, 167, 0.25);
   --primary-alpha-30: rgba(0, 47, 167, 0.3);
 
-  /* 特殊顏色替換 */
-  --chart-colors: {
-    primary: var(--orion-primary-900);
-    secondary: var(--orion-primary-400);
-    tertiary: var(--orion-primary-200);
-    quaternary: var(--orion-primary-100);
-    accent1: var(--success-500);
-    accent2: var(--warning-500);
-    accent3: var(--info-500);
-    accent4: var(--error-500);
-  };
+  /* 圖表顏色系統 */
+  --chart-color-primary: var(--orion-primary-900);
+  --chart-color-secondary: var(--orion-primary-400);
+  --chart-color-tertiary: var(--orion-primary-200);
+  --chart-color-quaternary: var(--orion-primary-100);
+  --chart-color-accent1: var(--success-500);
+  --chart-color-accent2: var(--warning-500);
+  --chart-color-accent3: var(--info-500);
+  --chart-color-accent4: var(--error-500);
 
   /* 語義化色彩 */
   --success-50: #f0fdf4;

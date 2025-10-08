@@ -86,7 +86,7 @@ export const useAuthStore = defineStore("auth", () => {
       if (token.value) {
         await unifiedFetch(API_ENDPOINTS.AUTH.LOGOUT, {
           method: "POST",
-        }).catch(() => {});
+        });
       }
     } catch (err) {
       console.warn("Logout API call failed:", err);

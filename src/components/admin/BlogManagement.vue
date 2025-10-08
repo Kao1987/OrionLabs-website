@@ -291,7 +291,21 @@
                     <div class="form-text">建議使用 3-5 個相關標籤</div>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">文章分類</label>
+                    <blog-category-selector
+                      v-model="currentPost.category"
+                      placeholder="選擇或新增分類"
+                      class="w-100"
+                    />
+                    <div class="form-text">為文章選擇適當的分類</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">狀態</label>
                     <select v-model="currentPost.status" class="form-select">
@@ -301,7 +315,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="mb-3">
                     <div class="form-check form-switch">
                       <input
@@ -386,6 +400,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useBlogStore, type BlogPost } from "@/stores/blog";
 import { useUIStore } from "@/stores/ui";
 import ImageUpload from "@/components/ImageUpload.vue";
+import BlogCategorySelector from "@/components/BlogCategorySelector.vue";
 
 const blogStore = useBlogStore();
 const uiStore = useUIStore();

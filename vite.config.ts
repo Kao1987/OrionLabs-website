@@ -40,7 +40,7 @@ export default defineConfig(async ({ mode }) => {
   const envDir = './'
   const envFiles = ['.env', `.env.${mode}`, '.env.local']
   const env: Record<string, string> = {}
-  
+
   for (const file of envFiles) {
     try {
       const envPath = `${envDir}${file}`
@@ -61,6 +61,7 @@ export default defineConfig(async ({ mode }) => {
     development: '純前端開發 (使用線上API)',
     local: '本地全端開發',
     remote: '前端開發 (連接線上API)',
+    docker: 'Docker 後端開發 (連接本地Docker)',
     performance: '性能測試模式'
   }
 
@@ -68,6 +69,7 @@ export default defineConfig(async ({ mode }) => {
   console.log(`📋 開發模式: ${modeNames[mode] || mode}`)
   console.log(`🔌 端口: ${availablePort}`)
   console.log(`🌐 本地訪問: http://localhost:${availablePort}`)
+  console.log(`🔗 代理目標: ${mode === 'local' ? 'localhost:8000' : mode === 'docker' ? 'localhost:8001' : env.VITE_PROXY_API_TARGET || 'http://161.33.209.198:8000'}`)
   console.log("-".repeat(50))
 
   return {
@@ -91,27 +93,9 @@ export default defineConfig(async ({ mode }) => {
       host: true,
       port: availablePort,
       strictPort: false, // 允許 Vite 自動尋找可用端口
-      // 根據模式動態配置代理
-      proxy: mode === 'local' ? {
-        // 本地模式：代理到本地後端
-        '/api': {
-          target: 'http://localhost:8000',
-          changeOrigin: true,
-          secure: false
-        },
-        '/health': {
-          target: 'http://localhost:8000',
-          changeOrigin: true,
-          secure: false
-        },
-        '/contact-api': {
-          target: 'http://localhost:8000',
-          changeOrigin: true,
-          secure: false,
-          rewrite: (path: string) => path.replace(/^\/contact-api/, '')
-        }
-      } : {
-        // 其他模式：使用環境變數配置的代理目標
+      // 根據模式動態配置代理 - 統一使用線上後端
+      proxy: {
+        // 代理到線上後端
         '/api': {
           target: env.VITE_PROXY_API_TARGET || 'http://161.33.209.198:8000',
           changeOrigin: true,
@@ -131,12 +115,25 @@ export default defineConfig(async ({ mode }) => {
       }
     },
     build: {
-      // 確保建構輸出正確
+      // 設置chunk size警告限制
+      chunkSizeWarningLimit: 800,
+      // 確保建構輸出正確並優化代碼分割
       rollupOptions: {
         output: {
           entryFileNames: '[name]-[hash].js',
           chunkFileNames: '[name]-[hash].js',
-          assetFileNames: '[name]-[hash].[ext]'
+          assetFileNames: '[name]-[hash].[ext]',
+          // 優化代碼分割策略
+          manualChunks: {
+            // 將Vue相關庫分離
+            'vue-vendor': ['vue', 'vue-router', 'pinia'],
+            // 將UI框架分離
+            'ui-vendor': ['bootstrap'],
+            // 將工具庫分離
+            'utils-vendor': ['axios', 'dompurify'],
+            // 將markdown相關分離
+            'markdown-vendor': ['marked', 'highlight.js']
+          }
         }
       }
     }

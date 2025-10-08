@@ -255,9 +255,25 @@ import { useRoute } from "vue-router";
 import { useBlogStore, type BlogPost } from "@/stores/blog";
 import { useUIStore } from "@/stores/ui";
 import { useSEO, useStructuredData } from "@/composables/useSEO";
-import { marked } from "marked";
-import hljs from "highlight.js";
-import DOMPurify from "dompurify";
+// 動態導入重型庫以優化首次加載性能
+let marked: any = null;
+let hljs: any = null;
+let DOMPurify: any = null;
+
+// 動態載入Markdown相關庫
+const loadMarkdownLibraries = async () => {
+  if (!marked) {
+    const [markedModule, hljsModule, DOMPurifyModule] = await Promise.all([
+      import('marked'),
+      import('highlight.js'),
+      import('dompurify')
+    ]);
+    marked = markedModule.marked;
+    hljs = hljsModule.default;
+    DOMPurify = DOMPurifyModule.default;
+  }
+  return { marked, hljs, DOMPurify };
+};
 
 // Import highlight.js theme
 import "highlight.js/styles/github.css";
@@ -285,14 +301,17 @@ const renderMarkdown = async () => {
     return;
   }
 
+  // 動態載入必要的庫
+  const { marked: markedLib, hljs: hljsLib, DOMPurify: DOMPurifyLib } = await loadMarkdownLibraries();
+
   // Reset table of contents
   tableOfContents.value = [];
 
   // Configure marked with highlight.js
-  const renderer = new marked.Renderer();
+  const renderer = new markedLib.Renderer();
 
   // Custom heading renderer to generate table of contents
-  renderer.heading = ({ tokens, depth }) => {
+  renderer.heading = ({ tokens, depth }: { tokens: any[], depth: number }) => {
     const text = tokens[0]?.raw || '';
     const id = text
       .toLowerCase()
@@ -313,10 +332,10 @@ const renderMarkdown = async () => {
   };
 
   // Custom code block renderer with syntax highlighting
-  renderer.code = ({ text, lang }) => {
+  renderer.code = ({ text, lang }: { text: string, lang?: string }) => {
     const language = lang || 'text';
-    const validLanguage = hljs.getLanguage(language) ? language : 'text';
-    const highlightedCode = hljs.highlight(text, { language: validLanguage }).value;
+    const validLanguage = hljsLib.getLanguage(language) ? language : 'text';
+    const highlightedCode = hljsLib.highlight(text, { language: validLanguage }).value;
 
     return `<div class="code-block-wrapper">
       <div class="code-block-header">
@@ -330,7 +349,7 @@ const renderMarkdown = async () => {
   };
 
   // Custom link renderer for external links
-  renderer.link = ({ href, title, tokens }) => {
+  renderer.link = ({ href, title, tokens }: { href: string, title?: string, tokens: any[] }) => {
     const text = tokens[0]?.raw || '';
     const isExternal = href.startsWith("http") && !href.includes(window.location.hostname);
     const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
@@ -340,7 +359,7 @@ const renderMarkdown = async () => {
   };
 
   // Configure marked options
-  marked.setOptions({
+  markedLib.setOptions({
     renderer,
     breaks: true,
     gfm: true,
@@ -348,8 +367,8 @@ const renderMarkdown = async () => {
 
   try {
     // Render and sanitize
-    const rawHtml = await marked.parse(post.value.content);
-    renderedContent.value = DOMPurify.sanitize(rawHtml as string, {
+    const rawHtml = await markedLib.parse(post.value.content);
+    renderedContent.value = DOMPurifyLib.sanitize(rawHtml as string, {
       ADD_TAGS: ["iframe"],
       ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
     });
