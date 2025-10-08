@@ -36,7 +36,21 @@ jobs:
         
       - name: Build project
         run: yarn build
-        
+
+      - name: Prepare deployment directory
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            echo "🧹 準備部署目錄..."
+            sudo rm -rf /var/www/orionlabs.pro/personal-brand-website/dist
+            sudo mkdir -p /var/www/orionlabs.pro/personal-brand-website/dist
+            sudo chown -R $USER:$USER /var/www/orionlabs.pro/personal-brand-website/dist
+            sudo chmod -R 755 /var/www/orionlabs.pro/personal-brand-website/dist
+            echo "✅ 目錄準備完成"
+
       - name: Deploy to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -47,7 +61,7 @@ jobs:
           target: "/var/www/orionlabs.pro/personal-brand-website/dist"
           strip_components: 1
           overwrite: true
-          
+
       - name: Set correct permissions
         uses: appleboy/ssh-action@v1.0.3
         with:
