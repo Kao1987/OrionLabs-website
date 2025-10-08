@@ -500,7 +500,7 @@ const markAllAsRead = async () => {
       .map((message) => message.id);
 
     if (newMessageIds.length > 0) {
-      await messageAPI.markAsRead(newMessageIds);
+      await Promise.all(newMessageIds.map(id => messageAPI.markAsRead(id)));
       messages.value.forEach((message) => {
         if (message.status === "new") {
           message.status = "read";
