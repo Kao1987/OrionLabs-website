@@ -37,17 +37,17 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Deploy to server using rsync
+      - name: Prepare deployment directory
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            echo "🚀 開始部署..."
-            # 建立臨時目錄
-            mkdir -p ~/deploy-temp
-            echo "✅ 臨時目錄已建立"
+            echo "🚀 準備部署環境..."
+            # 清理可能存在的舊臨時目錄
+            rm -rf ~/dist
+            echo "✅ 準備就緒"
 
       - name: Upload build files
         uses: appleboy/scp-action@v0.1.7
@@ -55,9 +55,11 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "dist/*"
-          target: "~/deploy-temp"
-          strip_components: 1
+          source: "dist"
+          target: "~/"
+          strip_components: 0
+          overwrite: true
+          rm: true
 
       - name: Move files to production and set permissions
         uses: appleboy/ssh-action@v1.0.3
@@ -66,15 +68,57 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
+            echo "📦 驗證上傳的文件..."
+            # 檢查上傳是否成功
+            if [ ! -d ~/dist ]; then
+              echo "❌ 錯誤：dist 目錄不存在，上傳失敗！"
+              exit 1
+            fi
+
+            FILE_COUNT=$(find ~/dist -type f | wc -l)
+            echo "📊 上傳了 $FILE_COUNT 個文件"
+
+            if [ "$FILE_COUNT" -lt 10 ]; then
+              echo "❌ 錯誤：文件數量異常（$FILE_COUNT），應該有 40+ 個文件"
+              exit 1
+            fi
+
             echo "📦 移動檔案到生產目錄..."
-            # 使用 sudo 移除舊檔案並複製新檔案
+            # 創建備份（如果生產目錄存在）
+            if [ -d /var/www/orionlabs.pro/personal-brand-website/dist ]; then
+              echo "💾 創建備份..."
+              sudo rm -rf /var/www/orionlabs.pro/personal-brand-website/dist.backup
+              sudo cp -r /var/www/orionlabs.pro/personal-brand-website/dist /var/www/orionlabs.pro/personal-brand-website/dist.backup
+              echo "✅ 備份完成"
+            fi
+
+            # 清空舊文件
             sudo rm -rf /var/www/orionlabs.pro/personal-brand-website/dist/*
-            sudo cp -r ~/deploy-temp/* /var/www/orionlabs.pro/personal-brand-website/dist/
-            # 清理臨時目錄
-            rm -rf ~/deploy-temp
+
+            # 複製新文件
+            sudo cp -r ~/dist/* /var/www/orionlabs.pro/personal-brand-website/dist/
+
+            # 清理臨時文件
+            rm -rf ~/dist
+
             # 設置正確權限
             sudo chown -R www-data:www-data /var/www/orionlabs.pro/personal-brand-website/dist
             sudo chmod -R 755 /var/www/orionlabs.pro/personal-brand-website/dist
+
+            # 驗證部署
+            DEPLOYED_COUNT=$(find /var/www/orionlabs.pro/personal-brand-website/dist -type f | wc -l)
+            echo "📊 生產環境文件數量：$DEPLOYED_COUNT"
+
+            # 檢查關鍵文件
+            if [ ! -f /var/www/orionlabs.pro/personal-brand-website/dist/index.html ]; then
+              echo "❌ 錯誤：index.html 不存在！"
+              exit 1
+            fi
+
+            # 顯示部署的 JS bundle 版本
+            JS_FILE=$(ls /var/www/orionlabs.pro/personal-brand-website/dist/index-*.js 2>/dev/null | head -1 | xargs basename)
+            echo "📦 JS Bundle: $JS_FILE"
+
             # 重載 nginx
             sudo systemctl reload nginx
-            echo "✅ 部署完成！"
+            echo "✅ 部署完成並已驗證！"
